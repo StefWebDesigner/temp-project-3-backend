@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.junit.jupiter.api.Assertions.*;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -20,12 +23,25 @@ public class ProductServicesTests {
 
     @Test
     public void testGetProductById() {
-
+        Product product = productService.getProductById(1);
+        assertEquals(product.getId(), 1);
+        assertNotEquals(product.getId(), 0);
+        assertEquals(product.getName(), "Kelloggs Froot Loops");
+        assertNotEquals(product.getName(), "Kelloggs Frosted Flakes");
+        assertEquals(product.getDescription(), "Delicious frooty flava");
+        assertNotEquals(product.getDescription(), "Disgusting frooty flava");
     }
 
     @Test
     public void testGetAllProducts() {
-
+        List<Product> productList = productService.getAllProducts();
+        Product product1 = productList.get(0);
+        assertEquals(product1.getId(), 1);
+        assertNotEquals(product1.getId(), 0);
+        assertEquals(product1.getName(), "Kelloggs Froot Loops");
+        assertNotEquals(product1.getName(), "Kelloggs Frosted Flakes");
+        assertEquals(product1.getDescription(), "Delicious frooty flava");
+        assertNotEquals(product1.getDescription(), "Disgusting frooty flava");
     }
 
 //    @Test
