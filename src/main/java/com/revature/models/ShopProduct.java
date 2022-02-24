@@ -22,6 +22,10 @@ public class ShopProduct {
     @JoinColumn(name="fk_shop_id")
     private int fkShopId;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_product_id")
+    private int fkProductId;
+
     private int quantity;
     private double price;
     private double discount;
