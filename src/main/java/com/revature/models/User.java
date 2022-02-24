@@ -33,4 +33,5 @@ public class User {
     @Column(name = "registration_date")
     private long registrationDate;
 
+
 }
