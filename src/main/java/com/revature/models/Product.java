@@ -18,10 +18,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name="fk_shop_product_id")
-    private int fkShopProductId;
-
     private String name;
     private String description;
 }
