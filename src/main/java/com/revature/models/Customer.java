@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * This class represents a Customer entity in the database.
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

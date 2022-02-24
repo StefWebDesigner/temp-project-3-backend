@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * This class represents a Seller entity in the database.
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
