@@ -18,16 +18,16 @@ public class Seller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seller_id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "name")
-    private String shopName;
+    private String name;
 
     private String homepage;
 
     private String description;
+
+    @OneToOne
+    private User user;
 
 }
