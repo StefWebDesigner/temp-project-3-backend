@@ -3,7 +3,9 @@ package com.revature.dartcart.utilities;
 import com.revature.dartcart.DartCartApplication;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,7 +13,7 @@ import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
 public class JwtTokenUtilTest {
 
     // Class that needs to be implemented
@@ -23,20 +25,23 @@ public class JwtTokenUtilTest {
     // the validate function we are testing
     private static Method validate;
 
+    @Autowired
+    private ApplicationContext app;
+
     /**
      * Tests the validation of JWTTokens
      */
     @BeforeAll
-    void testingSetup() {
+    static void testingSetup(@Autowired ApplicationContext app) {
         try {
-            tokenUtility = DartCartApplication.app.getBean(Class.forName(CLASSNAME));
+            tokenUtility = app.getBean(Class.forName(CLASSNAME));
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Class: " + CLASSNAME + " needs to be implemented", e);
         }
 
         // get the method from the object
         try {
-            validate = tokenUtility.getClass().getMethod(VALIDATE);
+            validate = tokenUtility.getClass().getMethod(VALIDATE, String.class);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Method: " + VALIDATE + " needs to be implemented", e);
         }
