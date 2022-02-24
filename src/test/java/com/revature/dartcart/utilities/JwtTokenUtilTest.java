@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -44,25 +45,25 @@ public class JwtTokenUtilTest {
     @Test
     void validate_sad_invalid() throws InvocationTargetException, IllegalAccessException {
         boolean retVal = (Boolean) validate.invoke(tokenUtility, "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0aW5ndXNlcnBsZWFzZWlnbm9yZSIsImlzcyI6InRlc3Rpbmdpc3N1ZXJwbGVhc2VpZ25vcmUiLCJpYXQiOjE2NDU3MjkwODgsImV4cCI6MTY0Mzc4NDIzNH0.gIl2FTdCBVdnLVAVxRUrJj3SWck34qP8wkRCFz-gHoxmou3ljSOyGQb7gnmyDRgFfCh0q7Sro948g0qBuO");
-        assertTrue(retVal);
+        assertFalse(retVal);
     }
 
     @Test
     void validate_sad_expired() throws InvocationTargetException, IllegalAccessException {
         boolean retVal = (Boolean) validate.invoke(tokenUtility, "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0aW5ndXNlcnBsZWFzZWlnbm9yZSIsImlzcyI6InRlc3Rpbmdpc3N1ZXJwbGVhc2VpZ25vcmUiLCJpYXQiOjE2NDU3MjkxNzIsImV4cCI6MTY0NTEyNDM3Mn0._f-QeO7KuMjCvXvUiGZlPeQDsMVvDtRvZfj-d0VMjyB-1wPauiWfmSVpMyclGUzazu9KMM238eyQYrZAVqnrkA");
-        assertTrue(retVal);
+        assertFalse(retVal);
     }
 
     @Test
     void validate_sad_malformed() throws InvocationTargetException, IllegalAccessException {
         boolean retVal = (Boolean) validate.invoke(tokenUtility, "tokem");
-        assertTrue(retVal);
+        assertFalse(retVal);
     }
 
     @Test
     void validate_sad_emptyString() throws InvocationTargetException, IllegalAccessException {
         boolean retVal = (Boolean) validate.invoke(tokenUtility, "");
-        assertTrue(retVal);
+        assertFalse(retVal);
     }
 
     // Assumes the Secret for the JWT Token:
