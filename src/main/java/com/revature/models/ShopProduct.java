@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
