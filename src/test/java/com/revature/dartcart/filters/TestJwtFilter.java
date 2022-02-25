@@ -1,5 +1,6 @@
 package com.revature.dartcart.filters;
 
+import com.revature.dartcart.utilities.JwtTokenUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,16 +34,28 @@ public class TestJwtFilter {
 	// CHECKS: token valid, username, is authenticated
 	// assertTrue( SecurityContextHolder.getContext().getAuthentication().isAuthenticated() );
 	
-	@Mock private JwtTokenFilter jtf;
-	@MockBean private static Class JwtTokenUtil;
+	private static final String CLASSNAME = "com.revature.dartcart.filters.JwtTokenFilter";
+	private static final String DOFILTER = "doFilterInternal";
+	private static Object tokenFilter;
+	private static Method doFilterInternal;
+	
+	@MockBean private static JwtTokenUtil jwtTokenUtil;
 	@MockBean private static Class UserRepo;
 	@Autowired private MockMvc mvc;
 	// @Autowired MockHttpServletRequest request;
 	
 	
 	@BeforeAll
-	static void testSetup(@Autowired ApplicationContext app) throws ClassNotFoundException, NoSuchMethodException {
-		//Authentication a = SecurityContextHolder.getContext().getAuthentication();
+	static void testSetup(@Autowired ApplicationContext app) {
+		
+		try {
+			tokenFilter = app.getBean(Class.forName(CLASSNAME));
+			doFilterInternal = tokenFilter.getClass().getMethod(DOFILTER);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Class: " + CLASSNAME+ " needs to be implemented", e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException("Method: " + DOFILTER+ " needs to be implemented", e);
+		}
 	}
 	
 	@Test
@@ -51,10 +64,11 @@ public class TestJwtFilter {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		MockFilterChain mockChain = new MockFilterChain();
-		//jtf.doFilterInternal.invoke(request, response, mockChain) ;
+		
 		request.addHeader(HttpHeaders.AUTHORIZATION, "invalid");
+		Mockito.when()
 		jtf.doFilterInternal(request, response, mockChain);
-		//Mockito.doThrow();
+		
 		//assertThrows(  );
 	}
 	
