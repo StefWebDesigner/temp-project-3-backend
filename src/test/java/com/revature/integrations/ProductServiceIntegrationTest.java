@@ -1,6 +1,7 @@
 package com.revature.integrations;
 
 import com.revature.models.Product;
+import com.revature.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
