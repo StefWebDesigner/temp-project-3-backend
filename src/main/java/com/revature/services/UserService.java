@@ -1,24 +1,17 @@
 package com.revature.services;
 
 import com.revature.models.User;
-import com.revature.repositories.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService
-{
-    @Autowired
-    UserRepo ur;
+import java.util.List;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptEncoder;
+public interface UserService {
 
-    public User newUser(User u)
-    {
-        u.setPassword(bCryptEncoder.encode(u.getPassword()));
-        return ur.save(u);
-    }
+    public User addUser(User user);
+    public User getUserById(int id);
+    public List<User> getAllUsers();
+    public void updateUser(User change);
+    public boolean deleteUser(int id);
+
+    User getUserByUsername(String username);
 
 }

@@ -39,13 +39,13 @@ class UserControllerTest {
 
     @Test
     void newUser() throws Exception {
-        Mockito.when(mockUserService.newUser(mockUser)).thenReturn(mockUser);
+        Mockito.when(mockUserService.addUser(mockUser)).thenReturn(mockUser);
 
         mvc.perform(MockMvcRequestBuilders.post("/register").
                         contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(mockUser))).
                 andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.when(mockUserService.newUser(new User())).thenReturn(new User());
+        Mockito.when(mockUserService.addUser(new User())).thenReturn(new User());
         mvc.perform(MockMvcRequestBuilders.post("/register").
                         contentType(MediaType.APPLICATION_JSON).
                         content(mapper.writeValueAsString(new User()))).

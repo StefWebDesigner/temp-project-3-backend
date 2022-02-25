@@ -43,6 +43,6 @@ class UserServiceTest {
         User encrypted = mockUser;
         encrypted.setPassword(bCryptEncoder.encode(encrypted.getPassword()));
         Mockito.when(mockUserRepo.save(mockUser)).thenReturn(encrypted);
-        Assertions.assertEquals(encrypted,mockUserService.newUser(mockUser));
+        Assertions.assertEquals(encrypted,mockUserService.addUser(mockUser));
     }
 }
