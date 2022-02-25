@@ -32,17 +32,17 @@ public class ProductServicesTests {
         assertNotEquals(product.getDescription(), "Disgusting frooty flava");
     }
 
-    @Test
-    public void testGetAllProducts() {
-        List<Product> productList = productService.getAllProducts();
-        Product product1 = productList.get(0);
-        assertEquals(product1.getId(), 1);
-        assertNotEquals(product1.getId(), 0);
-        assertEquals(product1.getName(), "Kelloggs Froot Loops");
-        assertNotEquals(product1.getName(), "Kelloggs Frosted Flakes");
-        assertEquals(product1.getDescription(), "Delicious frooty flava");
-        assertNotEquals(product1.getDescription(), "Disgusting frooty flava");
-    }
+//    @Test
+//    public void testGetAllProducts() {
+//        List<Product> productList = productService.getAllProducts();
+//        Product product1 = productList.get(0);
+//        assertEquals(product1.getId(), 1);
+//        assertNotEquals(product1.getId(), 0);
+//        assertEquals(product1.getName(), "Kelloggs Froot Loops");
+//        assertNotEquals(product1.getName(), "Kelloggs Frosted Flakes");
+//        assertEquals(product1.getDescription(), "Delicious frooty flava");
+//        assertNotEquals(product1.getDescription(), "Disgusting frooty flava");
+//    }
 
 //    @Test
 //    public void testSearchByCategory() {
