@@ -1,6 +1,7 @@
 package com.revature.integrations;
 
 import com.revature.models.Product;
+import com.revature.repositories.ProductRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Transactional
 public class ProductIntegrationTest {
     @Autowired
-    private ProductRepository pr;
+    private ProductRepo pr;
 
     @Test
     public void getProductById() {
