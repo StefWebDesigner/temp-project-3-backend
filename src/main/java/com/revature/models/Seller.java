@@ -28,6 +28,7 @@ public class Seller {
     private String description;
 
     @OneToOne
+    @JoinColumn(name="user_id")
     private User user;
 
 }

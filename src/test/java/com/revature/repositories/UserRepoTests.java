@@ -1,6 +1,6 @@
 package com.revature.repositories;
 
-import com.revature.driver.DartCartApplication;
+import com.revature.app.DartCartApplication;
 import com.revature.models.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -87,6 +87,5 @@ public class UserRepoTests {
         mockRepo.deleteById(id);
         verify(mockRepo).deleteById((id));
     }
-
 
 }

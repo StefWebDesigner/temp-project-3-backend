@@ -24,6 +24,7 @@ public class Customer {
     private String location;
 
     @OneToOne
+    @JoinColumn(name="user_id")
     private User user;
 
 }

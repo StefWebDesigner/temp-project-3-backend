@@ -1,8 +1,12 @@
-package com.revature.config;
+package com.revature.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+/**
+ * This component provides registration password hashing functionality.
+ */
 
 @Component
 public class AppConfig {

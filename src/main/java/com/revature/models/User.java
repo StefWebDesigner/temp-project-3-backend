@@ -38,6 +38,4 @@ public class User {
     @Column(name = "registration_date")
     private long registrationDate;
 
-    public User(String updateTest, String s, String update, String test, String s1, String s2, long l) {
-    }
 }
