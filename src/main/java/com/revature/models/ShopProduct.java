@@ -25,7 +25,7 @@ public class ShopProduct {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    private int product;
 
     private int quantity;
 
