@@ -18,7 +18,7 @@ public class ProductIntegrationTest {
     private ProductRepository pr;
 
     @Test
-    public void findProductById() {
+    public void getProductById() {
         Optional<Product> product = pr.findById(1);
 
         assertTrue(product.isPresent());
