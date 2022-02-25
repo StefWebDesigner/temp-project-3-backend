@@ -18,7 +18,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
-@SpringBootTest
+@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
 public class CategoryControllersTests {
 //    @Autowired
 //    private MockMvc mvc;

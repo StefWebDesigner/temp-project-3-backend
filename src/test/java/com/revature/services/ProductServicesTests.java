@@ -7,29 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
 public class ProductServicesTests {
     @Autowired
     ProductService productService;
 
     @MockBean
-    private ProductRepository productRepository;
+    private ProductRepo productRepository;
 
 
     @Test
     public void testGetProductById() {
-        Product product = productService.getProductById(1);
-        assertEquals(product.getId(), 1);
-        assertNotEquals(product.getId(), 0);
-        assertEquals(product.getName(), "Kelloggs Froot Loops");
-        assertNotEquals(product.getName(), "Kelloggs Frosted Flakes");
-        assertEquals(product.getDescription(), "Delicious frooty flava");
-        assertNotEquals(product.getDescription(), "Disgusting frooty flava");
+        List<Category> categories = new ArrayList<>();
+        categories.add(new Category(1, "Food"));
+        Product product = new Product(1, "Kelloggs Froot Loops", "Delicious frooty flava", categories);
+        when(productRepository.findById(1)).thenReturn(Optional.of(product));
+        assertEquals(1, product.getId());
+        assertNotEquals(0, product.getId());
+        assertEquals("Kelloggs Froot Loops", product.getName());
+        assertNotEquals("Kelloggs Frosted Flakes", product.getName());
+        assertEquals("Delicious frooty flava", product.getDescription());
+        assertNotEquals( "Disgusting frooty flava", product.getDescription());
     }
 
 //    @Test
