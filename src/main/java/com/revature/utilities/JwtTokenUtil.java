@@ -1,7 +1,7 @@
-package com.revature.dartcart.utilities;
+package com.revature.utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,15 @@ import java.util.Date;
 @Component
 public class JwtTokenUtil {
 
+    @Value("${com.revature.secret}")
     private final String jwtSecret;
+    @Value("${com.revature.jwtissuer}")
     private final String jwtIssuer;
 
+
     JwtTokenUtil(@Autowired Environment environment) {
-        this.jwtSecret = environment.getProperty("com.ravature.dartcart.secret");
-        this.jwtIssuer = environment.getProperty("com.ravature.dartcart.jwtissuer");
+        this.jwtSecret = environment.getProperty("com.revature.secret");
+        this.jwtIssuer = environment.getProperty("com.revature.jwtissuer");
     }
 
     public String generateAccessToken(User user) {

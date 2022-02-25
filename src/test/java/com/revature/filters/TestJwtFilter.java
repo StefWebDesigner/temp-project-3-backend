@@ -1,11 +1,10 @@
-package com.revature.dartcart.filters;
+package com.revature.filters;
 
-import com.revature.dartcart.utilities.JwtTokenUtil;
+import com.revature.utilities.JwtTokenUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,10 +14,7 @@ import org.springframework.mock.web.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,7 +30,7 @@ public class TestJwtFilter {
 	// CHECKS: token valid, username, is authenticated
 	// assertTrue( SecurityContextHolder.getContext().getAuthentication().isAuthenticated() );
 	
-	private static final String CLASSNAME = "com.revature.dartcart.filters.JwtTokenFilter";
+	private static final String CLASSNAME = "com.revature.app.filters.JwtTokenFilter";
 	private static final String DOFILTER = "doFilterInternal";
 	private static Object tokenFilter;
 	private static Method doFilterInternal;
@@ -66,8 +62,8 @@ public class TestJwtFilter {
 		MockFilterChain mockChain = new MockFilterChain();
 		
 		request.addHeader(HttpHeaders.AUTHORIZATION, "invalid");
-		Mockito.when()
-		jtf.doFilterInternal(request, response, mockChain);
+//		Mockito.when()
+//		jtf.doFilterInternal(request, response, mockChain);
 		
 		//assertThrows(  );
 	}

@@ -1,7 +1,6 @@
-package com.revature.dartcart.utiliti
-es;
+package com.revature.utilities;
 
-import com.revature.dartcart.DartCartApplication;
+import com.revature.app.DartCartApplication;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
+@SpringBootTest(classes = DartCartApplication.class)
 public class JwtTokenUtilTest {
 
     // Class that needs to be implemented
-    private static final String CLASSNAME = "com.revature.dartcart.utilities.JwtTokenUtil";
+    private static final String CLASSNAME = "com.revature.utilities.JwtTokenUtil";
     // Method name of the validate function
     private static final String VALIDATE = "validate";
     // object of the class
