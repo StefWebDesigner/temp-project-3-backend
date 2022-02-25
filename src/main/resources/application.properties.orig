@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username=postgres
@@ -9,9 +10,6 @@ endpoints.shutdown.enabled=true
 endpoints.shutdown.sensitive=false
 management.endpoint.beans.enabled=true
 server.port = 8081
-com.ravature.dartcart.jwtissuer=localhost
-com.ravature.dartcart.secret=aa2228b097e40541dfb229bacf40f00a81eac92a1b11412c4d678cb99feba0e96187db65b4b28eefd90097aa3b668790189dc1635823b7bb44cc5b4abdc61c37
-
 
 ##endpoints.beans.sensitive=false
 ### The format used for the keystore. It could be set to JKS in case it is a JKS file
@@ -24,3 +22,16 @@ com.ravature.dartcart.secret=aa2228b097e40541dfb229bacf40f00a81eac92a1b11412c4d6
 #server.ssl.key-alias=portfolio
 ## Make the server accept only HTTPS
 #server.ssl.enabled=true
+=======
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.jpa.defer-datasource-initialization=true
+
+com.ravature.dartcart.jwtissuer=localhost
+com.ravature.dartcart.secret=aa2228b097e40541dfb229bacf40f00a81eac92a1b11412c4d678cb99feba0e96187db65b4b28eefd90097aa3b668790189dc1635823b7bb44cc5b4abdc61c37
+>>>>>>> login-john

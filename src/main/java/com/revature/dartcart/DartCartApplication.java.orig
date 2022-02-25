@@ -1,9 +1,8 @@
 package com.revature.dartcart;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+<<<<<<< HEAD
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -12,7 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+=======
 import org.springframework.context.ApplicationContext;
+>>>>>>> login-john
 
 import java.util.List;
 
@@ -21,12 +22,9 @@ import java.util.List;
 @EnableJpaRepositories("com.revature.repositories")
 public class DartCartApplication {
 
-
-
 	public static ApplicationContext app;
 
 	public static void main(String[] args) {
-		SpringApplication.run(DartCartApplication.class, args);
 		app = SpringApplication.run(DartCartApplication.class, args);
 	}
 
