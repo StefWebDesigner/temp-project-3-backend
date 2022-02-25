@@ -7,19 +7,28 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * This class represents an individual Category a Product may belong to.
+ * This class represents a Seller entity in the database.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "category")
-public class Category {
+
+public class Seller {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "seller_id")
     private int id;
 
     private String name;
+
+    private String homepage;
+
+    private String description;
+
+    @OneToOne
+    private User user;
+
 }

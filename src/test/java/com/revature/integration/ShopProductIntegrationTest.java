@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
@@ -24,7 +23,7 @@ public class ShopProductIntegrationTest {
 
 
     @Test
-    void getAllShopProduct() {
+    void getAllShopProducts() {
 
         List<ShopProduct> allShopProducts = (List<ShopProduct>) shopProductRepository.findAll();
 
@@ -39,7 +38,7 @@ public class ShopProductIntegrationTest {
         Assertions.assertEquals("Frooty Loops", shopProduct.get().getProduct().getName());
         Assertions.assertEquals(1, shopProduct.get().getProduct().getId());
         Assertions.assertEquals(10, shopProduct.get().getQuantity());
-        Assertions.assertEquals(15.99, shopProduct.get().getPrice());
+        Assertions.assertEquals(15, shopProduct.get().getPrice());
     }
 
     @Test
@@ -50,6 +49,7 @@ public class ShopProductIntegrationTest {
                 .collect(Collectors.toList());
 
         Assertions.assertNotNull(shopProducts);
+        Assertions.assertEquals(1, shopProducts.get(0).getId());
     }
 
 

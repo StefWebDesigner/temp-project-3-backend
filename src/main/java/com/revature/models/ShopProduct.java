@@ -3,29 +3,33 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Entity
+/**
+ * This class represents an individual Product.
+ */
+
 @Data
-@Component
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="shop_product")
+@Entity
+@Table(name = "shopproducts")
 public class ShopProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shop_product_id", updatable = false)
+    @Column(name = "shop_product_id")
     private int id;
+
+    private int quantity;
+    private int price;
+    private int discount;
+
+    @ManyToOne
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    private int quantity;
-
-    private double price;
-
-    private double discount;
 }
