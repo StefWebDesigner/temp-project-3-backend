@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ import java.util.List;
 @EnableJpaRepositories("com.revature.repositories")
 public class DartCartApplication {
 
+	public static ApplicationContext app;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DartCartApplication.class, args);
+		app = SpringApplication.run(DartCartApplication.class, args);
 	}
 
 	@Bean
