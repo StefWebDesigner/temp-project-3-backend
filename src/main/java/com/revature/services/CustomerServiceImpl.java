@@ -3,9 +3,11 @@ package com.revature.services;
 import com.revature.models.Customer;
 import com.revature.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
