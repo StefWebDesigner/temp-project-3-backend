@@ -19,10 +19,6 @@ public class ShopProduct {
     @Column(name = "shop_product_id", updatable = false)
     private int id;
 
-//    @ManyToOne
-//    @JoinColumn(name="shop_id")
-//    private Shop shop;
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
