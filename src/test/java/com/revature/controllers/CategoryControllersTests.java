@@ -28,12 +28,12 @@ public class CategoryControllersTests {
 
     @Test
     public void testGetCategoryById() throws Exception {
-        Mockito.when(ps.getAllCategories().thenReturn(new Category(1, "Food")));
+        Mockito.when(categoryService.getAllCategories().thenReturn(new Category(1, "Food")));
 
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/products/category/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.when(ps.getProductById(3).thenReturn(null));
+        Mockito.when(categoryService.getCategoryById(3).thenReturn(null));
         ra = mvc.perform(MockMvcRequestBuilders.get("/products/category/3"));
         ra.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
