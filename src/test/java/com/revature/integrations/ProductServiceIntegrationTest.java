@@ -18,7 +18,7 @@ public class ProductServiceIntegrationTest {
 
     @Test
     public void testGetProductById() {
-        Product product = ps.getProductById(1); //query postgres and not h2?
+        Product product = ps.getProductById(1);
 
         assertEquals(product.getId(), 1);
         assertNotEquals(product.getId(), 5);
