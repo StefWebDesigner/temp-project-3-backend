@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.models.Product;
+import com.revature.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,16 @@ public class ProductControllersTests {
 
     @Test
     public void testGetProductById() throws Exception {
-        Mockito.when(ps.getProductById(1).thenReturn(new Product(1, "testProduct", "testDescription")));
+        Product testProduct = new Product();
+        testProduct.setId(1);
+        testProduct.setName("testProduct");
+        testProduct.setDescription("testDescription");
+        Mockito.when(ps.getProductById(1)).thenReturn(testProduct);
+
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/products/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.when(ps.getProductById(3).thenReturn(null));
+        Mockito.when(ps.getProductById(3)).thenReturn(null);
         ra = mvc.perform(MockMvcRequestBuilders.get("/products/3"));
         ra.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
