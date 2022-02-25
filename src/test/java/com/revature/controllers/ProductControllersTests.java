@@ -11,6 +11,7 @@ import org.springframework.security.test.web.servlet.response.SecurityMockMvcRes
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
@@ -23,11 +24,13 @@ public class ProductControllersTests {
 
     @Test
     public void testGetProductById() throws Exception {
-        Mockito.when(ms.getMovie(1).thenReturn(new Product(1, "testProduct", "testDescription")));
-
+        Mockito.when(ps.getProductById(1).thenReturn(new Product(1, "testProduct", "testDescription")));
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/products/1"));
+        ra.andExpect(MockMvcResultMatchers.status().isOk());
 
-        ra.andExpect(SecurityMockMvcResultMatchers.status().isOk());
+        Mockito.when(ps.getProductById(3).thenReturn(null));
+        ra = mvc.perform(MockMvcRequestBuilders.get("/products/3"));
+        ra.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 }
