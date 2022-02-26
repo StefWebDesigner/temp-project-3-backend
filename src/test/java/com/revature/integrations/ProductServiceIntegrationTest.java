@@ -10,8 +10,7 @@ import javax.transaction.Transactional;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
 @Transactional
@@ -21,16 +20,16 @@ public class ProductServiceIntegrationTest {
 
     @Test
     public void testGetProductById() {
-        Optional<Product> product = ps.getProductById(1);
-        Product p = product.get();
+        Optional<Product> p = ps.getProductById(1);
+        assertTrue(p.isPresent());
 
-        assertEquals(p.getId(), 1);
-        assertNotEquals(p.getId(), 5);
+        assertEquals(p.get().getId(), 1);
+        assertNotEquals(p.get().getId(), 5);
 
-        assertEquals(p.getName(), "Kelloggs Froot Loops");
-        assertNotEquals(p.getName(), "failData");
+        assertEquals(p.get().getName(), "Kelloggs Froot Loops");
+        assertNotEquals(p.get().getName(), "failData");
 
-        assertEquals(p.getDescription(), "Delicious frooty flava");
-        assertNotEquals(p.getDescription(), "failData");
+        assertEquals(p.get().getDescription(), "Delicious frooty flava");
+        assertNotEquals(p.get().getDescription(), "failData");
     }
 }
