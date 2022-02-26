@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @CrossOrigin
 @RestController
 public class ProductController {
@@ -18,8 +20,7 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") String id) {
-        Product p = ps.getProductById(Integer.parseInt(id));
-
-        return p != null ? new ResponseEntity<>(p, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Optional<Product> p = ps.getProductById(Integer.parseInt(id));
+        return p.isPresent() ? new ResponseEntity<Product>(p.get(), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
