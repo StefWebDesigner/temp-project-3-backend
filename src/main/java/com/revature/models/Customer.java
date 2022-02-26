@@ -6,19 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * This class represents a Customer entity in the database.
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Customer extends User {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
-
     private String location;
+
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
 }

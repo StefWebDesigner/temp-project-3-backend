@@ -6,15 +6,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * This class represents a User entity in the database.
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "USER")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
 
     private String username;

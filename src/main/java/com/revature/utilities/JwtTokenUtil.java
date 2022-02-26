@@ -12,7 +12,9 @@ import java.util.Date;
 public class JwtTokenUtil {
 
     private final String jwtSecret;
+    
     private final String jwtIssuer;
+
 
     JwtTokenUtil(@Autowired Environment environment) {
         this.jwtSecret = environment.getProperty("com.revature.secret");
