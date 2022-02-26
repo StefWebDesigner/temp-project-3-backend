@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -19,7 +21,8 @@ public class ProductServiceIntegrationTest {
 
     @Test
     public void testGetProductById() {
-        Product product = ps.getProductById(1);
+        Optional<Product> productOptional = ps.getProductById(1);
+        Product product = productOptional.get();
 
         assertEquals(product.getId(), 1);
         assertNotEquals(product.getId(), 5);
