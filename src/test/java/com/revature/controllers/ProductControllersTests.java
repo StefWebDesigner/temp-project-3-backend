@@ -52,21 +52,17 @@ public class ProductControllersTests {
             new ArrayList<Category>(Arrays.asList(new Category(1, "testCategory")))
     );
 
-//    Product testProduct = new Product();
-//    testProduct.setId(1);
-//    testProduct.setName("testProduct");
-//    testProduct.setDescription("testDescription");
-
     @Test
     public void testGetProductByIdSuccess() throws Exception {
         Mockito.when(ps.getProductById(1)).thenReturn(Optional.of(testProduct));
-
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/products/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
-
-        Mockito.when(ps.getProductById(3)).thenReturn(Optional.empty());
-        ra = mvc.perform(MockMvcRequestBuilders.get("/products/3"));
-        ra.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    @Test
+    public void testGetProductByIdFail() throws Exception {
+        Mockito.when(ps.getProductById(3)).thenReturn(Optional.empty());
+        ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/products/3"));
+        ra.andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 }
