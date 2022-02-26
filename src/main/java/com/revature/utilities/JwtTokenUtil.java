@@ -1,7 +1,6 @@
-package com.revature.dartcart.utilities;
+package com.revature.utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
@@ -16,8 +15,8 @@ public class JwtTokenUtil {
     private final String jwtIssuer;
 
     JwtTokenUtil(@Autowired Environment environment) {
-        this.jwtSecret = environment.getProperty("com.ravature.dartcart.secret");
-        this.jwtIssuer = environment.getProperty("com.ravature.dartcart.jwtissuer");
+        this.jwtSecret = environment.getProperty("com.revature.secret");
+        this.jwtIssuer = environment.getProperty("com.revature.jwtissuer");
     }
 
     public String generateAccessToken(User user) {
@@ -30,24 +29,6 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    public String getUsername(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
-    }
-
-    public Date getExpirationDate(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getExpiration();
-    }
-
     public boolean validate(String token) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
@@ -56,7 +37,7 @@ public class JwtTokenUtil {
             System.err.println("Invalid JWT signature");
             System.err.println(ex.getMessage());
         } catch (MalformedJwtException ex) {
-            System.err.println("Invalid JWT signature");
+            System.err.println("Malformed JWT");
             System.err.println(ex.getMessage());
         } catch (ExpiredJwtException ex) {
             System.err.println("Expired JWT signature");

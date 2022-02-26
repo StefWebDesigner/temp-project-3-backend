@@ -1,4 +1,4 @@
-package com.revature.dartcart.services;
+package com.revature.services;
 
 import com.revature.models.User;
 

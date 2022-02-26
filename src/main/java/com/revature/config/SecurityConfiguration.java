@@ -1,7 +1,7 @@
-package com.revature.dartcart.config;
+package com.revature.config;
 
-import com.revature.dartcart.services.AuthService;
-import com.revature.dartcart.ultilities.JwtTokenFilter;
+import com.revature.services.AuthService;
+import com.revature.utilities.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -66,8 +66,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
-                .antMatchers(HttpMethod.POST, "/login").permitAll();
-//                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                // Our private endpoints
+                .antMatchers("/actuator/**").hasRole(Role.ADMIN.toString())
+                .anyRequest().authenticated();
 
         // Add JWT token filter
         http.addFilterBefore(

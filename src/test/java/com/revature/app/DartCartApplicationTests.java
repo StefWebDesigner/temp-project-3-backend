@@ -1,4 +1,4 @@
-package com.revature.dartcart;
+package com.revature.app;
 
 import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.Test;
