@@ -20,8 +20,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 
     @Override
     public Optional<ShopProduct> getShopProductById(int id) {
-        Optional<ShopProduct> shopProduct = shopProductRepository.findById(id);
 
-        return shopProduct.isPresent() ? shopProduct : Optional.of(new ShopProduct());
+        return shopProductRepository.findById(id);
     }
 }
