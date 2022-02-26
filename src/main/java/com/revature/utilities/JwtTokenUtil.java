@@ -44,9 +44,6 @@ public class JwtTokenUtil {
         } catch (ExpiredJwtException ex) {
             System.err.println("Expired JWT signature");
             System.err.println(ex.getMessage());
-        } catch (UnsupportedJwtException ex) {
-            System.err.println("Unsupported JWT signature");
-            System.err.println(ex.getMessage());
         } catch (IllegalArgumentException ex) {
             System.err.println("JWT claims string is empty");
             System.err.println(ex.getMessage());

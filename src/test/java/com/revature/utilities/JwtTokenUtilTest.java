@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.core.userdetails.User;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = DartCartApplication.class)
 public class JwtTokenUtilTest {
@@ -20,10 +21,14 @@ public class JwtTokenUtilTest {
     private static final String CLASSNAME = "com.revature.utilities.JwtTokenUtil";
     // Method name of the validate function
     private static final String VALIDATE = "validate";
+    // Method name of the generate function
+    private static final String GENERATE = "generateAccessToken";
     // object of the class
     private static Object tokenUtility;
     // the validate function we are testing
     private static Method validate;
+    // the generate function we are testing
+    private static Method generate;
 
     @Autowired
     private ApplicationContext app;
@@ -39,12 +44,26 @@ public class JwtTokenUtilTest {
             throw new RuntimeException("Class: " + CLASSNAME + " needs to be implemented", e);
         }
 
-        // get the method from the object
+        // get the validate method from the object
         try {
             validate = tokenUtility.getClass().getMethod(VALIDATE, String.class);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Method: " + VALIDATE + " needs to be implemented", e);
         }
+
+        // get the generate method from the object
+        try {
+            generate = tokenUtility.getClass().getMethod(GENERATE, User.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("Method: " + GENERATE + " needs to be implemented", e);
+        }
+    }
+
+    @Test
+    void generateAccessToken_happy() throws InvocationTargetException, IllegalAccessException {
+        User anyUser = new User("username", "password", new ArrayList<>());
+        String retVal = (String) generate.invoke(tokenUtility, anyUser);
+        assertNotNull(retVal);
     }
 
     @Test
