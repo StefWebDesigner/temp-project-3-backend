@@ -21,16 +21,16 @@ public class ProductServiceIntegrationTest {
 
     @Test
     public void testGetProductById() {
-        Optional<Product> productOptional = ps.getProductById(1);
-        Product product = productOptional.get();
+        Optional<Product> product = ps.getProductById(1);
+        Product p = product.get();
 
-        assertEquals(product.getId(), 1);
-        assertNotEquals(product.getId(), 5);
+        assertEquals(p.getId(), 1);
+        assertNotEquals(p.getId(), 5);
 
-        assertEquals(product.getName(), "Kelloggs Froot Loops");
-        assertNotEquals(product.getName(), "failData");
+        assertEquals(p.getName(), "Kelloggs Froot Loops");
+        assertNotEquals(p.getName(), "failData");
 
-        assertEquals(product.getDescription(), "Delicious frooty flava");
-        assertNotEquals(product.getDescription(), "failData");
+        assertEquals(p.getDescription(), "Delicious frooty flava");
+        assertNotEquals(p.getDescription(), "failData");
     }
 }
