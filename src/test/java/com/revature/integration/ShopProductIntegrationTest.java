@@ -28,6 +28,7 @@ public class ShopProductIntegrationTest {
         List<ShopProduct> allShopProducts = (List<ShopProduct>) shopProductRepository.findAll();
 
         Assertions.assertNotNull(allShopProducts);
+        Assertions.assertEquals(1, allShopProducts.size());
 
     }
 
@@ -41,16 +42,6 @@ public class ShopProductIntegrationTest {
         Assertions.assertEquals(15, shopProduct.get().getPrice());
     }
 
-    @Test
-    void getDiscountedShopProducts() {
-
-        List<ShopProduct> shopProducts = (List<ShopProduct>) shopProductRepository.findAll();
-        shopProducts.stream().filter(shopProduct -> shopProduct.getDiscount() > 0)
-                .collect(Collectors.toList());
-
-        Assertions.assertNotNull(shopProducts);
-        Assertions.assertEquals(1, shopProducts.get(0).getId());
-    }
 
 
 }
