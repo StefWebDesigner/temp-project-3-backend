@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Optional;
+
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = DartCartApplication.class)
 public class ProductControllersTests {
@@ -46,12 +48,12 @@ public class ProductControllersTests {
         testProduct.setId(1);
         testProduct.setName("testProduct");
         testProduct.setDescription("testDescription");
-        Mockito.when(ps.getProductById(1)).thenReturn(testProduct);
+        Mockito.when(ps.getProductById(1)).thenReturn(Optional.of(testProduct));
 
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/products/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.when(ps.getProductById(3)).thenReturn(null);
+        Mockito.when(ps.getProductById(3)).thenReturn(Optional.empty());
         ra = mvc.perform(MockMvcRequestBuilders.get("/products/3"));
         ra.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
