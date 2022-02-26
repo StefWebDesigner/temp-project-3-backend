@@ -1,7 +1,7 @@
 package com.revature.integrations;
 
 import com.revature.models.Product;
-import com.revature.services.ProductService;
+import com.revature.services.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @Transactional
 public class ProductServiceIntegrationTest {
     @Autowired
-    private ProductService ps;
+    private ProductServiceImpl ps;
 
     @Test
     public void testGetProductById() {
