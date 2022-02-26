@@ -1,4 +1,4 @@
-package com.revature.dartcart.repositories;
+package com.revature.repositories;
 
 
 import org.springframework.data.repository.CrudRepository;
