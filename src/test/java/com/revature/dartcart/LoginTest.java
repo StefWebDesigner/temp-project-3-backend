@@ -39,9 +39,9 @@ public class LoginTest {
     }
 
     @Test
-    public void testLoginUnhappy() throws Exception {
+    public void testLoginUnhappyWrongPassword() throws Exception {
         String url = "/login";
-        User user = new User("test","test1", new ArrayList<>());
+        User user = new User("test","test11", new ArrayList<>());
         //... more
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -50,6 +50,21 @@ public class LoginTest {
 
         mockMvc.perform(post(url).contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void testLoginUnhappyWrongUsername() throws Exception {
+        String url = "/login";
+        User user = new User("test11","test", new ArrayList<>());
+        //... more
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(user );
+
+        mockMvc.perform(post(url).contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().isForbidden());
     }
 }

@@ -19,11 +19,11 @@ import java.util.List;
 @EnableJpaRepositories("com.revature.repositories")
 public class DartCartApplication {
 
-	public static ApplicationContext app;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DartCartApplication.class, args);
-		app = SpringApplication.run(DartCartApplication.class, args);
+
 	}
 
 	@Bean

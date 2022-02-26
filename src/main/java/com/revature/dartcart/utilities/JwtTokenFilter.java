@@ -1,6 +1,7 @@
-package com.revature.dartcart.ultilities;
+package com.revature.dartcart.utilities;
 
 import com.revature.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +23,8 @@ import java.util.List;
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    private final JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
     private final UserRepo userRepo;
 
     public JwtTokenFilter(JwtTokenUtil jwtTokenUtil,

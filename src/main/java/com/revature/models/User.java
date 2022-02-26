@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+
 public class User {
 
     @Id
@@ -31,7 +32,5 @@ public class User {
 
     private String phone;
 
-    @Column(name = "registration_date")
-    private long registrationDate;
 
 }

@@ -1,7 +1,7 @@
 package com.revature.dartcart.config;
 
 import com.revature.dartcart.services.AuthService;
-import com.revature.dartcart.ultilities.JwtTokenFilter;
+import com.revature.dartcart.utilities.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -51,17 +51,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and();
 
         // Set unauthorized requests exception handler
-        http = http
-                .exceptionHandling()
-                .authenticationEntryPoint(
-                        (request, response, ex) -> {
-                            response.sendError(
-                                    HttpServletResponse.SC_UNAUTHORIZED,
-                                    ex.getMessage()
-                            );
-                        }
-                )
-                .and();
+//        http = http
+//                .exceptionHandling()
+//                .authenticationEntryPoint(
+//                        (request, response, ex) -> {
+//                            response.sendError(
+//                                    HttpServletResponse.SC_UNAUTHORIZED,
+//                                    ex.getMessage()
+//                            );
+//                        }
+//                )
+//                .and();
 
         // Set permissions on endpoints
         http.authorizeRequests()
