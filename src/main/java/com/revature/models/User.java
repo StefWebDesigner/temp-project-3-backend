@@ -1,10 +1,12 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * This class represents a User entity in the database.
@@ -14,6 +16,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@NamedEntityGraph(
+        name = "graph.UserCartItems",
+        attributeNodes = @NamedAttributeNode("itemList")
+)
 public class User {
 
     @Id
@@ -21,21 +27,28 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
 
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
 
     private String email;
 
     private String phone;
 
-    @Column(name = "registration_date")
+    private String location;
+
     private long registrationDate;
+
+    // Returns items in both cart and wishlist
+    // Filter by CartItem's saved field to separate the lists
+    @OneToMany
+    @JoinColumn(name = "cart_item_id")
+    @JsonIgnore
+    private List<CartItem> itemList;
 
 }

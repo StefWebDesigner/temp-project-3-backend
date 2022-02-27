@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import com.revature.app.DartCartApplication;
+import com.revature.driver.DartCartApplication;
 import com.revature.models.User;
 import com.revature.repositories.UserRepo;
 import org.junit.jupiter.api.Assertions;
@@ -15,34 +15,45 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-// @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = DartCartApplication.class)
 class UserServiceTest {
 
-    final private User mockUser = new User(1,"test1","password","Test","User","test1@DartCart.net","123-456-7890",123563672L);
+    final private User mockUser = new User(
+            1,
+            "test1",
+            "password",
+            "Test",
+            "User",
+            "test1@DartCart.net",
+            "123-456-7890",
+            "1 Test Street, Test Town, Testonia 12345",
+            123563672L,
+            null
+    );
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
     @MockBean
     private UserRepo mockUserRepo;
+
     @Autowired
     private UserService mockUserService;
+
     @Autowired
     BCryptPasswordEncoder bCryptEncoder;
 
-
     @BeforeEach
-    void setup()
-    {
+    void setup() {
         MockMvc mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
-    void newUser()
-    {
+    void givenUser_whenAddUser_thenAddNewUser() {
         User encrypted = mockUser;
         encrypted.setPassword(bCryptEncoder.encode(encrypted.getPassword()));
         Mockito.when(mockUserRepo.save(mockUser)).thenReturn(encrypted);
-        Assertions.assertEquals(encrypted,mockUserService.addUser(mockUser));
+        Assertions.assertEquals(encrypted, mockUserService.addUser(mockUser));
     }
+
 }

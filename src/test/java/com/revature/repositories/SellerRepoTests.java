@@ -1,7 +1,6 @@
 package com.revature.repositories;
 
-import com.revature.app.DartCartApplication;
-import com.revature.models.Customer;
+import com.revature.driver.DartCartApplication;
 import com.revature.models.Seller;
 import com.revature.models.User;
 import org.junit.jupiter.api.Test;
@@ -29,6 +28,12 @@ public class SellerRepoTests {
     @MockBean
     private UserRepo mockUserRepo;
 
+    // @BeforeAll
+    // public static void setUp() {
+    //     User user = new User();
+    //     Hibernate.initialize(user.getItemList());
+    // }
+
     final private User mockUser = new User(
             1,
             "test1",
@@ -37,7 +42,16 @@ public class SellerRepoTests {
             "User",
             "test1@dartcart.net",
             "123-456-7890",
-            123563672L
+            "1 Test Street, Test Town, Testonia 12345",
+            123563672L,
+            null
+    );
+
+    final private Seller mockSeller = new Seller(
+            1,
+            "/newseller",
+            "THE BEST NEW SELLER!!!",
+            mockUser
     );
 
     @ParameterizedTest
@@ -48,38 +62,28 @@ public class SellerRepoTests {
 
         Seller seller = output.get();
         assertEquals(id, seller.getId());
-        System.out.println(seller);
     }
 
     @Test
     public void whenFindAll_thenReturnAllSellers() {
         List<Seller> sellers = (List<Seller>) sellerRepo.findAll();
         assertNotEquals(0, sellers.size());
-        System.out.println(sellers);
     }
 
     @Test
     public void givenSeller_whenSave_thenAddSeller() {
         SellerRepo mockRepo = mock(SellerRepo.class);
         Mockito.when(mockUserRepo.save(mockUser)).thenReturn(mockUser);
-        Seller newSeller = new Seller(
-                3,
-                "New Seller",
-                "/newseller",
-                "THE BEST NEW SELLER!!!",
-                mockUser
-        );
 
-        mockRepo.save(newSeller);
-        verify(mockRepo).save(newSeller);
-        System.out.println(newSeller);
+        mockRepo.save(mockSeller);
+        verify(mockRepo).save(mockSeller);
+        System.out.println(mockSeller);
     }
 
     @Test
-    public void givenUserId_whenSave_thenUpdateUser() {
+    public void givenSellerId_whenSave_thenUpdateSeller() {
         Seller testSeller = new Seller(
                 1,
-                "New Seller",
                 "/newseller",
                 "THE SUPER DUPER BEST NEW SELLER!!!",
                 mockUser
@@ -90,7 +94,6 @@ public class SellerRepoTests {
 
         Seller updatedSeller = output.get();
         assertEquals("THE SUPER DUPER BEST NEW SELLER!!!", updatedSeller.getDescription());
-        System.out.println(updatedSeller);
     }
 
     @ParameterizedTest

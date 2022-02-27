@@ -1,7 +1,7 @@
 package com.revature.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.app.DartCartApplication;
+import com.revature.driver.DartCartApplication;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,22 +18,34 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 
-// @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = DartCartApplication.class)
 
 class UserControllerTest {
+
     private MockMvc mvc;
     ObjectMapper mapper = new ObjectMapper();
+
     @Autowired
     private WebApplicationContext webApplicationContext;
+
     @MockBean
     private UserService mockUserService;
 
-    final private User mockUser = new User(1,"test1","password","Test","User","test1@dartcart.net","123-456-7890",123563672L);
+    final private User mockUser = new User(
+            1,
+            "test1",
+            "password",
+            "Test",
+            "User",
+            "test1@dartcart.net",
+            "123-456-7890",
+            "1 Test Street, Test Town, Testonia 12345",
+            123563672L,
+            null
+    );
 
     @BeforeEach
-    void setup()
-    {
+    void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
@@ -42,13 +54,14 @@ class UserControllerTest {
         Mockito.when(mockUserService.addUser(mockUser)).thenReturn(mockUser);
 
         mvc.perform(MockMvcRequestBuilders.post("/register").
-                        contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(mockUser))).
-                andExpect(MockMvcResultMatchers.status().isOk());
+            contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(mockUser))).
+            andExpect(MockMvcResultMatchers.status().isOk());
 
         Mockito.when(mockUserService.addUser(new User())).thenReturn(new User());
         mvc.perform(MockMvcRequestBuilders.post("/register").
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(mapper.writeValueAsString(new User()))).
-                        andExpect(MockMvcResultMatchers.status().isBadRequest());
+            contentType(MediaType.APPLICATION_JSON).
+            content(mapper.writeValueAsString(new User()))).
+            andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
+
 }

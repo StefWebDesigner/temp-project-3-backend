@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-public class UserController
-{
+public class UserController {
+
     @Autowired
     UserService us;
 
-    @PostMapping(value = "/register")
-    public ResponseEntity<User> newUser(@RequestBody User u)
-    {
+    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<User> newUser(@RequestBody User u) {
         User created = us.addUser(u);
 
         if (created.getId()!=0) {
@@ -27,4 +26,5 @@ public class UserController
         }
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
 }

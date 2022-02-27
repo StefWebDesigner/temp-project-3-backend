@@ -81,50 +81,28 @@ VALUES (
     '757-670-8879',
     1645737745123
 );
-INSERT INTO Customer (
-    customer_id,
-    location,
-    user_id
-)
-VALUES (
-    DEFAULT,
-    '1001 Real Street, Anytown, VA 23462',
-    1
-);
-INSERT INTO Customer (
-    customer_id,
-    location,
-    user_id
-)
-VALUES (
-    DEFAULT,
-    '410 Unreal Ave, Anytown, VA 23462',
-    3
-);
+
 INSERT INTO Seller (
     seller_id,
-    name,
     homepage,
     description,
     user_id
 )
 VALUES (
     DEFAULT,
-    'Best Seller',
     '/sellers/bestseller',
     'THE BEST SELLER!',
     2
 );
+
 INSERT INTO Seller (
     seller_id,
-    name,
     homepage,
     description,
     user_id
 )
 VALUES (
     DEFAULT,
-    'ALSO Best Seller',
     '/sellers/alsobestseller',
     'ALSO THE BEST SELLER!!!',
     4

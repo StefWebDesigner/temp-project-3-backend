@@ -3,30 +3,30 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.revature.models.Seller;
 
 import javax.persistence.*;
 
 /**
- * This class represents a Seller entity in the database.
+ * This class represents an individual location controlled by a Seller.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Seller {
+@Table(name = "Shops")
+public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seller_id")
+    @Column(name = "shop_id")
     private int id;
 
-    private String homepage;
+    private String location;
 
-    private String description;
-
-    @OneToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 
 }

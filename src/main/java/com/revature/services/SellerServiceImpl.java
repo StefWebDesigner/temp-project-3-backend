@@ -1,6 +1,5 @@
 package com.revature.services;
 
-import com.revature.models.Customer;
 import com.revature.models.Seller;
 import com.revature.repositories.SellerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
