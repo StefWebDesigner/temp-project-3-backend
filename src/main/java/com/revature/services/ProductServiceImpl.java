@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.models.Product;
+import com.revature.repositories.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,8 @@ public class ProductServiceImpl implements ProductService{
     ProductRepo pr;
 
     @Override
-    public Product getProductById(int productId) {
-        Optional<Product> product = pr.findById(productId);
-        return product.orElseGet(Product::new);
+    public Optional<Product> getProductById(int productId) {
+        return pr.findById(productId);
     }
 
 }

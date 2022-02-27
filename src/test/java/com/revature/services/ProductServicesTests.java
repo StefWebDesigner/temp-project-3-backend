@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.models.Category;
 import com.revature.models.Product;
+import com.revature.repositories.ProductRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,66 +23,29 @@ public class ProductServicesTests {
     @MockBean
     private ProductRepo productRepository;
 
-
     @Test
     public void testGetProductById() {
         List<Category> categories = new ArrayList<>();
         categories.add(new Category(1, "Food"));
-        Product product = new Product(1, "Kelloggs Froot Loops", "Delicious frooty flava", categories);
-        when(productRepository.findById(1)).thenReturn(Optional.of(product));
+        Product p = new Product(1, "Kelloggs Froot Loops", "Delicious frooty flava", categories);
+        when(productRepository.findById(1)).thenReturn(Optional.of(p));
+
+        Optional<Product> productOptional = productService.getProductById(1);
+        Product product = productOptional.orElse(new Product());
+
         assertEquals(1, product.getId());
         assertNotEquals(0, product.getId());
         assertEquals("Kelloggs Froot Loops", product.getName());
         assertNotEquals("Kelloggs Frosted Flakes", product.getName());
         assertEquals("Delicious frooty flava", product.getDescription());
         assertNotEquals( "Disgusting frooty flava", product.getDescription());
+
+        assertEquals(p.getId(), product.getId());
+        assertNotEquals(0, product.getId());
+        assertEquals(p.getDescription(), product.getDescription());
+        assertNotEquals("Disgusting frooty flava", product.getDescription());
+        assertEquals(p.getCategory().get(0), product.getCategory().get(0));
+        assertNotEquals("Not Food", product.getCategory().get(0));
     }
-
-//    @Test
-//    public void testGetAllProducts() {
-//        List<Product> productList = productService.getAllProducts();
-//        Product product1 = productList.get(0);
-//        assertEquals(product1.getId(), 1);
-//        assertNotEquals(product1.getId(), 0);
-//        assertEquals(product1.getName(), "Kelloggs Froot Loops");
-//        assertNotEquals(product1.getName(), "Kelloggs Frosted Flakes");
-//        assertEquals(product1.getDescription(), "Delicious frooty flava");
-//        assertNotEquals(product1.getDescription(), "Disgusting frooty flava");
-//    }
-
-//    @Test
-//    public void testSearchByCategory() {
-//
-//    }
-//
-//    @Test
-//    public void testSearchByWord() {
-//
-//    }
-
-//    @Test
-//    public void testAddProduct() {
-//        Product product = new Product();
-//        product.setId(1);
-//        product.setName("Cocoa Puffs");
-//        product.setDescription("I'm coo-coo for Cocoa Puffs");
-//
-//        Category category1 = new Category();
-//        category1.setId(1);
-//        category1.setName("Food");
-//
-//        List<Category> categoriesList = {category1};
-//        product.setCategory(categoriesList);
-//    }
-
-//    @Test
-//    public void testUpdateProduct() {
-//
-//    }
-//
-//    @Test
-//    public void deleteProduct() {
-//
-//    }
 
 }
