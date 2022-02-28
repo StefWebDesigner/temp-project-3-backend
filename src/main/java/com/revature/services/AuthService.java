@@ -17,6 +17,12 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new User(null, null, null);
+        //authorization method checks for the object exist in DB using the username
+        com.revature.models.User user = userService.getUser(username);
+        if(user == null){
+            throw new UsernameNotFoundException("No user found of this username:" + username );
+        }
+
+        return new User(user.getUsername(),user.getPassword(), new ArrayList<>());
     }
 }
