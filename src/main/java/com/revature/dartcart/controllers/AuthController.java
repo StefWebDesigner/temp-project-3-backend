@@ -37,17 +37,17 @@ public class AuthController {
     @PostMapping("login")
     public ResponseEntity<User> login(@RequestBody UserLogin request) {
         try {
-//            Authentication authenticate = authenticationManager
-//                    .authenticate(
-//                            new UsernamePasswordAuthenticationToken(
-//                                    request.getUsername(), request.getPassword()
-//                            )
-//                    );
+            Authentication authenticate = authenticationManager
+                    .authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    request.getUsername(), request.getPassword()
+                            )
+                    );
 
             User user = (User) authService.loadUserByUsername(request.getUsername());
-            if(!request.getPassword().equals(user.getPassword())){
-                throw new BadCredentialsException("wrong password");
-            }
+//            if(!request.getPassword().equals(user.getPassword())){
+//                throw new BadCredentialsException("wrong password");
+//            }
             System.out.println(jwtTokenUtil.validate(jwtTokenUtil.generateAccessToken(user)));
 
             return ResponseEntity.ok()

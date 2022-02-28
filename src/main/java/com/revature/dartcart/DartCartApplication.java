@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -19,7 +20,7 @@ import java.util.List;
 @EnableJpaRepositories("com.revature.repositories")
 public class DartCartApplication {
 
-
+	public static ApplicationContext app;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DartCartApplication.class, args);
@@ -28,7 +29,7 @@ public class DartCartApplication {
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
+		return NoOpPasswordEncoder.getInstance();
 	}
 
 	@Bean
