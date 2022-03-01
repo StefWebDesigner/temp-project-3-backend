@@ -1,4 +1,4 @@
-package com.revature.filters;
+package com.revature.utilities;
 
 import com.revature.utilities.JwtTokenUtil;
 import org.junit.jupiter.api.AfterEach;
