@@ -62,7 +62,7 @@ public class AuthController {
 
 
 
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
 //        System.out.println("username:"+request.getUsername());

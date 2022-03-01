@@ -90,6 +90,29 @@ VALUES (
     'address'
 );
 
+INSERT INTO Users (
+    user_id,
+    username,
+    password,
+    first_name,
+    last_name,
+    email,
+    phone,
+    registration_date,
+    location
+)
+VALUES (
+    DEFAULT,
+    'test',
+    '$2a$04$vwsthDC7JUu9kfqA264DJenCuUC2ifUcRAGdEUFNrxa/gz9p9rgC2',
+    'Jer',
+    'Mann',
+    'jermanny@gmail.com',
+    '757-670-8879',
+    1645737745123,
+    'address'
+);
+
 INSERT INTO Seller (
     seller_id,
     homepage,
