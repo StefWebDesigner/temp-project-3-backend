@@ -15,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.web.*;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.FilterChain;
@@ -36,16 +35,11 @@ public class TestJwtFilter {
 	
 	@MockBean private static JwtTokenUtil jwtTokenUtil;
 	@MockBean private static UserRepo userRepo;
-	@Autowired private MockMvc mvc;
-	
-	// @Autowired ApplicationContext app;
-	// @Autowired MockHttpServletRequest request;
 	
 	@BeforeAll
 	static void testSetup(@Autowired ApplicationContext app) {
 		try {
 			tokenFilter = app.getBean(Class.forName(CLASSNAME));
-			
 			doFilterInternal = tokenFilter.getClass().getDeclaredMethod(DOFILTER, HttpServletRequest.class, HttpServletResponse.class, FilterChain.class);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Class: " + CLASSNAME + " needs to be implemented", e);

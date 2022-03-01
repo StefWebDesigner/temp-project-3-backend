@@ -1,5 +1,6 @@
 package com.revature.utilities;
 
+import com.revature.configs.Role;
 import com.revature.repositories.UserRepo;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -59,7 +60,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 			return;
 		
 		ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-		//if(tokenUser.getUsername().equals("admin")) authorities.add(Role.ADMIN);
+		if(tokenUser.getUsername().equals("admin")) authorities.add(Role.ADMIN);
 		UserDetails userDetails = new User(tokenUser.getUsername(), tokenUser.getPassword(), authorities);
 		
 		UsernamePasswordAuthenticationToken

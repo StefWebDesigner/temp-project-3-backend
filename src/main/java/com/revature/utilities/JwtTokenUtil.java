@@ -1,7 +1,6 @@
 package com.revature.utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
@@ -12,9 +11,8 @@ import java.util.Date;
 @Component
 public class JwtTokenUtil {
 
-    @Value("${com.revature.secret}")
     private final String jwtSecret;
-    @Value("${com.revature.jwtissuer}")
+    
     private final String jwtIssuer;
 
 
@@ -33,24 +31,6 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    public String getUsername(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
-    }
-
-    public Date getExpirationDate(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getExpiration();
-    }
-
     public boolean validate(String token) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
@@ -59,13 +39,10 @@ public class JwtTokenUtil {
             System.err.println("Invalid JWT signature");
             System.err.println(ex.getMessage());
         } catch (MalformedJwtException ex) {
-            System.err.println("Invalid JWT signature");
+            System.err.println("Malformed JWT");
             System.err.println(ex.getMessage());
         } catch (ExpiredJwtException ex) {
             System.err.println("Expired JWT signature");
-            System.err.println(ex.getMessage());
-        } catch (UnsupportedJwtException ex) {
-            System.err.println("Unsupported JWT signature");
             System.err.println(ex.getMessage());
         } catch (IllegalArgumentException ex) {
             System.err.println("JWT claims string is empty");
