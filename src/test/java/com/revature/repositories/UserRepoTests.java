@@ -1,14 +1,19 @@
 package com.revature.repositories;
 
-import com.revature.app.DartCartApplication;
+import com.revature.driver.DartCartApplication;
+import com.revature.models.CartItem;
 import com.revature.models.User;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.persistence.EntityGraph;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +25,19 @@ public class UserRepoTests {
 
     @Autowired
     UserRepo userRepo;
+
+    final private User mockUser = new User(
+            1,
+            "test1",
+            "password",
+            "Test",
+            "User",
+            "test1@DartCart.net",
+            "123-456-7890",
+            "1 Test Street, Test Town, Testonia 12345",
+            123563672L,
+            null
+    );
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
@@ -42,20 +60,10 @@ public class UserRepoTests {
     @Test
     public void givenUser_whenSave_thenAddUser() {
         UserRepo mockRepo = mock(UserRepo.class);
-        User newUser = new User(
-                0,
-                "Postmann",
-                "0abad76ce6a87e08b34da234de06b1f325d777067d670b8f59dc887f0853d53d",
-                "Post",
-                "Mann",
-                "postmann@gmail.com",
-                "757-411-1204",
-                1645743231935L
-        );
 
-        mockRepo.save(newUser);
-        verify(mockRepo).save(newUser);
-        System.out.println(newUser);
+        mockRepo.save(mockUser);
+        verify(mockRepo).save(mockUser);
+        System.out.println(mockUser);
     }
 
     @ParameterizedTest
@@ -63,13 +71,15 @@ public class UserRepoTests {
     public void givenUserId_whenSave_thenUpdateUser(int id) {
         User testUser = new User(
                 id,
-                "UpdateTest",
+                "UpdateTest" + id,
                 "0abad76ce6a87e08b34da234de06b1f325d777067d670b8f59dc887f0853d53d",
                 "Update",
                 "Test",
                 "nope@gmail.com",
                 "757-411-1204",
-                1645743231935L
+                "1 Test Street, Test Town, Testonia 12345",
+                1645743231935L,
+                null
         );
 
         userRepo.save(testUser);

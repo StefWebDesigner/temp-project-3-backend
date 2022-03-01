@@ -1,6 +1,6 @@
 package com.revature.utilities;
 
-import com.revature.app.DartCartApplication;
+import com.revature.driver.DartCartApplication;
 import com.revature.repositories.UserRepo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

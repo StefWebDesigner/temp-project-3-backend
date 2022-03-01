@@ -1,11 +1,13 @@
 package com.revature.models;
 
-import com.revature.app.DartCartApplication;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.revature.driver.DartCartApplication;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * This class represents a User entity in the database.
@@ -15,7 +17,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
+@NamedEntityGraph(
+        name = "graph.UserCartItems",
+        attributeNodes = @NamedAttributeNode("itemList")
+)
 public class User {
 
     @Id
@@ -23,20 +29,34 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "first_name")
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String phone;
 
-    @Column(name = "registration_date")
+    @Column(nullable = false)
+    private String location;
+
+    @Column(nullable = false)
     private long registrationDate;
+
+    // Returns items in both cart and wishlist
+    // Filter by CartItem's saved field to separate the lists
+    @OneToMany
+    @JoinColumn(name = "cart_item_id")
+    @JsonIgnore
+    private List<CartItem> itemList;
 }

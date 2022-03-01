@@ -12,5 +12,4 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
-
 }

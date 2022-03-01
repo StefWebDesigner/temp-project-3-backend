@@ -3,6 +3,7 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.revature.models.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "Invoices")
 public class Invoice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_id")
@@ -31,8 +34,8 @@ public class Invoice {
     private String shippedTo;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "user_id")
+    private User customer;
 
     @ManyToOne
     @JoinColumn(name = "shop_id")
@@ -40,5 +43,6 @@ public class Invoice {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "invoice_id")
-    private List<OrderDetails> orderDetails;
+    private List<OrderDetail> orderDetails;
+
 }

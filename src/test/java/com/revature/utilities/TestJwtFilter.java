@@ -1,6 +1,6 @@
 package com.revature.utilities;
 
-import com.revature.app.DartCartApplication;
+import com.revature.driver.DartCartApplication;
 import com.revature.models.User;
 import com.revature.repositories.UserRepo;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -103,7 +104,8 @@ public class TestJwtFilter {
 		Mockito.when(jwtTokenUtil.validate("exampleToken")).thenReturn(true);
 		
 		Mockito.when( jwtTokenUtil.getUsername("exampleToken")).thenReturn("validName");
-		Mockito.when(userRepo.findByUsername("validName") ).thenReturn(new User(1, "admin", "pass", "Bob", "Latency", "Bob@Babbo.com", "555 555 5555", 0L));
+		Mockito.when(userRepo.findByUsername("validName") ).thenReturn(new User(1, "admin", "pass", "Bob", "Latency", "Bob@Babbo.com", "555 555 5555", "Address",
+				0L, new ArrayList<>()));
 		
 		doFilterInternal.invoke(tokenFilter, request, response, mockChain);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -1,4 +1,4 @@
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -6,7 +6,8 @@ INSERT INTO User (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -16,10 +17,11 @@ VALUES (
     'Mann',
     'hughmanntheman@gmail.com',
     '757-319-0192',
-    1645736771148
+    1645736771148,
+    'address'
 );
 
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -27,7 +29,8 @@ INSERT INTO User (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -37,10 +40,11 @@ VALUES (
     'Mann',
     'sammannnotthefish@gmail.com',
     '757-978-6422',
-    1645737413547
+    1645737413547,
+    'address'
 );
 
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -48,7 +52,8 @@ INSERT INTO User (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -58,10 +63,11 @@ VALUES (
     'Mann',
     'thedieiscastxd@gmail.com',
     '757-433-4787',
-    1645737476942
+    1645737476942,
+    'address'
 );
 
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -69,7 +75,8 @@ INSERT INTO User (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -79,52 +86,31 @@ VALUES (
     'Mann',
     'jermanny@gmail.com',
     '757-670-8879',
-    1645737745123
+    1645737745123,
+    'address'
 );
-INSERT INTO Customer (
-    customer_id,
-    location,
-    user_id
-)
-VALUES (
-    DEFAULT,
-    '1001 Real Street, Anytown, VA 23462',
-    1
-);
-INSERT INTO Customer (
-    customer_id,
-    location,
-    user_id
-)
-VALUES (
-    DEFAULT,
-    '410 Unreal Ave, Anytown, VA 23462',
-    3
-);
+
 INSERT INTO Seller (
     seller_id,
-    name,
     homepage,
     description,
     user_id
 )
 VALUES (
     DEFAULT,
-    'Best Seller',
     '/sellers/bestseller',
     'THE BEST SELLER!',
     2
 );
+
 INSERT INTO Seller (
     seller_id,
-    name,
     homepage,
     description,
     user_id
 )
 VALUES (
     DEFAULT,
-    'ALSO Best Seller',
     '/sellers/alsobestseller',
     'ALSO THE BEST SELLER!!!',
     4

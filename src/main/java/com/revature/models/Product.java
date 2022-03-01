@@ -15,10 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "Products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shop_id")
+    @Column(name = "product_id")
     private int id;
 
     private String name;
@@ -30,4 +32,5 @@ public class Product {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="Product_Category", joinColumns = @JoinColumn(name="shop_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
+
 }

@@ -14,7 +14,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "ShopProducts")
 public class ShopProduct {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shop_product_id")
@@ -31,4 +33,5 @@ public class ShopProduct {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
 }
