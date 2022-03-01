@@ -3,7 +3,6 @@ package com.revature.utilities;
 import com.revature.app.DartCartApplication;
 import com.revature.models.User;
 import com.revature.repositories.UserRepo;
-import com.revature.utilities.JwtTokenUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.web.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.FilterChain;
@@ -57,8 +57,9 @@ public class TestJwtFilter {
 		
 		request.addHeader(HttpHeaders.AUTHORIZATION, "invalid");
 		doFilterInternal.invoke(tokenFilter, request, response, mockChain);
-		
-		assertFalse( SecurityContextHolder.getContext().getAuthentication().isAuthenticated() );
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assertNull(authentication);
 	}
 	
 	@Test
@@ -71,7 +72,8 @@ public class TestJwtFilter {
 		Mockito.when(jwtTokenUtil.validate("exampleToken")).thenReturn(false);
 		
 		doFilterInternal.invoke(tokenFilter, request, response, mockChain);
-		assertFalse( SecurityContextHolder.getContext().getAuthentication().isAuthenticated() );
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assertNull(authentication);
 	}
 	
 	@Test
@@ -87,7 +89,8 @@ public class TestJwtFilter {
 		Mockito.when(userRepo.findByUsername("invalidName") ).thenReturn(null);
 		
 		doFilterInternal.invoke(tokenFilter, request, response, mockChain);
-		assertFalse(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assertNull(authentication);
 	}
 	
 	@Test
@@ -100,10 +103,12 @@ public class TestJwtFilter {
 		Mockito.when(jwtTokenUtil.validate("exampleToken")).thenReturn(true);
 		
 		Mockito.when( jwtTokenUtil.getUsername("exampleToken")).thenReturn("validName");
-		Mockito.when(userRepo.findByUsername("validName") ).thenReturn(new User());
+		Mockito.when(userRepo.findByUsername("validName") ).thenReturn(new User(1, "admin", "pass", "Bob", "Latency", "Bob@Babbo.com", "555 555 5555", 0L));
 		
 		doFilterInternal.invoke(tokenFilter, request, response, mockChain);
-		assertTrue(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assertNotNull(authentication);
+		assertTrue(authentication.isAuthenticated());
 	}
 	
 	@AfterEach
