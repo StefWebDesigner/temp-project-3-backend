@@ -1,5 +1,6 @@
-package com.revature.config;
+package com.revature.configs;
 
+import com.revature.configs.Role;
 import com.revature.services.AuthService;
 import com.revature.utilities.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;

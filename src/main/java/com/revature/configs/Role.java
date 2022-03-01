@@ -1,4 +1,4 @@
-package com.revature.config;
+package com.revature.configs;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
