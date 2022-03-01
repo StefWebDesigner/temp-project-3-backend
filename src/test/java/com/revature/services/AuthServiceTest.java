@@ -1,8 +1,7 @@
-package com.revature.dartcart.authentication;
+package com.revature.services;
 
 
 
-import com.revature.dartcart.services.AuthService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AuthenticationTest {
+public class AuthServiceTest {
 
 
     String userName = "Username";
