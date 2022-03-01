@@ -1,3 +1,4 @@
+
 package com.revature.models;
 
 import lombok.AllArgsConstructor;
@@ -7,28 +8,25 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * This class represents a Seller entity in the database.
+ * This class hard codes data of an individual Product placed on an invoice.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Sellers")
-public class Seller {
-
+@Table(name = "OrderDetails")
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seller_id")
+    @Column(name = "order_detail_id")
     private int id;
 
+    @Column(updatable = false)
+    private int cost;
+    @Column(updatable = false)
     private String name;
 
-    private String homepage;
-
+    @Column(length = 1000, updatable = false)
     private String description;
-
-    @OneToOne
-    private User user;
-
 }
