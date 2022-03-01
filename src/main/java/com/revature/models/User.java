@@ -27,21 +27,28 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String firstName;
 
+    @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
     private String location;
 
+    @Column(nullable = false)
     private long registrationDate;
 
     // Returns items in both cart and wishlist
