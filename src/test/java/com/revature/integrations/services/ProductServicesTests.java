@@ -1,4 +1,4 @@
-package com.revature.services;
+package com.revature.integrations.services;
 
 import com.revature.models.Category;
 import com.revature.models.Product;
@@ -47,5 +47,6 @@ public class ProductServicesTests {
         assertEquals(p.getCategory().get(0), product.getCategory().get(0));
         assertNotEquals("Not Food", product.getCategory().get(0));
     }
+
 
 }
