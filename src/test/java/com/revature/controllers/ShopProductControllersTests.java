@@ -25,6 +25,17 @@ public class ShopProductControllersTests {
     @MockBean
     private ShopProductService sps;
 
+    final static ShopProduct testShopProduct = new ShopProduct(
+            1,
+            new Product(1,
+                    "testProduct",
+                    "testDescription",
+                    new ArrayList<Category>(Arrays.asList(new Category(1, "testCategory")))),
+            20,
+            50.0,
+            0.0
+    );
+
     @Test
     void getShopProductByIdPass() throws Exception {
         Mockito.when(sps.getShopProductById(1).thenReturn(Optional.of(testShopProduct)));
