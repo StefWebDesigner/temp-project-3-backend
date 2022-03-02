@@ -1,7 +1,7 @@
 package com.revature.utilities;
 
+import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 import org.springframework.core.env.Environment;
