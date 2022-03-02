@@ -47,14 +47,12 @@ public class UserRepoTests {
 
         User user = output.get();
         assertEquals(id, user.getId());
-        System.out.println(user);
     }
 
     @Test
     public void whenFindAll_thenReturnAllUsers() {
         List<User> users = (List<User>) userRepo.findAll();
         assertNotEquals(0, users.size());
-        System.out.println(users);
     }
 
     @Test
@@ -63,7 +61,6 @@ public class UserRepoTests {
 
         mockRepo.save(mockUser);
         verify(mockRepo).save(mockUser);
-        System.out.println(mockUser);
     }
 
     @ParameterizedTest
@@ -87,7 +84,6 @@ public class UserRepoTests {
 
         User updatedUser = output.get();
         assertEquals("Update", updatedUser.getFirstName());
-        System.out.println(updatedUser);
     }
 
     @ParameterizedTest

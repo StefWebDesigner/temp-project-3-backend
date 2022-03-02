@@ -53,7 +53,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		// Get user identity and set it on the spring security context
 		com.revature.models.User tokenUser = userRepo
 				.findByUsername(jwtTokenUtil.getUsername(token));
-				//.orElse(null);
 		if(tokenUser == null) {
             filterChain.doFilter(request, response);
             return;
@@ -66,9 +65,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		UsernamePasswordAuthenticationToken
 				authentication = new UsernamePasswordAuthenticationToken(
 				userDetails, null,
-				
-				// List.of introduced in Java9 - Arrays.asList() Java8
-				//userDetails == null ? List.of() : userDetails.getAuthorities()
+
 				userDetails == null ? Arrays.asList() : userDetails.getAuthorities()
 		);
 		

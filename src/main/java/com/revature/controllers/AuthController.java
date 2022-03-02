@@ -42,9 +42,6 @@ public class AuthController {
                     );
 
             User user = (User) authenticate.getPrincipal();
-//            if(!request.getPassword().equals(user.getPassword())){
-//                throw new BadCredentialsException("wrong password");
-//            }
             System.out.println(jwtTokenUtil.validate(jwtTokenUtil.generateAccessToken(user)));
 
             return ResponseEntity.ok()
@@ -64,10 +61,6 @@ public class AuthController {
 
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-//        System.out.println("username:"+request.getUsername());
-//        System.out.println("password:"+request.getPassword());
-//        System.out.println("in database:"+userRepo.findAll());
 
     }
 }
