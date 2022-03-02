@@ -1,4 +1,4 @@
-package com.revature.integrations;
+package com.revature.integration.services;
 
 import com.revature.models.Product;
 import com.revature.services.ProductServiceImpl;
@@ -12,9 +12,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
+@SpringBootTest(classes = com.revature.driver.DartCartApplication.class)
 @Transactional
-public class ProductServiceIntegrationTest {
+public class ProductServiceIntegrationTests {
     @Autowired
     private ProductServiceImpl ps;
 

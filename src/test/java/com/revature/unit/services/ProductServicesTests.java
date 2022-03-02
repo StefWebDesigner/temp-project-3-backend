@@ -1,8 +1,9 @@
-package com.revature.integrations.services;
+package com.revature.unit.services;
 
 import com.revature.models.Category;
 import com.revature.models.Product;
 import com.revature.repositories.ProductRepo;
+import com.revature.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
+@SpringBootTest(classes = com.revature.driver.DartCartApplication.class)
 public class ProductServicesTests {
     @Autowired
     ProductService productService;
@@ -44,8 +45,8 @@ public class ProductServicesTests {
         assertNotEquals(0, product.getId());
         assertEquals(p.getDescription(), product.getDescription());
         assertNotEquals("Disgusting frooty flava", product.getDescription());
-        assertEquals(p.getCategory().get(0), product.getCategory().get(0));
-        assertNotEquals("Not Food", product.getCategory().get(0));
+        assertEquals(p.getCategories().get(0), product.getCategories().get(0));
+        assertNotEquals("Not Food", product.getCategories().get(0));
     }
 
 

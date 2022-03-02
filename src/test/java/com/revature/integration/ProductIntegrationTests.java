@@ -1,4 +1,4 @@
-package com.revature.integrations;
+package com.revature.integration;
 
 import com.revature.models.Product;
 import com.revature.repositories.ProductRepo;
@@ -12,9 +12,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = com.revature.dartcart.DartCartApplication.class)
+@SpringBootTest(classes = com.revature.driver.DartCartApplication.class)
 @Transactional
-public class ProductIntegrationTest {
+public class ProductIntegrationTests {
     @Autowired
     private ProductRepo pr;
 
@@ -29,6 +29,6 @@ public class ProductIntegrationTest {
         assertEquals(p.getId(), 1);
         assertEquals(p.getName(), "Kelloggs Froot Loops");
         assertEquals(p.getDescription(), "Delicious frooty flava");
-        assertEquals(p.getCategory().size(), 1);
+        assertEquals(p.getCategories().size(), 1);
     }
 }

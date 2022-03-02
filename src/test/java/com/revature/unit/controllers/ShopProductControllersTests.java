@@ -1,6 +1,6 @@
 package com.revature.unit.controllers;
 
-import com.revature.dartcart.DartCartApplication;
+import com.revature.driver.DartCartApplication;
 import com.revature.models.Category;
 import com.revature.models.Product;
 import com.revature.models.ShopProduct;
@@ -46,35 +46,35 @@ public class ShopProductControllersTests {
 
     final static ShopProduct testShopProduct = new ShopProduct(
             1,
+            20,
+            50,
+            0,
             new Product(1,
                     "testProduct",
                     "testDescription",
-                    new ArrayList<Category>(Arrays.asList(new Category(1, "testCategory")))),
-            20,
-            50.0,
-            0.0
+                    new ArrayList<Category>(Arrays.asList(new Category(1, "testCategory"))))
     );
 
     final static ShopProduct testShopProduct2 = new ShopProduct(
             1,
+            30,
+            70,
+            2,
             new Product(2,
                     "testProduct2",
                     "testDescription2",
-                    new ArrayList<Category>(Arrays.asList(new Category(2, "testCategory2")))),
-            30,
-            70.0,
-            2.0
+                    new ArrayList<Category>(Arrays.asList(new Category(2, "testCategory2"))))
     );
 
     final static ShopProduct testShopProduct3 = new ShopProduct(
             1,
+            90,
+            10,
+            5,
             new Product(3,
                     "testProduct3",
                     "testDescription3",
-                    new ArrayList<Category>(Arrays.asList(new Category(3, "testCategory3")))),
-            90,
-            10.0,
-            5.0
+                    new ArrayList<Category>(Arrays.asList(new Category(3, "testCategory3"))))
     );
 
     @Test
@@ -92,7 +92,7 @@ public class ShopProductControllersTests {
     }
 
     @Test
-    void getAllShopProductsPass() throws Exception {
+    void getAllShopProducts() throws Exception {
         List<ShopProduct> testList = new ArrayList<>();
         testList.add(testShopProduct);
         testList.add(testShopProduct2);
@@ -101,21 +101,8 @@ public class ShopProductControllersTests {
         Mockito.when(sps.getAllShopProducts()).thenReturn(testList);
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/shop_products"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
-
-        assertEquals(testList.size(), 3);
-    }
-
-    @Test
-    void getAllShopProductsFail() throws Exception {
-        List<ShopProduct> testList = new ArrayList<>();
-        testList.add(testShopProduct);
-        testList.add(testShopProduct2);
-        testList.add(testShopProduct3);
-
-        Mockito.when(sps.getAllShopProducts()).thenReturn(testList);
-        ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/shop_products"));
-        ra.andExpect(MockMvcResultMatchers.status().isOk());
-
-        assertNotEquals(testList.size(), 2);
+        ra.andExpect(MockMvcResultMatchers.jsonPath("$[0]").value(testShopProduct));
+        ra.andExpect(MockMvcResultMatchers.jsonPath("$[1]").value(testShopProduct2));
+        ra.andExpect(MockMvcResultMatchers.jsonPath("$[2]").value(testShopProduct3));
     }
 }
