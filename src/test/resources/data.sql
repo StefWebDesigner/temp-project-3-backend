@@ -1,4 +1,4 @@
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -19,7 +19,7 @@ VALUES (
     1645736771148
 );
 
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -40,7 +40,7 @@ VALUES (
     1645737413547
 );
 
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -61,7 +61,7 @@ VALUES (
     1645737476942
 );
 
-INSERT INTO User (
+INSERT INTO Users (
     user_id,
     username,
     password,
@@ -82,7 +82,7 @@ VALUES (
     1645737745123
 );
 
-INSERT INTO Seller (
+INSERT INTO Sellers (
     seller_id,
     homepage,
     description,
@@ -95,7 +95,7 @@ VALUES (
     2
 );
 
-INSERT INTO Seller (
+INSERT INTO Sellers (
     seller_id,
     homepage,
     description,

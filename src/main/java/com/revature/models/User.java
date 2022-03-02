@@ -20,6 +20,7 @@ import java.util.List;
         name = "graph.UserCartItems",
         attributeNodes = @NamedAttributeNode("itemList")
 )
+@Table(name = "Users")
 public class User {
 
     @Id
