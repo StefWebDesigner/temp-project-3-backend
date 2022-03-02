@@ -1,4 +1,4 @@
-package com.revature.services;
+package com.revature.integrations.services;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

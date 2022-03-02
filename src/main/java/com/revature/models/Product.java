@@ -1,4 +1,4 @@
-package revature.models;
+package com.revature.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;

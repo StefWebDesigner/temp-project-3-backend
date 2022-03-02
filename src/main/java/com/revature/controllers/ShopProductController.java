@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.models.ShopProduct;
+import com.revature.services.ShopProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.HttpStatus;

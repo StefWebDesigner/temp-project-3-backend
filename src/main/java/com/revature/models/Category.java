@@ -1,4 +1,5 @@
-package revature.models;
+
+package com.revature.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,28 +8,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * This class represents a Seller entity in the database.
+ * This class represents an individual Category a Product may belong to.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Sellers")
-public class Seller {
-
+@Table(name = "Categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seller_id")
+    @Column(name = "category_id")
     private int id;
 
     private String name;
-
-    private String homepage;
-
-    private String description;
-
-    @OneToOne
-    private User user;
-
 }

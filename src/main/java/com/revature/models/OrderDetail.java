@@ -1,5 +1,5 @@
 
-package revature.models;
+package com.revature.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
