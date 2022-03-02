@@ -20,18 +20,13 @@ import org.springframework.security.core.Authentication;
 @RestController
 @CrossOrigin
 public class AuthController {
-
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    AuthService authService;
-
-
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserLogin request) {
         try {
             Authentication authenticate = authenticationManager
@@ -40,13 +35,7 @@ public class AuthController {
                                     request.getUsername(), request.getPassword()
                             )
                     );
-
             User user = (User) authenticate.getPrincipal();
-//            if(!request.getPassword().equals(user.getPassword())){
-//                throw new BadCredentialsException("wrong password");
-//            }
-            System.out.println(jwtTokenUtil.validate(jwtTokenUtil.generateAccessToken(user)));
-
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
@@ -54,20 +43,8 @@ public class AuthController {
                     )
                     .body(user);
         } catch (BadCredentialsException ex) {
-
-            System.out.println("username:"+request.getUsername());
-            System.out.println("password:"+request.getPassword());
-
-            System.out.println("in database:"+ authService.loadUserByUsername(request.getUsername()));
-
-
-
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-//        System.out.println("username:"+request.getUsername());
-//        System.out.println("password:"+request.getPassword());
-//        System.out.println("in database:"+userRepo.findAll());
 
     }
 }

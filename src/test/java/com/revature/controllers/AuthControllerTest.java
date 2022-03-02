@@ -1,4 +1,4 @@
-package com.revature.services;
+package com.revature.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = DartCartApplication.class)
-public class LoginTest {
+public class AuthControllerTest {
     @Autowired
     MockMvc mockMvc;
 

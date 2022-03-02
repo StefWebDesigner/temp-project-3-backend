@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = DartCartApplication.class)
-public class TestJwtFilter {
+public class JwtFilterTest {
 	
 	private static final String CLASSNAME = "com.revature.utilities.JwtTokenFilter";
 	private static final String DOFILTER = "doFilterInternal";
