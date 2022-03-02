@@ -16,7 +16,7 @@ public class ShopProductServicesTests {
     private ShopProductService ShopProductService;
 
     @MockBean
-    private ShopProductRepository shopProductRepository;
+    private ShopProductRepository ShopProductRepo;
 
     @Test
     void getShop_ProductById(int id) {
