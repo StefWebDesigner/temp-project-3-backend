@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = DartCartApplication.class)
@@ -30,6 +32,8 @@ public class JwtTokenUtilTest {
     private static final String VALIDATE = "validate";
     // Method name of the generate function
     private static final String GENERATE = "generateAccessToken";
+    // Method name of the generate function
+    private static final String GETEXPIRATIONDATE = "getExpirationDate";
     // object of the class
     private static Object tokenUtility;
 
@@ -37,6 +41,8 @@ public class JwtTokenUtilTest {
     private static Method validate;
     // the generate function we are testing
     private static Method generate;
+    // the generate function we are testing
+    private static Method getExpirationDate;
 
     // Method name of the GETUSERNAME function
     private static final String GETUSERNAME = "getUsername";
@@ -50,7 +56,7 @@ public class JwtTokenUtilTest {
      * Tests the validation of JWTTokens
      */
     @BeforeAll
-    static void testingSetup(@Autowired ApplicationContext app) throws NoSuchMethodException {
+    static void testingSetup(@Autowired ApplicationContext app) {
         try {
             tokenUtility = app.getBean(Class.forName(CLASSNAME));
 
@@ -72,6 +78,13 @@ public class JwtTokenUtilTest {
             generate = tokenUtility.getClass().getMethod(GENERATE, User.class);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Method: " + GENERATE + " needs to be implemented", e);
+        }
+
+        // get the getExpirationDate method from the object
+        try {
+            getExpirationDate = tokenUtility.getClass().getMethod(GETEXPIRATIONDATE, String.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("Method: " + GETEXPIRATIONDATE + " needs to be implemented", e);
         }
     }
 
@@ -121,5 +134,12 @@ public class JwtTokenUtilTest {
         String userVal = (String) getUsername.invoke(tokenUtility, token);
 
         assertEquals(userVal,"username");
+    }
+
+    @Test
+    void getExpirationDate() throws InvocationTargetException, IllegalAccessException {
+        Date expected = new Date(1646916186000L);
+        Date retVal = (Date) getExpirationDate.invoke(tokenUtility, "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0aW5ndXNlcnBsZWFzZWlnbm9yZSIsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTY0NTgyMjE4MSwiZXhwIjoxNjQ2OTE2MTg2fQ.m40zqnRVkMAvCsDLorhaTkY-vkVq64Ybfs-3zSjv8E3w68CGc9pBgj-F6NhbhWdnI0waKLCiux0I13CYTUKxXA");
+        assertEquals(expected, retVal);
     }
 }
