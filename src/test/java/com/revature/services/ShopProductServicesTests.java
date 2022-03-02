@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.revature.repositories.ShopProductRepo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -20,10 +22,10 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = DartCartApplication.class)
 public class ShopProductServicesTests {
     @Autowired
-    private ShopProductService ShopProductService;
+    private ShopProductService shopProductService;
 
     @MockBean
-    private ShopProductRepository ShopProductRepo;
+    private ShopProductRepo shopProductRepo;
 
     final static ShopProduct testShopProduct = new ShopProduct(
             1,
@@ -39,7 +41,7 @@ public class ShopProductServicesTests {
 
     @Test
     void getShopProductByIdPass(int id) {
-        when(ShopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
+        when(shopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
         Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
 
         assertTrue(shopProduct.isPresent());
@@ -51,12 +53,12 @@ public class ShopProductServicesTests {
         assertEquals(shopProduct.get().getProduct().getId(), 1);
         assertEquals(shopProduct.get().getProduct().getName(), "testProduct");
         assertEquals(shopProduct.get().getProduct().getDescription(), "testDescription");
-        assertEquals(shopProduct.get().getProduct().getCategoryList().size(), 1);
+        assertEquals(shopProduct.get().getProduct().getCategory().size(), 1);
     }
 
     @Test
     void getShopProductByIdFail(int id) {
-        when(ShopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
+        when(shopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
         Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
 
         assertTrue(shopProduct.isPresent());
@@ -68,6 +70,6 @@ public class ShopProductServicesTests {
         assertNotEquals(shopProduct.get().getProduct().getId(), 2);
         assertNotEquals(shopProduct.get().getProduct().getName(), "notTestProduct");
         assertNotEquals(shopProduct.get().getProduct().getDescription(), "notTestDescription");
-        assertNotEquals(shopProduct.get().getProduct().getCategoryList().size(), 0);
+        assertNotEquals(shopProduct.get().getProduct().getCategory().size(), 0);
     }
 }

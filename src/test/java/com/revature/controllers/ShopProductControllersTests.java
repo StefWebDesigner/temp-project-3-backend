@@ -4,6 +4,7 @@ import com.revature.dartcart.DartCartApplication;
 import com.revature.models.Category;
 import com.revature.models.Product;
 import com.revature.models.ShopProduct;
+import com.revature.services.ShopProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -53,14 +54,14 @@ public class ShopProductControllersTests {
 
     @Test
     void getShopProductByIdPass() throws Exception {
-        Mockito.when(sps.getShopProductById(1).thenReturn(Optional.of(testShopProduct)));
+        Mockito.when(sps.getShopProductById(1)).thenReturn(Optional.of(testShopProduct));
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/shop_products/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     void getShopProductByIdFail() throws Exception {
-        Mockito.when(sps.getProductById(2).thenReturn(Optional.empty()));
+        Mockito.when(sps.getShopProductById(2)).thenReturn(Optional.empty());
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/shop_products/2"));
         ra.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
