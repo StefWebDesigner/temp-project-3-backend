@@ -37,7 +37,7 @@ public class ShopProductServicesTests {
     );
 
     @Test
-    void getShop_ProductById(int id) {
+    void getShopProductById(int id) {
         when(ShopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
 
         Optional<ShopProduct> product = shopProductService.getShopProductById(id);
