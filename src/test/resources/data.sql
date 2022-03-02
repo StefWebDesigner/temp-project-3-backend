@@ -6,7 +6,8 @@ INSERT INTO Users (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -16,7 +17,8 @@ VALUES (
     'Mann',
     'hughmanntheman@gmail.com',
     '757-319-0192',
-    1645736771148
+    1645736771148,
+    'address'
 );
 
 INSERT INTO Users (
@@ -27,7 +29,8 @@ INSERT INTO Users (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -37,7 +40,8 @@ VALUES (
     'Mann',
     'sammannnotthefish@gmail.com',
     '757-978-6422',
-    1645737413547
+    1645737413547,
+    'address'
 );
 
 INSERT INTO Users (
@@ -48,7 +52,8 @@ INSERT INTO Users (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -58,7 +63,8 @@ VALUES (
     'Mann',
     'thedieiscastxd@gmail.com',
     '757-433-4787',
-    1645737476942
+    1645737476942,
+    'address'
 );
 
 INSERT INTO Users (
@@ -69,7 +75,8 @@ INSERT INTO Users (
     last_name,
     email,
     phone,
-    registration_date
+    registration_date,
+    location
 )
 VALUES (
     DEFAULT,
@@ -79,7 +86,31 @@ VALUES (
     'Mann',
     'jermanny@gmail.com',
     '757-670-8879',
-    1645737745123
+    1645737745123,
+    'address'
+);
+
+INSERT INTO Users (
+    user_id,
+    username,
+    password,
+    first_name,
+    last_name,
+    email,
+    phone,
+    registration_date,
+    location
+)
+VALUES (
+    DEFAULT,
+    'test',
+    '$2a$04$vwsthDC7JUu9kfqA264DJenCuUC2ifUcRAGdEUFNrxa/gz9p9rgC2',
+    'Jer',
+    'Mann',
+    'jermanny@gmail.com',
+    '757-670-8879',
+    1645737745123,
+    'address'
 );
 
 INSERT INTO Sellers (

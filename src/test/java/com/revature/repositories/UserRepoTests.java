@@ -71,7 +71,7 @@ public class UserRepoTests {
     public void givenUserId_whenSave_thenUpdateUser(int id) {
         User testUser = new User(
                 id,
-                "UpdateTest",
+                "UpdateTest" + id,
                 "0abad76ce6a87e08b34da234de06b1f325d777067d670b8f59dc887f0853d53d",
                 "Update",
                 "Test",
