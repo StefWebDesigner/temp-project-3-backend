@@ -1,7 +1,3 @@
---Placeholder table for shop model (fix)
---CREATE TABLE shop (id serial PRIMARY KEY id);
-
---INSERT INTO shop (id) VALUES (default);
 
 INSERT INTO products (product_id, name, description) VALUES
 (1, 'Kelloggs Froot Loops', 'Delicious frooty flava');
@@ -13,3 +9,5 @@ INSERT INTO category (category_id, name) VALUES (1, 'Food');
 
 INSERT INTO product_category (product_id, category_id) VALUES
 (1, 1);
+
+--INSERT INTO shop () VALUES ();
