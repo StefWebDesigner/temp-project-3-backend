@@ -38,36 +38,36 @@ public class ShopProductServicesTests {
     );
 
     @Test
-    void getShopProductById(int id) {
+    void getShopProductByIdPass(int id) {
         when(ShopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
-
         Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
 
         assertTrue(shopProduct.isPresent());
 
         assertEquals(shopProduct.get().getId(), 1);
-        assertNotEquals(shopProduct.get().getId(), 2);
-
         assertEquals(shopProduct.get().getQuantity(), 20);
-        assertNotEquals(shopProduct.get().getQuantity(), 50);
-
         assertEquals(shopProduct.get().getPrice(), 50.0);
-        assertNotEquals(shopProduct.get().getPrice(), 100.0);
-
         assertEquals(shopProduct.get().getDiscount(), 0.0);
-        assertNotEquals(shopProduct.get().getDiscount(), 10.0);
-
         assertEquals(shopProduct.get().getProduct().getId(), 1);
-        assertNotEquals(shopProduct.get().getProduct().getId(), 2);
-
         assertEquals(shopProduct.get().getProduct().getName(), "testProduct");
-        assertNotEquals(shopProduct.get().getProduct().getName(), "notTestProduct");
-
         assertEquals(shopProduct.get().getProduct().getDescription(), "testDescription");
-        assertNotEquals(shopProduct.get().getProduct().getDescription(), "notTestDescription");
-
         assertEquals(shopProduct.get().getProduct().getCategoryList().size(), 1);
-        assertNotEquals(shopProduct.get().getProduct().getCategoryList().size(), 0);
     }
 
+    @Test
+    void getShopProductByIdFail(int id) {
+        when(ShopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
+        Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
+
+        assertTrue(shopProduct.isPresent());
+
+        assertNotEquals(shopProduct.get().getId(), 2);
+        assertNotEquals(shopProduct.get().getQuantity(), 50);
+        assertNotEquals(shopProduct.get().getPrice(), 100.0);
+        assertNotEquals(shopProduct.get().getDiscount(), 10.0);
+        assertNotEquals(shopProduct.get().getProduct().getId(), 2);
+        assertNotEquals(shopProduct.get().getProduct().getName(), "notTestProduct");
+        assertNotEquals(shopProduct.get().getProduct().getDescription(), "notTestDescription");
+        assertNotEquals(shopProduct.get().getProduct().getCategoryList().size(), 0);
+    }
 }
