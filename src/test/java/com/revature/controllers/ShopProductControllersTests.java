@@ -22,18 +22,16 @@ public class ShopProductControllersTests {
     private ShopProductService sps;
 
     @Test
-    void getShop_ProductsbyId() throws Exception {
-
+    void getShopProductByIdPass() throws Exception {
         Mockito.when(sps.getShopProductById(1).thenReturn(new ShopProduct(1, 1, 10, 15.99, 2.99)));
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/Shop_products/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
-
-        Mockito.when(sps.getProductById(2).thenReturn(null));
-        ra = mvc.perform(MockMvcRequestBuilders.get("/Shop_products/2"));
-        ra.andExpect(MockMvcResultMatchers.status().isNotFound());
-
-
     }
 
-
+    @Test
+    void getShopProductByIdFail() throws Exception {
+        Mockito.when(sps.getProductById(2).thenReturn(null));
+        ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/Shop_products/2"));
+        ra.andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 }
