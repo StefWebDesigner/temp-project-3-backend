@@ -10,7 +10,7 @@ public interface ShopProductService {
      * This method gets all Shop Products from the database
      * @return  returns a List of all Shop Products
      */
-    List<ShopProduct> gelAllShopProducts();
+    List<ShopProduct> getAllShopProducts();
 
 
     /**

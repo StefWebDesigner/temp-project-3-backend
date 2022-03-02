@@ -25,9 +25,9 @@ public class ShopProduct {
     private int price;
     private int discount;
 
-    @ManyToOne
-    @JoinColumn(name = "shop_id")
-    private Shop shop;
+//    @ManyToOne
+//    @JoinColumn(name = "shop_id")
+//    private Shop shop;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

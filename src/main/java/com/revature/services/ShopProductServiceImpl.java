@@ -1,7 +1,7 @@
 package com.revature.services;
 
 import com.revature.models.ShopProduct;
-import com.revature.repositories.ShopProductRepository;
+import com.revature.repositories.ShopProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
     @Autowired
-    ShopProductRepository shopProductRepository;
+    ShopProductRepo shopProductRepository;
 
     @Override
-    public List<ShopProduct> gelAllShopProducts() {
+    public List<ShopProduct> getAllShopProducts() {
         return (List<ShopProduct>) shopProductRepository.findAll();
     }
 
