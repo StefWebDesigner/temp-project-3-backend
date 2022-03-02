@@ -27,7 +27,8 @@ public class ShopProductServicesTests {
 
     final static ShopProduct testShopProduct = new ShopProduct(
             1,
-            new Product(1,
+            new Product(
+                    1,
                     "testProduct",
                     "testDescription",
                     new ArrayList<Category>(Arrays.asList(new Category(1, "testCategory")))),
@@ -44,6 +45,29 @@ public class ShopProductServicesTests {
 
         assertTrue(shopProduct.isPresent());
 
+        assertEquals(shopProduct.get().getId(), 1);
+        assertNotEquals(shopProduct.get().getId(), 2);
+
+        assertEquals(shopProduct.get().getQuantity(), 20);
+        assertNotEquals(shopProduct.get().getQuantity(), 50);
+
+        assertEquals(shopProduct.get().getPrice(), 50.0);
+        assertNotEquals(shopProduct.get().getPrice(), 100.0);
+
+        assertEquals(shopProduct.get().getDiscount(), 0.0);
+        assertNotEquals(shopProduct.get().getDiscount(), 10.0);
+
+        assertEquals(shopProduct.get().getProduct().getId(), 1);
+        assertNotEquals(shopProduct.get().getProduct().getId(), 2);
+
+        assertEquals(shopProduct.get().getProduct().getName(), "testProduct");
+        assertNotEquals(shopProduct.get().getProduct().getName(), "notTestProduct");
+
+        assertEquals(shopProduct.get().getProduct().getDescription(), "testDescription");
+        assertNotEquals(shopProduct.get().getProduct().getDescription(), "notTestDescription");
+
+        assertEquals(shopProduct.get().getProduct().getCategoryList().size(), 1);
+        assertNotEquals(shopProduct.get().getProduct().getCategoryList().size(), 0);
     }
 
 }
