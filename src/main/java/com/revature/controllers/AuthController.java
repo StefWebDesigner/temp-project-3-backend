@@ -20,16 +20,11 @@ import org.springframework.security.core.Authentication;
 @RestController
 @CrossOrigin
 public class AuthController {
-
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    AuthService authService;
-
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserLogin request) {
@@ -40,9 +35,7 @@ public class AuthController {
                                     request.getUsername(), request.getPassword()
                             )
                     );
-
             User user = (User) authenticate.getPrincipal();
-
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
