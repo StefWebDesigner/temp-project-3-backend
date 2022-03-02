@@ -25,7 +25,6 @@ public class UserController {
     public ResponseEntity<User> newUser(@RequestBody User u) {
         try {
             User created = us.addUser(u);
-
             if (created.getId() != 0) {
                 return new ResponseEntity<>(created, HttpStatus.OK);
             } else {

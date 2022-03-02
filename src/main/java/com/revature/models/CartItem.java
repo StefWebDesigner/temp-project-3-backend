@@ -16,7 +16,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "CartItems")
 public class CartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_item_id")
@@ -27,7 +26,10 @@ public class CartItem {
     // if saved, set to wishlist, if not saved is in cart
     private boolean saved;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private User customer;
+
     @OneToOne
     private ShopProduct shopProduct;
-
 }

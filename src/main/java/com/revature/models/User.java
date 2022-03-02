@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.revature.driver.DartCartApplication;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -58,5 +59,4 @@ public class User {
     @JoinColumn(name = "cart_item_id")
     @JsonIgnore
     private List<CartItem> itemList;
-
 }
