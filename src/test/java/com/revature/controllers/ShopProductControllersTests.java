@@ -4,7 +4,7 @@ import com.revature.dartcart.DartCartApplication;
 import com.revature.models.Category;
 import com.revature.models.Product;
 import com.revature.models.ShopProduct;
-import com.revature.services.ShopProductService;
+import com.revature.services.ShopProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,7 +21,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @AutoConfigureMockMvc
@@ -34,7 +33,7 @@ public class ShopProductControllersTests {
     private WebApplicationContext webApplicationContext;
 
     @MockBean
-    private ShopProductService sps;
+    private ShopProductServiceImpl sps;
 
     @BeforeEach
     void setup(){

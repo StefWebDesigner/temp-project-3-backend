@@ -6,7 +6,6 @@ import com.revature.models.Product;
 import com.revature.models.ShopProduct;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -22,7 +21,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = DartCartApplication.class)
 public class ShopProductServicesTests {
     @Autowired
-    private ShopProductService shopProductService;
+    private ShopProductServiceImpl shopProductService;
 
     @MockBean
     private ShopProductRepo shopProductRepo;
@@ -40,9 +39,9 @@ public class ShopProductServicesTests {
     );
 
     @Test
-    void getShopProductByIdPass(int id) {
+    void getShopProductByIdPass() {
         when(shopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
-        Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
+        Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(1);
 
         assertTrue(shopProduct.isPresent());
 
@@ -57,9 +56,9 @@ public class ShopProductServicesTests {
     }
 
     @Test
-    void getShopProductByIdFail(int id) {
+    void getShopProductByIdFail() {
         when(shopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
-        Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
+        Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(1);
 
         assertTrue(shopProduct.isPresent());
 
