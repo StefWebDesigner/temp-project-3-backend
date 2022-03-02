@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import com.revature.models.Category;
+import com.revature.models.Product;
 import com.revature.models.ShopProduct;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +27,7 @@ public class ShopProductControllersTests {
 
     @Test
     void getShopProductByIdPass() throws Exception {
-        Mockito.when(sps.getShopProductById(1).thenReturn(new ShopProduct(1, 1, 10, 15.99, 2.99)));
+        Mockito.when(sps.getShopProductById(1).thenReturn(Optional.of(testShopProduct)));
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.get("/shop_products/1"));
         ra.andExpect(MockMvcResultMatchers.status().isOk());
     }
