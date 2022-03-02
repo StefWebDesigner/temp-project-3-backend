@@ -17,11 +17,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USERS")
 @NamedEntityGraph(
         name = "graph.UserCartItems",
         attributeNodes = @NamedAttributeNode("itemList")
 )
+@Table(name = "Users")
 public class User {
 
     @Id

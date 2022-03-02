@@ -20,11 +20,11 @@ public class UserController {
     @Autowired
     UserService us;
 
+    // Return JWT for automatic login after registration
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<User> newUser(@RequestBody User u) {
         try {
             User created = us.addUser(u);
-
             if (created.getId() != 0) {
                 return new ResponseEntity<>(created, HttpStatus.OK);
             } else {

@@ -113,7 +113,7 @@ VALUES (
     'address'
 );
 
-INSERT INTO Seller (
+INSERT INTO Sellers (
     seller_id,
     homepage,
     description,
@@ -126,7 +126,7 @@ VALUES (
     2
 );
 
-INSERT INTO Seller (
+INSERT INTO Sellers (
     seller_id,
     homepage,
     description,
