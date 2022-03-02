@@ -16,14 +16,6 @@ public class ShopProductServicesTests {
     @MockBean
     private ShopProductRepository shopProductRepository;
 
-//    @Test
-//    void getShop_Products() {
-//
-//        List<ShopProduct> products = shopProductService.getShopProducts(int id)
-//        assertFalse(products.isEmpty());
-//        assertTrue(products.isEmpty());
-//    }
-
     @Test
     void getShop_ProductById(int id) {
 
