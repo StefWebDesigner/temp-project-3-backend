@@ -40,9 +40,9 @@ public class ShopProductServicesTests {
     void getShopProductById(int id) {
         when(ShopProductRepo.findById(1)).thenReturn(Optional.of(testShopProduct));
 
-        Optional<ShopProduct> product = shopProductService.getShopProductById(id);
+        Optional<ShopProduct> shopProduct = shopProductService.getShopProductById(id);
 
-        assertTrue(product.isPresent());
+        assertTrue(shopProduct.isPresent());
 
     }
 
