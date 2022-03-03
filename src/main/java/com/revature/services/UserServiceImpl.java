@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public User getUserById(int id) {
-        return ur.findById(id).orElse(new User());
+    public Optional<User> getUserById(int id) {
+        return ur.findById(id);
     }
 
     @Override
@@ -44,7 +45,6 @@ public class UserServiceImpl implements UserService
             ur.deleteById(id);
             return true;
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             return false;
         }
     }

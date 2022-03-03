@@ -56,12 +56,15 @@ class UserControllerTest {
         mvc.perform(MockMvcRequestBuilders.post("/register").
             contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(mockUser))).
             andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
+    @Test
+    void testNewUserFail() throws Exception {
         Mockito.when(mockUserService.addUser(new User())).thenReturn(new User());
         mvc.perform(MockMvcRequestBuilders.post("/register").
-            contentType(MediaType.APPLICATION_JSON).
-            content(mapper.writeValueAsString(new User()))).
-            andExpect(MockMvcResultMatchers.status().isBadRequest());
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(mapper.writeValueAsString(new User()))).
+                andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
 }

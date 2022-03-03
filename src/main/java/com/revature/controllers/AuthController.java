@@ -35,7 +35,7 @@ public class AuthController {
     AuthService authService;
 
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<com.revature.models.User> login(@RequestBody UserLogin request) {
         try {
             Authentication authenticate = authenticationManager
@@ -60,3 +60,4 @@ public class AuthController {
         }
     }
 }
+

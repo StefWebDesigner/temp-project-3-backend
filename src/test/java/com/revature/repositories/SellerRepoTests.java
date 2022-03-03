@@ -28,12 +28,6 @@ public class SellerRepoTests {
     @MockBean
     private UserRepo mockUserRepo;
 
-    // @BeforeAll
-    // public static void setUp() {
-    //     User user = new User();
-    //     Hibernate.initialize(user.getItemList());
-    // }
-
     final private User mockUser = new User(
             1,
             "test1",
@@ -77,7 +71,6 @@ public class SellerRepoTests {
 
         mockRepo.save(mockSeller);
         verify(mockRepo).save(mockSeller);
-        System.out.println(mockSeller);
     }
 
     @Test
