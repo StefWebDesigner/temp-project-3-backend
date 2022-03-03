@@ -19,4 +19,7 @@ public interface ShopProductService {
      * @return      Returns the retrieved Shop Product by the ID
      */
     Optional<ShopProduct> getShopProductById(int id);
+
+
+    List<ShopProduct> search(String searchString);
 }

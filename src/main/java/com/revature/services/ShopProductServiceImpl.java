@@ -23,4 +23,9 @@ public class ShopProductServiceImpl implements ShopProductService {
 
         return shopProductRepository.findById(id);
     }
+
+    @Override
+    public List<ShopProduct> search(String searchString) {
+        return null;
+    }
 }
