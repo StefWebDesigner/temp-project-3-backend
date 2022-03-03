@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.models.Product;
 import com.revature.models.Seller;
+import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
 import com.revature.repositories.ProductRepo;
 import com.revature.repositories.ShopProductRepo;
@@ -32,13 +33,17 @@ public class ShopProductServiceImpl implements ShopProductService {
     }
 
     @Override
-    public List<Seller> getSellersForProduct(int id) {
-        List<ShopProduct> allListings = shopProductRepository.findByProduct(shopProductRepository.findById(id).get().getProduct());
-        ArrayList<Seller> sellers = new ArrayList<>();
+    public List<ShopProduct> getSellersForProduct(int id) {
+        return shopProductRepository.findByProduct(shopProductRepository.findById(id).get().getProduct());
+
+        /*
+        ArrayList<Shop> shops = new ArrayList<>();
+
         for(ShopProduct s:allListings)
         {
-            sellers.add(s.getShop().getSeller());
+            shops.add(s.getShop());
         }
-        return sellers;
+        return shops;
+        */
     }
 }

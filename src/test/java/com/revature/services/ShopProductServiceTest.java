@@ -71,6 +71,6 @@ public class ShopProductServiceTest
             Mockito.when(mockShopProductRepo.findByProduct(mockShopProduct.getProduct())).thenReturn(testList);
             Mockito.when(mockShopProductRepo.findById(mockShopProduct.getId())).thenReturn(Optional.of(mockShopProduct));
 
-            Assertions.assertEquals(mockSeller,mockShopService.getSellersForProduct(mockShopProduct.getId()).get(0));
+            Assertions.assertEquals(mockShopProduct,mockShopService.getSellersForProduct(mockShopProduct.getId()).get(0));
         }
 }
