@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.services.AuthService;
+import com.revature.services.UserService;
 import com.revature.utilities.JwtTokenUtil;
 import com.revature.models.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,14 @@ public class AuthController {
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     AuthService authService;
 
 
     @PostMapping("login")
-    public ResponseEntity<User> login(@RequestBody UserLogin request) {
+    public ResponseEntity<com.revature.models.User> login(@RequestBody UserLogin request) {
         try {
             Authentication authenticate = authenticationManager
                     .authenticate(
@@ -42,32 +46,17 @@ public class AuthController {
                     );
 
             User user = (User) authenticate.getPrincipal();
-//            if(!request.getPassword().equals(user.getPassword())){
-//                throw new BadCredentialsException("wrong password");
-//            }
-            System.out.println(jwtTokenUtil.validate(jwtTokenUtil.generateAccessToken(user)));
+            com.revature.models.User retUser = userService.getUserByUsername(user.getUsername());
+            retUser.setPassword(null);
 
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
                             jwtTokenUtil.generateAccessToken(user)
                     )
-                    .body(user);
+                    .body(retUser);
         } catch (BadCredentialsException ex) {
-
-            System.out.println("username:"+request.getUsername());
-            System.out.println("password:"+request.getPassword());
-
-            System.out.println("in database:"+ authService.loadUserByUsername(request.getUsername()));
-
-
-
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-//        System.out.println("username:"+request.getUsername());
-//        System.out.println("password:"+request.getPassword());
-//        System.out.println("in database:"+userRepo.findAll());
-
     }
 }
