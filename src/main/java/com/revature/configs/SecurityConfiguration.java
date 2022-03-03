@@ -42,7 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Enable CORS and disable CSRF
         http = http.cors().and().csrf().disable();
 
-
         // Set session management to stateless
         http = http
                 .sessionManagement()
@@ -75,6 +74,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
         );
+
+        // Enable iframe rendering for H2 console
+        http.headers().frameOptions().sameOrigin();
 
     }
 
