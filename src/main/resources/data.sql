@@ -151,4 +151,8 @@ INSERT INTO Shop_Products (shop_product_id, quantity, price, discount, product_i
 INSERT INTO Categories (category_id, name) VALUES (1, 'Food');
 
 INSERT INTO Product_Category (product_id, category_id) VALUES
+<<<<<<< HEAD
 (1, 1);
+=======
+(1, 1);
+>>>>>>> origin/supplier-scanga
