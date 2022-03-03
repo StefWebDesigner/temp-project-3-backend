@@ -3,6 +3,7 @@ package com.revature.unit.controllers;
 import com.revature.driver.DartCartApplication;
 import com.revature.models.Category;
 import com.revature.models.Product;
+import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
 import com.revature.services.ShopProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,11 +45,14 @@ public class ShopProductControllersTests {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+    final static private Shop shop = new Shop();
+
     final static ShopProduct testShopProduct = new ShopProduct(
             1,
             20,
             50,
             0,
+            shop,
             new Product(1,
                     "testProduct",
                     "testDescription",
@@ -60,6 +64,7 @@ public class ShopProductControllersTests {
             30,
             70,
             2,
+            shop,
             new Product(2,
                     "testProduct2",
                     "testDescription2",
@@ -71,6 +76,7 @@ public class ShopProductControllersTests {
             90,
             10,
             5,
+            shop,
             new Product(3,
                     "testProduct3",
                     "testDescription3",

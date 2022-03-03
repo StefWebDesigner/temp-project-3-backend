@@ -48,6 +48,8 @@ local.properties
 # STS (Spring Tool Suite)
 .springBeans
 
+*.DS_Store
+
 # Code Recommenders
 .recommenders/
 
@@ -286,5 +288,8 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# merge artifacts
+*.orig
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,intellij+all,eclipse,maven,java

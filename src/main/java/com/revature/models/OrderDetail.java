@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "OrderDetails")
 public class OrderDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_detail_id")
@@ -29,4 +30,5 @@ public class OrderDetail {
 
     @Column(length = 1000, updatable = false)
     private String description;
+
 }

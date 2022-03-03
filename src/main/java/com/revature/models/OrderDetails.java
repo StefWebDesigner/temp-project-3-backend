@@ -7,27 +7,24 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * This class represents a Seller entity in the database.
+ * This class hard codes data of an individual Product placed on an invoice.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Sellers")
-public class Seller {
-
+public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seller_id")
+    @Column(name = "order_detail_id")
     private int id;
 
-    private String homepage;
+    @Column(updatable = false)
+    private int cost;
+    @Column(updatable = false)
+    private String name;
 
+    @Column(length = 1000, updatable = false)
     private String description;
-
-    @OneToOne
-    @JoinColumn(name="user_id")
-    private User user;
-
 }

@@ -17,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "Products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -29,7 +30,7 @@ public class Product {
 
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
-  
-    @JoinTable(name="product_category", joinColumns = @JoinColumn(name="product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name="Product_Category", joinColumns = @JoinColumn(name="product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
+
 }

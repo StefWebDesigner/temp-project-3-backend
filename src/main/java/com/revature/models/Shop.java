@@ -3,6 +3,7 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.revature.models.Seller;
 
 import javax.persistence.*;
 
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Shops")
 public class Shop {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shop_id")
@@ -26,4 +28,5 @@ public class Shop {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller seller;
+
 }

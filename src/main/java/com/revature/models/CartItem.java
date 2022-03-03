@@ -26,6 +26,10 @@ public class CartItem {
     // if saved, set to wishlist, if not saved is in cart
     private boolean saved;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private User customer;
+
     @OneToOne
     private ShopProduct shopProduct;
 }

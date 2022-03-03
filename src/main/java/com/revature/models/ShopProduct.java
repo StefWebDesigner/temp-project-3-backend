@@ -14,8 +14,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "shopproducts")
+@Table(name = "ShopProducts")
 public class ShopProduct {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shop_product_id")
@@ -25,11 +26,12 @@ public class ShopProduct {
     private int price;
     private int discount;
 
-//    @ManyToOne
-//    @JoinColumn(name = "shop_id")
-//    private Shop shop;
+    @ManyToOne
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
 }
