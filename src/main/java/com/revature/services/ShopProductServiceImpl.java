@@ -30,6 +30,5 @@ public class ShopProductServiceImpl implements ShopProductService {
         List<ShopProduct> shopProductList = (List<ShopProduct>) shopProductRepository.findAll();
         return shopProductList.stream().filter(shopProduct ->
                 shopProduct.getProduct().getName().toLowerCase().contains(searchString.toLowerCase())).collect(Collectors.toList());
-
     }
 }
