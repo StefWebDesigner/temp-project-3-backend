@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.revature.models.Seller;
 import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
+import com.revature.models.ShopProductResponse;
 import com.revature.services.ShopProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,9 +34,9 @@ public class ShopProductController {
     }
 
     @GetMapping("/sellers/{shopProductId}")
-    public ResponseEntity<List<ShopProduct>> getAllSellersForProduct(@PathVariable("shopProductId") String id)
+    public ResponseEntity<List<ShopProductResponse>> getAllSellersForProduct(@PathVariable("shopProductId") String id)
     {
-        List<ShopProduct> shops = sps.getSellersForProduct(Integer.parseInt(id));
+        List<ShopProductResponse> shops = sps.getSellersForProduct(Integer.parseInt(id));
         return new ResponseEntity<>(shops, HttpStatus.OK);
     }
 }

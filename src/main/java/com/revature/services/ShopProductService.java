@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.models.Seller;
 import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
+import com.revature.models.ShopProductResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,5 +23,5 @@ public interface ShopProductService {
      */
     Optional<ShopProduct> getShopProductById(int id);
 
-    List<ShopProduct> getSellersForProduct(int id);
+    List<ShopProductResponse> getSellersForProduct(int id);
 }
