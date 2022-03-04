@@ -77,7 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 UsernamePasswordAuthenticationFilter.class
         );
 
-        
+
     }
 
     @Override @Bean
