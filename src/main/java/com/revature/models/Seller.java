@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,11 @@ public class Seller {
     @Column(name = "seller_id")
     private int id;
 
+    @NotNull
+    private String name;
+
+    @NotNull
+    @Column(unique = true)
     private String homepage;
 
     private String description;
