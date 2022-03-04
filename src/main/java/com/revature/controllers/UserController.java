@@ -11,20 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 @CrossOrigin
 @RestController
 public class UserController {
 
     @Autowired
-    UserService us;
+    UserService userService;
 
-    // Return JWT for automatic login after registration
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<User> newUser(@RequestBody User u) {
         try {
-            User created = us.addUser(u);
+            User created = userService.addUser(u);
             if (created.getId() != 0) {
                 return new ResponseEntity<>(created, HttpStatus.OK);
             } else {

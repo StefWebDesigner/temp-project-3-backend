@@ -29,4 +29,9 @@ public class ShopProductController {
     public List<ShopProduct> getAllShopProducts() {
         return sps.getAllShopProducts();
     }
+
+    @GetMapping("/shop_products/search/{search}")
+    public List<ShopProduct> searchShopProducts(@PathVariable ("search") String search){
+        return sps.searchByProductName(search);
+    }
 }

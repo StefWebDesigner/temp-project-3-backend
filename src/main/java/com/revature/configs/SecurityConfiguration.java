@@ -44,7 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
 
 
-
         // Set session management to stateless
         http = http
                 .sessionManagement()
@@ -67,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
-                .antMatchers("/login", "/h2/**", "/register").permitAll()
+                .antMatchers("/h2/**", "/login", "/register", "/signup", "/signup/shop", "/shop_products").permitAll()
                 .antMatchers(HttpMethod.GET, "/sellers/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/invoices/**").permitAll()
                 // Our private endpoints
@@ -80,6 +79,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
         );
+
+        // Enable iframe rendering for H2 console
+        http.headers().frameOptions().sameOrigin();
 
     }
 

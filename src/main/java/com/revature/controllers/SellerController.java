@@ -16,6 +16,9 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
+    // There's no need for an addSeller() method. It's handled by the /signup endpoint in ShopController,
+    // since by signing up as a Seller, you also create your first Shop automatically.
+
     /**
      * Method retrieves a Sellers data from the database/backend by an id.
      *

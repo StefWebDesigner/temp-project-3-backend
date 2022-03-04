@@ -7,20 +7,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
     @Autowired
-    ShopProductRepo shopProductRepository;
+    ShopProductRepo shopProductRepo;
 
     @Override
     public List<ShopProduct> getAllShopProducts() {
-        return (List<ShopProduct>) shopProductRepository.findAll();
+        return (List<ShopProduct>) shopProductRepo.findAll();
     }
 
     @Override
     public Optional<ShopProduct> getShopProductById(int id) {
 
-        return shopProductRepository.findById(id);
+        return shopProductRepo.findById(id);
+    }
+
+    @Override
+    public List<ShopProduct> searchByProductName(String searchString) {
+        List<ShopProduct> shopProductList = (List<ShopProduct>) shopProductRepo.findAll();
+        return shopProductList.stream().filter(shopProduct ->
+                shopProduct.getProduct().getName().toLowerCase().contains(searchString.toLowerCase())).collect(Collectors.toList());
     }
 }
