@@ -10,12 +10,14 @@ import java.util.List;
 @Repository
 public interface CartItemRepo extends CrudRepository<CartItem, Integer> {
     
-    @Query(value = "SELECT * FROM CartItems WHERE cart_item_id=? AND date IS NOT NULL;", nativeQuery = true)
+    @Query(value = "SELECT * FROM Cart_Items WHERE customer_id=?", nativeQuery = true)
     List<CartItem> getAllCartItem(int id);
 
-    @Query(value = "SELECT * FROM CartItems WHERE customer_id=? AND date IS NULL;", nativeQuery = true)
+    @Query(value = "SELECT * FROM Cart_Items WHERE customer_id=?", nativeQuery = true)
     CartItem getCurrentCart(int userId);
 
+    @Query(value = "SELECT * FROM Cart_Items WHERE SHOP_PRODUCT_SHOP_PRODUCT_ID=? limit 1", nativeQuery = true)
+    CartItem getByShopProductId(int id);
 
-    //void deleteByObject(ShopProduct shopProduct);
+    //void deleteByObject(ShopProduct );
 }

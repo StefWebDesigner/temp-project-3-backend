@@ -145,6 +145,8 @@ INSERT INTO Products (product_id, name, description) VALUES
 INSERT INTO Shop_Products (shop_product_id, quantity, price, discount, product_id) VALUES
 (1, 10, 15, 2, 1);
 
+
+
 INSERT INTO Categories (category_id, name) VALUES (1, 'Food');
 
 INSERT INTO Product_Category (product_id, category_id) VALUES
@@ -153,5 +155,3 @@ INSERT INTO Product_Category (product_id, category_id) VALUES
 INSERT INTO Cart_Items(cart_item_id, quantity, saved, customer_id, shop_product_shop_product_id)
 VALUES(1,12,true,1, 1);
 
-INSERT INTO Cart_Items(cart_item_id, quantity, saved, customer_id, shop_product_shop_product_id)
-VALUES(2,15,true,1, 1);
