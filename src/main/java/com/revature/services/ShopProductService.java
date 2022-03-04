@@ -21,7 +21,7 @@ public interface ShopProductService {
     Optional<ShopProduct> getShopProductById(int id);
 
     /**
-     * This function retrieves all Shop Products with the search string in the product
+     * This function retrieves all Shop Products with the search string in their name
      * @param searchString The string to be searched
      * @return A list of all Sop Products that contain the search string in their name
      */
