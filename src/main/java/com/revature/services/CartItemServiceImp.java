@@ -32,12 +32,14 @@ public class CartItemServiceImp implements CartItemService{
 
     @Override
     public CartItem addCartItem(CartItem cartItem) {
-        CartItem tempCartItem =  cir.getByShopProductId(cartItem.getShopProduct().getId(),cartItem.getCustomer().getId());
+        CartItem tempCartItem =  cir.getByShopProductId(cartItem.getShopProduct().getShop_product_id(),cartItem.getCustomer().getId());
+
         if(tempCartItem!=null){
             tempCartItem.setQuantity(tempCartItem.getQuantity()+1);
             return cir.save(tempCartItem);
         }else {
-            ShopProduct shopProduct = shopProductService.getShopProductById(cartItem.getShopProduct().getId()).orElse(null);
+            ShopProduct shopProduct = shopProductService.getShopProductById(cartItem.getShopProduct().getShop_product_id()).orElse(null);
+            shopProduct.getShop_product_id();
             CartItem item = new CartItem(cartItem.getQuantity(), cartItem.isSaved(), userService.getUserById(cartItem.getCustomer().getId()).orElse(null),shopProduct);
 
             return cir.save(item);

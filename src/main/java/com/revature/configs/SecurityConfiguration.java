@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http = http.cors().and().csrf().disable();
         http.headers().frameOptions().disable();
 
+        http.headers().frameOptions().disable();
 
         // Set session management to stateless
         http = http
@@ -79,6 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
         );
+
 
     }
 
