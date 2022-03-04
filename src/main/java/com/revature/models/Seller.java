@@ -1,10 +1,12 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * This class represents a Seller entity in the database.
@@ -29,5 +31,6 @@ public class Seller {
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
+
 
 }

@@ -15,7 +15,7 @@ public interface SellerService {
 
     public Optional<Seller> getSellerByUserId(int id);
 
-   // Optional<Seller> getShopBySellerId(int parseInt);
-    //Optional<Seller> getInvoiceByShopId(int parseInt);
-    //Optional<Seller> getInvoiceByShop(int parseInt);
+
+
+
 }

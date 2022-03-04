@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class SellerServiceImpl implements SellerService {
 
     @Autowired
@@ -49,6 +50,8 @@ public class SellerServiceImpl implements SellerService {
     public Optional<Seller> getSellerByUserId(int id) {
         return sr.findByUserId(id);
     }
+
+
 
 //    @Override
 //    public Optional<Seller> getShopBySellerId(int parseInt) {

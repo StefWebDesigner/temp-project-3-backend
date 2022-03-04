@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ import java.util.List;
 )
 @Table(name = "Users")
 public class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,4 +61,28 @@ public class User {
     @JoinColumn(name = "cart_item_id")
     @JsonIgnore
     private List<CartItem> itemList;
+
+//
+//    @OneToMany(mappedBy = "Users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "invoice_id")
+//    @JsonIgnore
+//    private List<Invoice> invoiceList;
+//
+//
+//
+//
+//    public User(int id, String username, String password, String firstName, String lastName, String email, String phone, String location, long registrationDate, List<CartItem> cartItems) {
+//        this.invoiceList = new ArrayList<Invoice>();
+//        this.itemList = cartItems;
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.phone = phone;
+//        this.location = location;
+//        this.registrationDate = registrationDate;
+//
+//    }
 }

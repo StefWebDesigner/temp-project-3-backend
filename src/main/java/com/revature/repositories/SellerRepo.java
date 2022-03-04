@@ -11,6 +11,5 @@ import java.util.Optional;
 public interface SellerRepo extends CrudRepository<Seller, Integer> {
 
     Optional<Seller> findByUserId(int userId);
-   // Optional<Seller> findBySellerId(int sellerId);
-    //Optional<Seller> findByShopId(int shopId);
+
 }
