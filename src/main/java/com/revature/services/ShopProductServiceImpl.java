@@ -11,16 +11,16 @@ import java.util.Optional;
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
     @Autowired
-    ShopProductRepo shopProductRepository;
+    ShopProductRepo shopProductRepo;
 
     @Override
     public List<ShopProduct> getAllShopProducts() {
-        return (List<ShopProduct>) shopProductRepository.findAll();
+        return (List<ShopProduct>) shopProductRepo.findAll();
     }
 
     @Override
     public Optional<ShopProduct> getShopProductById(int id) {
 
-        return shopProductRepository.findById(id);
+        return shopProductRepo.findById(id);
     }
 }
