@@ -16,8 +16,8 @@ public interface CartItemRepo extends CrudRepository<CartItem, Integer> {
     @Query(value = "SELECT * FROM Cart_Items WHERE customer_id=?", nativeQuery = true)
     CartItem getCurrentCart(int userId);
 
-    @Query(value = "SELECT * FROM Cart_Items WHERE SHOP_PRODUCT_SHOP_PRODUCT_ID=? limit 1", nativeQuery = true)
-    CartItem getByShopProductId(int id);
+    @Query(value = "SELECT * FROM Cart_Items WHERE SHOP_PRODUCT_SHOP_PRODUCT_ID=? and customer_id=? limit 1", nativeQuery = true)
+    CartItem getByShopProductId(int ShopProductId, int userId);
 
     //void deleteByObject(ShopProduct );
 }

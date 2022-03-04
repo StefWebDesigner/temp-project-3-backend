@@ -21,6 +21,6 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public Optional<ShopProduct> getShopProductById(int id) {
 
-        return shopProductRepository.findById(id);
+        return shopProductRepository.findById(id) ;
     }
 }

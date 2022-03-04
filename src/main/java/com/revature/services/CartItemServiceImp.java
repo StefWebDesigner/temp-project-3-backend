@@ -3,6 +3,8 @@ package com.revature.services;
 import com.revature.models.CartItem;
 import com.revature.models.ShopProduct;
 import com.revature.repositories.CartItemRepo;
+import com.revature.repositories.ShopProductRepo;
+import com.revature.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,10 @@ import java.util.List;
 public class CartItemServiceImp implements CartItemService{
     @Autowired
     CartItemRepo cir;
+    @Autowired
+    UserService userService;
+    @Autowired
+    ShopProductService shopProductService;
 
     @Override
     public List<CartItem> getAllCartItem() {
@@ -26,11 +32,16 @@ public class CartItemServiceImp implements CartItemService{
 
     @Override
     public CartItem addCartItem(CartItem cartItem) {
-        CartItem tempCartItem =  cir.getByShopProductId(cartItem.getShopProduct().getId());
+        CartItem tempCartItem =  cir.getByShopProductId(cartItem.getShopProduct().getId(),cartItem.getCustomer().getId());
         if(tempCartItem!=null){
-            tempCartItem.setQuantity(cartItem.getQuantity()+1);
+            tempCartItem.setQuantity(tempCartItem.getQuantity()+1);
             return cir.save(tempCartItem);
-        }else return cir.save(cartItem);
+        }else {
+            ShopProduct shopProduct = shopProductService.getShopProductById(cartItem.getShopProduct().getId()).orElse(null);
+            CartItem item = new CartItem(cartItem.getQuantity(), cartItem.isSaved(), userService.getUserById(cartItem.getCustomer().getId()).orElse(null),shopProduct);
+
+            return cir.save(item);
+        }
 
     }
 
@@ -44,14 +55,22 @@ public class CartItemServiceImp implements CartItemService{
         return cir.getCurrentCart(userId);
     }
 
-//    @Override
-//    public boolean deleteCartItem(int id) {
-//        try {
-//            cir.deleteById(id);
-//            return true;
-//        } catch (IllegalArgumentException | EmptyResultDataAccessException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
+    @Override
+    public CartItem getbyId(int id) {
+        return cir.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean deleteById(int id) {
+        try{
+            cir.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+
+    }
+
+
 }

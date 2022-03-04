@@ -11,5 +11,6 @@ public interface CartItemService {
     public CartItem addCartItem(CartItem cartItem);
     public CartItem updateCartItem(CartItem change);
     public CartItem getCurrentCartbyId(int userId);
-
+    public CartItem getbyId(int id);
+    public boolean deleteById(int id);
 }

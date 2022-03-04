@@ -36,4 +36,10 @@ public class CartItem {
     @OneToOne
     private ShopProduct shopProduct;
 
+    public CartItem(int quantity, boolean saved, User customer, ShopProduct shopProduct) {
+        this.quantity = quantity;
+        this.saved = saved;
+        this.customer = customer;
+        this.shopProduct = shopProduct;
+    }
 }

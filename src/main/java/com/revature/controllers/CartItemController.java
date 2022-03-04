@@ -30,7 +30,25 @@ public class CartItemController {
     @PostMapping(value = "/carts")
     public CartItem addCartItem(@RequestBody CartItem cartItem) {
 
+        String username = cartItem.getCustomer().getUsername();
+
+        cartItem.setCustomer(userService.getUserByUsername(username));
         return cis.addCartItem(cartItem);
+    }
+
+    @PutMapping("/carts/{id}")
+    public CartItem updateCartItem(@PathVariable("id") int id, @RequestBody CartItem quantity){
+        CartItem cartItem = cis.getbyId(id);
+        if(quantity.getQuantity()!=0){
+
+            cartItem.setQuantity(quantity.getQuantity());
+            cis.updateCartItem(cartItem);
+            return cartItem;
+        }else{
+            cis.deleteById(id);
+            return null;
+        }
+
     }
 
 //    @PutMapping(value="/carts/{id}", consumes = "application/json", produces = "application/json")
