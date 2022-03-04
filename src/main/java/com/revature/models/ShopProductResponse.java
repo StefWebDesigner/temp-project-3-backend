@@ -11,14 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 public class ShopProductResponse
 {
-    private int shopProductId;
-    private int productId;
-    private List<Category> category;
-    private String name;
+    private int shop_product_id;
+    private int shop_id;
+    private Product product;
     private int price;
     private String location;
     private int discount;
     private int quantity;
-    private String description;
     private String sellerDescription;
 }

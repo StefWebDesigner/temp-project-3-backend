@@ -37,15 +37,13 @@ public class ShopProductServiceImpl implements ShopProductService {
 
         for(ShopProduct s:allListings)
         {
-            shopProducts.add(new ShopProductResponse(s.getId(),
-                    s.getProduct().getId()
-                    ,s.getProduct().getCategories()
-                    ,s.getProduct().getName()
+            shopProducts.add(new ShopProductResponse(s.getShop_product_id()
+                    ,s.getShop().getId()
+                    ,s.getProduct()
                     ,s.getPrice()
                     ,s.getShop().getLocation()
                     ,s.getDiscount()
                     ,s.getQuantity()
-                    ,s.getProduct().getDescription()
                     ,s.getShop().getSeller().getDescription()));
         }
         return shopProducts;
