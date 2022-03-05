@@ -27,10 +27,16 @@ public class InvoiceController {
     public List<Invoice> getInvoiceByUsername(@PathVariable("id") String id) {
         return invoiceService.getInvoiceByCustomerId(Integer.parseInt(id));
     }
-        
+
     @GetMapping("/invoices/seller/{id}")
     public List<Invoice> getAllInvoicesBySellerId(@PathVariable("id")String id) {
-      return invoiceService.getAllInvoicesBySellerId(Integer.parseInt(id));
+        return invoiceService.getAllInvoicesBySellerId(Integer.parseInt(id));
+
+    }
+
+    @GetMapping("/invoices/shop/{id}")
+    public List<Invoice> getAllInvoicesByShopId(@PathVariable("id")String id) {
+        return invoiceService.getInvoicesByShopId(Integer.parseInt(id));
 
     }
 }

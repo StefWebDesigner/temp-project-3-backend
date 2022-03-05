@@ -31,12 +31,17 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .collect(Collectors.toList());
 
     }
-        public List<Invoice> getInvoiceByCustomerId ( int id){
-            List<Invoice> invoices = (List<Invoice>) invoiceRepo.findAll();
-            return invoices.stream()
-                    .filter(invoice -> invoice.getCustomer().getId() == id)
-                    .collect(Collectors.toList());
 
-        }
+    public List<Invoice> getInvoiceByCustomerId ( int id){
+        List<Invoice> invoices = (List<Invoice>) invoiceRepo.findAll();
+        return invoices.stream()
+                .filter(invoice -> invoice.getCustomer().getId() == id)
+                .collect(Collectors.toList());
+
+    }
+
+    public List<Invoice> getInvoicesByShopId ( int id){
+        return (List<Invoice>) invoiceRepo.findAllByShopId(id);
+    }
 
 }

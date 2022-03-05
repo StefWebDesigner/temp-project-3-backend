@@ -12,6 +12,7 @@ public interface InvoiceService {
      */
 
     List<Invoice> getAllInvoicesBySellerId(int id);
+    List<Invoice> getInvoicesByShopId(int id);
     List<Invoice> getInvoiceByCustomerId(int id);
 
 

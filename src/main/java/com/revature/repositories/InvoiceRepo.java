@@ -13,4 +13,6 @@ import java.util.Optional;
 @Repository
 public interface InvoiceRepo extends CrudRepository<Invoice, Integer> {
 
+    public Iterable<Invoice> findAllByShopId(int id);
+
 }
