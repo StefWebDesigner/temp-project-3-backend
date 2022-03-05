@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 public class InvoiceController {
 
     @Autowired
@@ -28,5 +28,15 @@ public class InvoiceController {
         return invoiceService.getInvoiceByCustomerId(Integer.parseInt(id));
     }
 
+    @GetMapping("/invoices/seller/{id}")
+    public List<Invoice> getAllInvoicesBySellerId(@PathVariable("id")String id) {
+        return invoiceService.getAllInvoicesBySellerId(Integer.parseInt(id));
 
+    }
+
+    @GetMapping("/invoices/shop/{id}")
+    public List<Invoice> getAllInvoicesByShopId(@PathVariable("id")String id) {
+        return invoiceService.getInvoicesByShopId(Integer.parseInt(id));
+
+    }
 }

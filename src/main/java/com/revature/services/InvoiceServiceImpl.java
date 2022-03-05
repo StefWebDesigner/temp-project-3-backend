@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 @Transactional
 public class InvoiceServiceImpl implements InvoiceService {
@@ -20,16 +19,29 @@ public class InvoiceServiceImpl implements InvoiceService {
     InvoiceRepo invoiceRepo;
 
     /**
+     * Gets all invoices through seller id
      * Gets all invoices through customer id
      * @return a list of all customer invoices
      */
     @Override
-    public List<Invoice> getInvoiceByCustomerId(int id) {
+    public List<Invoice> getAllInvoicesBySellerId(int id) {
         List<Invoice> invoices = (List<Invoice>) invoiceRepo.findAll();
-        List<Invoice> generatedInvoice = null;
-        generatedInvoice = invoices.stream()
+        return invoices.stream()
                 .filter(invoice -> invoice.getCustomer().getId() == id)
                 .collect(Collectors.toList());
-        return generatedInvoice;
+
     }
+
+    public List<Invoice> getInvoiceByCustomerId ( int id){
+        List<Invoice> invoices = (List<Invoice>) invoiceRepo.findAll();
+        return invoices.stream()
+                .filter(invoice -> invoice.getCustomer().getId() == id)
+                .collect(Collectors.toList());
+
+    }
+
+    public List<Invoice> getInvoicesByShopId ( int id){
+        return (List<Invoice>) invoiceRepo.findAllByShopId(id);
+    }
+
 }

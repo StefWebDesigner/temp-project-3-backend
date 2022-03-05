@@ -48,24 +48,6 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public Optional<Seller> getSellerByUserId(int id) {
-        return sr.findByUserId(id);
+        return sellerRepo.findByUserId(id);
     }
-
-
-
-//    @Override
-//    public Optional<Seller> getShopBySellerId(int parseInt) {
-//        return sr.findBySellerId(parseInt);
-//    }
-//
-//    @Override
-//    public Optional<Seller> getInvoiceByShopId(int sellerId) {
-//        return sr.findByShopId(sellerId);
-//    }
-
-//    @Override
-//    public Optional<Seller> getInvoiceByShop(int parseInt) {
-//        return Optional.empty();
-//    }
-
 }

@@ -1,6 +1,5 @@
 package com.revature.repositories;
 
-
 import com.revature.models.Invoice;
 import com.revature.models.Product;
 import com.revature.models.User;
@@ -13,5 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface InvoiceRepo extends CrudRepository<Invoice, Integer> {
+
+    public Iterable<Invoice> findAllByShopId(int id);
 
 }
