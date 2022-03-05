@@ -26,10 +26,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<Invoice> getInvoiceByCustomerId(int id) {
         List<Invoice> invoices = (List<Invoice>) invoiceRepo.findAll();
-        List<Invoice> generatedInvoice = null;
-        generatedInvoice = invoices.stream()
+        return invoices.stream()
                 .filter(invoice -> invoice.getCustomer().getId() == id)
                 .collect(Collectors.toList());
-        return generatedInvoice;
     }
 }

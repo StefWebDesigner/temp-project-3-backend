@@ -12,7 +12,7 @@ INSERT INTO Users (
 VALUES (
     DEFAULT,
     'HughTheMann',
-    '16e168e4cb8c6921dc2bb3f1e11c87a12b4fa3c750ca14efeb7f8870ab611971',
+    '$2a$04$vwsthDC7JUu9kfqA264DJenCuUC2ifUcRAGdEUFNrxa/gz9p9rgC2',
     'Hugh',
     'Mann',
     'hughmanntheman@gmail.com',
@@ -35,7 +35,7 @@ INSERT INTO Users (
 VALUES (
     DEFAULT,
     'Sammykins',
-    '3e4463134cf818db84a14d750b86603aa0611b1989c337d4bc9f0a14e3a08bb1',
+    '$2a$04$vwsthDC7JUu9kfqA264DJenCuUC2ifUcRAGdEUFNrxa/gz9p9rgC2',
     'Samantha',
     'Mann',
     'sammannnotthefish@gmail.com',
@@ -58,7 +58,7 @@ INSERT INTO Users (
 VALUES (
     DEFAULT,
     'Caesar92',
-    'ac9ef06fa6d05293997edd051dee190ae657e5033a612b6977fe0fd6b227d99e',
+    '$2a$04$vwsthDC7JUu9kfqA264DJenCuUC2ifUcRAGdEUFNrxa/gz9p9rgC2',
     'Roe',
     'Mann',
     'thedieiscastxd@gmail.com',
@@ -81,7 +81,7 @@ INSERT INTO Users (
 VALUES (
     DEFAULT,
     'JerManny',
-    'bb45d85472de2bff5e1801cf09d3b0b5121a29e5e71bc128f1621ccf9d9d410f',
+    '$2a$04$vwsthDC7JUu9kfqA264DJenCuUC2ifUcRAGdEUFNrxa/gz9p9rgC2',
     'Jer',
     'Mann',
     'jermanny@gmail.com',
@@ -176,4 +176,7 @@ INSERT INTO Order_Details VALUES
 (default, 37, 'Delicious frooty flava', 'Kelloggs Froot Loops', 5, 7),
 (default, 41, 'Delicious frooty flava', 'Kelloggs Froot Loops', 15, 8),
 (default, 1, 'Delicious frooty flava', 'Kelloggs Froot Loops', 7, 9),
-(default, 139, 'Delicious frooty flava', 'Kelloggs Froot Loops', 107, 10);
+(default, 139, 'Delicious frooty flava', 'Kelloggs Froot Loops', 107, 10),
+(default, 1300, 'Delicious frooty flava', 'Kelloggs Froot Loops', 107, 10),
+(default, 1500, 'Delicious frooty flava', 'Kelloggs Froot Loops', 107, 10),
+(default, 1250, 'Delicious frooty flava', 'Kelloggs Froot Loops', 5, 10);
