@@ -27,7 +27,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 
     @Override
     public List<ShopProduct> searchByProductName(String searchString) {
-        List<ShopProduct> shopProductList = (List<ShopProduct>) shopProductRepository.findAll();
+        List<ShopProduct> shopProductList = (List<ShopProduct>) shopProductRepo.findAll();
         return shopProductList.stream().filter(shopProduct ->
                 shopProduct.getProduct().getName().toLowerCase().contains(searchString.toLowerCase())).collect(Collectors.toList());
     }
