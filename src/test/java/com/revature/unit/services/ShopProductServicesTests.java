@@ -186,9 +186,12 @@ public class ShopProductServicesTests {
         Product product = new Product(1, "Loops", "Delicious frooty flava",categories );
         products.add(product);
 
-        when(productRepo.findByCategories("Food")).thenReturn(products);
+        when(productRepo.findAll()).thenReturn(products);
         List<Product> allProducts = shopProductService.getByProductCategory(null,"Food");
+        List<Product> allProducts2 = shopProductService.getByProductCategory(null, "Categories");
         assertEquals(products.get(0).getName(), allProducts.get(0).getName());
+        assertNotEquals(allProducts.size(), allProducts2.size());
     }
+
 
 }
