@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.models.Product;
 import com.revature.models.ShopProduct;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface ShopProductService {
      * @return A list of all Sop Products that contain the search string in their name
      */
     List<ShopProduct> searchByProductName(String searchString);
+
+    List<Product> getByProductCategory(String name, String category);
 }
