@@ -27,8 +27,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> getAllInvoicesBySellerId(int id) {
         List<Invoice> invoices = (List<Invoice>) invoiceRepo.findAll();
         return invoices.stream()
-                .filter(invoice -> invoice.getCustomer().getId() == id)
+                .filter(invoice -> invoice.getShop().getSeller().getId() == id)
                 .collect(Collectors.toList());
+        //.filter(invoice -> invoice.getCustomer().getId() == id)
 
     }
 
