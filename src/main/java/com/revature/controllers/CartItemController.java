@@ -50,15 +50,4 @@ public class CartItemController {
         }
 
     }
-
-//    @PutMapping(value="/carts/{id}", consumes = "application/json", produces = "application/json")
-//    public CartItem updateCartItem(@PathVariable("id") String id, @RequestBody int quantity) {
-//        //change.setId(Integer.parseInt(id));
-//        if(quantity == 0){
-//            //cis.deleteCartItem(id);
-//        }
-//        CartItem ci = cis.getCurrentCartbyId(Integer.parseInt(id));
-//        ci.setQuantity(quantity);
-//        return cis.updateCartItem(ci);
-//    }
 }
