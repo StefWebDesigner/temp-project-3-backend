@@ -32,4 +32,10 @@ public class Shop {
     @JoinColumn(name = "seller_id")
     private Seller seller;
 
+    public Shop(int id){
+        this.id = id;
+        location = "";
+        seller = new Seller();
+    }
+
 }
