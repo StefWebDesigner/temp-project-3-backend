@@ -41,6 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // Enable CORS and disable CSRF
         http = http.cors().and().csrf().disable();
+        http.headers().frameOptions().disable();
+
 
         // Set session management to stateless
         http = http
@@ -65,6 +67,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers("/h2/**", "/login", "/register", "/signup", "/signup/shop", "/shop_products", "/shop_products/search/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/sellers/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/invoices/**").permitAll()
                 // Our private endpoints
                 .antMatchers("/actuator/**").hasRole(Role.ADMIN.toString())
                 .anyRequest().authenticated();
