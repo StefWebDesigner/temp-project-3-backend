@@ -61,4 +61,7 @@ public class User {
     @JoinColumn(name = "cart_item_id")
     @JsonIgnore
     private List<CartItem> itemList;
+    public User(int id){
+        this.id = id;
+    }
 }
