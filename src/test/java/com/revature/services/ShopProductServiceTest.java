@@ -24,6 +24,7 @@ public class ShopProductServiceTest
 {
         final private Seller mockSeller = new Seller(
                 1,
+                "name",
                 "test.com",
                 "desc",
                 null
