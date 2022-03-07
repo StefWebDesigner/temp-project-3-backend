@@ -21,7 +21,7 @@ import java.util.List;
         name = "graph.UserCartItems",
         attributeNodes = @NamedAttributeNode("itemList")
 )
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
 
