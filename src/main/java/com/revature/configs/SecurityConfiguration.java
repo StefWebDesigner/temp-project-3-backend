@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
-                .antMatchers("/h2/**", "/login", "/register", "/signup", "/signup/shop", "/shop_products").permitAll()
+                .antMatchers("/h2/**", "/login", "/register", "/signup", "/signup/shop", "/shop_products", "/shop_products/search/**").permitAll()
                 // Our private endpoints
                 .antMatchers("/actuator/**").hasRole(Role.ADMIN.toString())
                 .anyRequest().authenticated();
