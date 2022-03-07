@@ -70,7 +70,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/sellers/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/invoices/**").permitAll()
                 // Our private endpoints
-               // .antMatchers(HttpMethod.GET, "/invoices/customer/username").permitAll()
                 .antMatchers("/actuator/**").hasRole(Role.ADMIN.toString())
                 .anyRequest().authenticated();
 
