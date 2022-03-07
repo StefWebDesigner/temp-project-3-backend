@@ -1,8 +1,6 @@
 package com.revature.services;
 
-import com.revature.models.Category;
-import com.revature.models.Product;
-import com.revature.models.ShopProduct;
+import com.revature.models.*;
 import com.revature.repositories.ProductRepo;
 import com.revature.repositories.ShopProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,9 @@ public class ShopProductServiceImpl implements ShopProductService {
 
     @Autowired
     ProductRepo productRepo;
+
+    @Autowired
+    ProductRepo pr;
 
     @Override
     public List<ShopProduct> getAllShopProducts() {
@@ -60,5 +61,25 @@ public class ShopProductServiceImpl implements ShopProductService {
           }).collect(Collectors.toList());
         }
         return productList;
+    }
+
+    @Override
+    public List<ShopProductResponse> getSellersForProduct(int id) {
+        List<ShopProduct> allListings =  shopProductRepo.findByProduct(shopProductRepo.findById(id).get().getProduct());
+
+        ArrayList<ShopProductResponse> shopProducts = new ArrayList<>();
+
+        for(ShopProduct s:allListings)
+        {
+            shopProducts.add(new ShopProductResponse(s.getShop_product_id()
+                    ,s.getShop().getId()
+                    ,s.getProduct()
+                    ,s.getPrice()
+                    ,s.getShop().getLocation()
+                    ,s.getDiscount()
+                    ,s.getQuantity()
+                    ,s.getShop().getSeller().getDescription()));
+        }
+        return shopProducts;
     }
 }

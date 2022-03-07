@@ -77,7 +77,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Enable iframe rendering for H2 console
         http.headers().frameOptions().sameOrigin();
-
     }
 
     @Override @Bean
