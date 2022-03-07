@@ -3,7 +3,7 @@ package com.revature.controllers;
 import com.revature.models.CartItem;
 import com.revature.repositories.UserRepo;
 import com.revature.services.CartItemService;
-import com.revature.services.UserServiceImpl;
+import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ public class CartItemController {
     @Autowired
     CartItemService cis;
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     @GetMapping("/carts")
     public List<CartItem> getAllCartItem() {
