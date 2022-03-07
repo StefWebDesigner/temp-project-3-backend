@@ -22,7 +22,8 @@ public class UserController {
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<User> newUser(@RequestBody User u) {
-        u.setUsername(u.getUsername().toLowerCase(Locale.ROOT));
+        if(u.getUsername() != null)
+            u.setUsername(u.getUsername().toLowerCase(Locale.ROOT));
         try {
             User created = userService.addUser(u);
             if (created.getId() != 0) {
