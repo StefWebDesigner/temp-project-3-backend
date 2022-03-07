@@ -29,7 +29,6 @@ public class Product {
     @Column(length = 1000)
     private String description;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="Product_Category", joinColumns = @JoinColumn(name="product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
