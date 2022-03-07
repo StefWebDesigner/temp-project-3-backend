@@ -7,8 +7,6 @@ import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
 import com.revature.repositories.ProductRepo;
 import com.revature.services.ShopProductService;
-import com.revature.services.ShopProductServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -111,6 +111,7 @@ public class ShopProductControllersTests {
         ra.andExpect(MockMvcResultMatchers.jsonPath("$[2]").value(testShopProduct3));
     }
 
+    // This test needs work
     @Test
     void searchProductByCategory() throws Exception {
 

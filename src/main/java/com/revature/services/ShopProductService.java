@@ -1,7 +1,10 @@
 package com.revature.services;
 
 import com.revature.models.Product;
+import com.revature.models.Seller;
+import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
+import com.revature.models.ShopProductResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +32,5 @@ public interface ShopProductService {
     List<ShopProduct> searchByProductName(String searchString);
 
     List<Product> getByProductCategory(String name, String category);
+    List<ShopProductResponse> getSellersForProduct(int id);
 }

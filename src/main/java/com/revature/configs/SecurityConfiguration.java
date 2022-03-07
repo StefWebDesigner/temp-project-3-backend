@@ -66,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
-                .antMatchers("/h2/**", "/login", "/register", "/signup", "/signup/shop", "/shop_products").permitAll()
+                .antMatchers("/h2/**", "/login", "/register", "/signup", "/signup/shop", "/shop_products", "/shop_products/search/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/sellers/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/invoices/**").permitAll()
                 // Our private endpoints
@@ -81,7 +81,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Enable iframe rendering for H2 console
         http.headers().frameOptions().sameOrigin();
-
     }
 
     @Override @Bean
