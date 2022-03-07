@@ -43,8 +43,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http = http.cors().and().csrf().disable();
         http.headers().frameOptions().disable();
 
-        http.headers().frameOptions().disable();
-
         // Set session management to stateless
         http = http
                 .sessionManagement()
@@ -68,7 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers("/login", "/h2", "/register").permitAll()
-                .anyRequest().permitAll()
                 // Our private endpoints
                 .antMatchers("/actuator/**").hasRole(Role.ADMIN.toString())
                 .anyRequest().authenticated();
