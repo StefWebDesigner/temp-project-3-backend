@@ -25,6 +25,7 @@ public class ShopProductController {
 
     @GetMapping("/shop_products")
     public List<ShopProduct> getAllShopProducts() {
+
         return sps.getAllShopProducts();
     }
 

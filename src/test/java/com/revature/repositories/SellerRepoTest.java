@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest(classes = DartCartApplication.class)
-public class SellerRepoTests {
+public class SellerRepoTest {
 
     @Autowired
     SellerRepo sellerRepo;

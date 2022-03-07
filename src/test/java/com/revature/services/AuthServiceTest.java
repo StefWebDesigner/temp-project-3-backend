@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AuthServiceTest {
 
 
-    String trueUser = "JerManny";
-    String falseUser = "fakeUser";
+    private final String trueUser = "test";
+    private final String falseUser = "fakeUser";
 
 
     //class where method exist
@@ -56,13 +57,12 @@ public class AuthServiceTest {
     @Test
     void valid_GetUsernameByUsername() throws InvocationTargetException, IllegalAccessException {
         UserDetails retVal = (UserDetails) loadUser.invoke(authService, trueUser);
-        assertEquals(retVal.getUsername(),trueUser);
+        assertEquals(trueUser, retVal.getUsername());
     }
 
     @Test
     void invalid_GetUsernameByUsername() throws InvocationTargetException, IllegalAccessException {
-        UserDetails retVal = (UserDetails) loadUser.invoke(authService, trueUser);
-        assertNotEquals(retVal.getUsername(), falseUser);
+        assertThrows(InvocationTargetException.class, () -> loadUser.invoke(authService, falseUser));
     }
 
 }
