@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.EntityGraph;
 import java.util.HashMap;
@@ -63,6 +64,7 @@ public class UserRepoTests {
         verify(mockRepo).save(mockUser);
     }
 
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     public void givenUserId_whenSave_thenUpdateUser(int id) {
