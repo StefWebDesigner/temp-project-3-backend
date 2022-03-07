@@ -3,10 +3,7 @@ package com.revature.services;
 import com.revature.models.CartItem;
 import com.revature.models.ShopProduct;
 import com.revature.repositories.CartItemRepo;
-import com.revature.repositories.ShopProductRepo;
-import com.revature.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,14 +29,14 @@ public class CartItemServiceImp implements CartItemService{
 
     @Override
     public CartItem addCartItem(CartItem cartItem) {
-        CartItem tempCartItem =  cir.getByShopProductId(cartItem.getShopProduct().getShop_product_id(),cartItem.getCustomer().getId());
+        CartItem tempCartItem =  cir.getByShopProductId(cartItem.getShopProduct().getId(),cartItem.getCustomer().getId());
 
         if(tempCartItem!=null){
             tempCartItem.setQuantity(tempCartItem.getQuantity()+1);
             return cir.save(tempCartItem);
         }else {
-            ShopProduct shopProduct = shopProductService.getShopProductById(cartItem.getShopProduct().getShop_product_id()).orElse(null);
-            shopProduct.getShop_product_id();
+            ShopProduct shopProduct = shopProductService.getShopProductById(cartItem.getShopProduct().getId()).orElse(null);
+            shopProduct.getId();
             CartItem item = new CartItem(cartItem.getQuantity(), cartItem.isSaved(), userService.getUserById(cartItem.getCustomer().getId()).orElse(null),shopProduct);
 
             return cir.save(item);

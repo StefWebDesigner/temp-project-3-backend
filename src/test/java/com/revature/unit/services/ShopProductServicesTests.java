@@ -7,8 +7,6 @@ import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
 import com.revature.repositories.ProductRepo;
 import com.revature.services.ShopProductService;
-import com.revature.services.ShopProductServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -82,7 +80,7 @@ public class ShopProductServicesTests {
 
         assertTrue(shopProduct.isPresent());
 
-        assertEquals(shopProduct.get().getShop_product_id(), 1);
+        assertEquals(shopProduct.get().getId(), 1);
         assertEquals(shopProduct.get().getQuantity(), 20);
         assertEquals(shopProduct.get().getPrice(), 50);
         assertEquals(shopProduct.get().getDiscount(), 0);
@@ -99,7 +97,7 @@ public class ShopProductServicesTests {
 
         assertTrue(shopProduct.isPresent());
 
-        assertNotEquals(shopProduct.get().getShop_product_id(), 2);
+        assertNotEquals(shopProduct.get().getId(), 2);
         assertNotEquals(shopProduct.get().getQuantity(), 50);
         assertNotEquals(shopProduct.get().getPrice(), 100);
         assertNotEquals(shopProduct.get().getDiscount(), 10);
