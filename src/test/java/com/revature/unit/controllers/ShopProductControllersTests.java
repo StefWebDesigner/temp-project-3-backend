@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = DartCartApplication.class)
@@ -39,6 +37,7 @@ public class ShopProductControllersTests {
 
     @MockBean
     private ShopProductServiceImpl sps;
+
 
     @BeforeEach
     void setup(){
@@ -113,15 +112,21 @@ public class ShopProductControllersTests {
     }
 
     @Test
-    void searchShopProduct() throws Exception {
-        List<ShopProduct> testList = new ArrayList<>();
-        testList.add(testShopProduct);
-        testList.add(testShopProduct2);
-        testList.add(testShopProduct3);
+    void searchProductByCategory() throws Exception {
 
-        Mockito.when(sps.searchByProductName("Product2")).thenReturn(testList);
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/shop_products/search/Product2"));
-        resultActions.andExpectAll((MockMvcResultMatchers.jsonPath("$[1]").value(testShopProduct2)),
-                (MockMvcResultMatchers.status().isOk()));
+        List<Product> products = new ArrayList<>();
+        Category category = new Category(1, "Food");
+        List<Category> categories = new ArrayList<>();
+        categories.add(category);
+
+        Product product = new Product(1, "Kelloggs Froot Loops", "Delicious frooty flava",categories );
+        products.add(product);
+
+        Mockito.when(sps.getByProductCategory(null, "Food")).thenReturn(products);
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/shop_products/search?category=Food"));
+        resultActions.andExpectAll(
+                (MockMvcResultMatchers.jsonPath("$[0]").value(product)),
+                (MockMvcResultMatchers.status().isOk())
+        );
     }
 }
