@@ -1,8 +1,10 @@
 package com.revature.repositories;
 
-import com.revature.models.Shop;
+import com.revature.models.Invoice;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ShopRepo extends CrudRepository<Shop, Integer> {}
+public interface InvoiceRepo extends CrudRepository<Invoice, Integer> {
+  Iterable<Invoice> findAllByShopId(int id);
+}
