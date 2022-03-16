@@ -8,19 +8,25 @@ import com.revature.repositories.ProductReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.Authentication;
+
+
 
 @Service
 @Transactional
 public class ProductReviewService {
     private final ProductReviewRepo productReviewRepo;
-
+    private final UserService userService;
+    // private final AuthService authService;
     /**
      * Constructor
      * @param ProductReviewRepo
      */
     @Autowired
-    public ProductReviewService(ProductReviewRepo productReviewRepo) {
+    public ProductReviewService(ProductReviewRepo productReviewRepo, UserService userService) {
         this.productReviewRepo = productReviewRepo;
+        this.userService = userService;
+        // this.authService = authService;
     }
 
     /**
@@ -30,6 +36,7 @@ public class ProductReviewService {
      */
     public ProductReview addProductReview(ProductReview newProductReview) throws Exception {
         // TODO
+        // int id = userService.getUserByUsername( auth.getName() ).getId();
         if (newProductReview == null){
             throw new Exception("Invalid product review data.");
         }
