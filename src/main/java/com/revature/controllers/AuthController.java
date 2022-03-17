@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,16 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 public class AuthController {
-	/*
-	 * @Autowired AuthenticationManager authenticationManager;
-	 * 
-	 * @Autowired JwtTokenUtil jwtTokenUtil;
-	 * 
-	 * @Autowired UserService userService;
-	 * 
-	 * @Autowired AuthService authService;
-	 * 
-	 */
 	private final AuthenticationManager authenticationManager;
 	private final JwtTokenUtil jwtTokenUtil;
 	private final UserService userService;
@@ -69,10 +60,10 @@ public class AuthController {
 		}
 	}
 	
-	@GetMapping("/resetpass")
-	public String resetPassword(@RequestBody String username) {
+	@GetMapping("/resetpass/{username}")
+	public String resetPassword(@PathVariable("username") String username) {
 		com.revature.models.User user = userService.getUserByUsername(username);
-		emailServiceImp.sendSimpleMessage(user.getEmail(), "password reset email test", "didn't implement yet stay tuned :)");
+		emailServiceImp.sendSimpleMessage(user.getEmail(), "password reset email test", "http://localhost:3000/resetpassword?data=" + username);
 		return "test";
 	}
 }
