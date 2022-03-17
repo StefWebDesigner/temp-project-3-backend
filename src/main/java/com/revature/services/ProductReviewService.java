@@ -15,9 +15,7 @@ import org.springframework.security.core.Authentication;
 @Transactional
 public class ProductReviewService {
     private final ProductReviewRepo productReviewRepo;
-    private final UserService userService;
-
-    // private final AuthService authService;
+    private final AuthService authService;
     /**
      * Constructor
      * 
@@ -25,10 +23,9 @@ public class ProductReviewService {
      * @param productReviewRepo
      */
     @Autowired
-    public ProductReviewService(ProductReviewRepo productReviewRepo, UserService userService) {
+    public ProductReviewService(ProductReviewRepo productReviewRepo, AuthService authService) {
         this.productReviewRepo = productReviewRepo;
-        this.userService = userService;
-        // this.authService = authService;
+        this.authService = authService;
     }
 
     /**
@@ -40,6 +37,7 @@ public class ProductReviewService {
     public ProductReview addProductReview(ProductReview newProductReview) {
         //TODO Check for user authentication
         // int id = userService.getUserByUsername( auth.getName() ).getId();
+        // int id = authService
         if (!isValidProductReview(newProductReview)) {
             throw new RuntimeException("Invalid product review.");
         }
