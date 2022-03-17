@@ -70,6 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         "/h2/**",
         "/login",
         "/resetpass/*",
+        "/resetpassword",
         "/register",
         "/signup",
         "/signup/shop",

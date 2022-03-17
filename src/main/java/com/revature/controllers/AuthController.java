@@ -69,11 +69,24 @@ public class AuthController {
 		return "test";
 	}
 	
-	@PatchMapping("/resetpass/{username}")
-	public ResponseEntity<?> updatePassword(@RequestBody UpdateUserPassword updateUserPassword, @PathVariable("username") String username) {
+	@PatchMapping("/resetpassword")
+	public ResponseEntity<?> updatePassword(@RequestBody String request) {
+		String[] userInfo = request.split(",");
+		String[] usernameArr = userInfo[0].split(":");
+		String[] passwordArr = userInfo[1].split(":");
+				
+		int firstIndex = usernameArr[1].indexOf("\"");
+		int secondIndex = usernameArr[1].lastIndexOf("\""); 
+		String username = usernameArr[1].substring(firstIndex+1, secondIndex);
+
+		firstIndex = passwordArr[1].indexOf("\"");
+		secondIndex = passwordArr[1].lastIndexOf("\""); 
+		String password = passwordArr[1].substring(firstIndex+1, secondIndex);
+		
 		com.revature.models.User existingUser = userService.getUserByUsername(username);
-		existingUser.setPassword(updateUserPassword.getPassword());
-		userService.updateUser(existingUser);
+		existingUser.setPassword(password);
+		userService.updateUser(existingUser); 	
+		
 		return ResponseEntity.ok("Password updated");
 	}
 }
