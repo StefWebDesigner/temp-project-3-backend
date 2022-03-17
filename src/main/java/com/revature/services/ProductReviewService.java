@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.ProductReview;
@@ -42,7 +43,7 @@ public class ProductReviewService {
         if (!isValidProductReview(newProductReview)) {
             throw new RuntimeException("Invalid product review.");
         }
-        
+        //check for same user, reviews same product, throw exception
         ProductReview savedProductReview = productReviewRepo.save(newProductReview);
 
         return savedProductReview;
@@ -53,7 +54,12 @@ public class ProductReviewService {
      */
     public List<ProductReview> findAllProductReviews() {
         // TODO
-        return null;
+        List<ProductReview> allProductReviews = new ArrayList<>();
+        Iterable<ProductReview> prIterable = productReviewRepo.findAll();
+        for (ProductReview pr : prIterable) {
+            allProductReviews.add(pr);
+        }
+        return allProductReviews;
     }
 
     /**
@@ -114,7 +120,7 @@ public class ProductReviewService {
         //     return false;
         // } else if (productReview.getComment() == null || productReview.getComment().equals("")) {
         //     return false;
-        // } else if (productReview.getRating() == null) {
+        // } else if (productReview.getRating() == null || productReview.getComment().equals("")) {
         //     return false;
         // } else {
         //     return true;

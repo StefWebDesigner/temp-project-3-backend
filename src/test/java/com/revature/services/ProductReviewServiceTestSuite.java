@@ -54,7 +54,7 @@ public class ProductReviewServiceTestSuite {
     // }
 
     @Test
-    void test_addProductReview_throwsException_givenNullProductReview() {
+    void test_addProductReview_throwsRuntimeException_givenNullProductReview() {
         ProductReview productReview = null;
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
 			sut.addProductReview(productReview);
@@ -64,7 +64,7 @@ public class ProductReviewServiceTestSuite {
     }
 
     @Test
-    void test_addProductReview_throwsException_givenInvalidProductReviewTitle() {
+    void test_addProductReview_throwsRuntimeException_givenInvalidProductReviewTitle() {
         ProductReview productReview = null; //TODO give invalid title
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
 			sut.addProductReview(productReview);
@@ -74,7 +74,7 @@ public class ProductReviewServiceTestSuite {
     }
 
     @Test
-    void test_addProductReview_throwsException_givenInvalidProductReviewComment() {
+    void test_addProductReview_throwsRuntimeException_givenInvalidProductReviewComment() {
         ProductReview productReview = null; //TODO give invalid comment
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
 			sut.addProductReview(productReview);
@@ -84,7 +84,7 @@ public class ProductReviewServiceTestSuite {
     }
 
     @Test
-    void test_addProductReview_throwsException_givenInvalidProductReviewRating() {
+    void test_addProductReview_throwsRuntimeException_givenInvalidProductReviewRating() {
         ProductReview productReview = null; //TODO give invalid rating
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
 			sut.addProductReview(productReview);
@@ -93,4 +93,15 @@ public class ProductReviewServiceTestSuite {
         verify(mockProductReviewRepo, times(0)).save(productReview);
     }
 
+    @Test
+    void test_findAllProductReviews_returnsProductReviews() {
+        List<ProductReview> allProductReviews = new ArrayList<>();
+
+        when(mockProductReviewRepo.findAll()).thenReturn(allProductReviews);
+        
+        List<ProductReview> result = sut.findAllProductReviews();
+        
+        Assertions.assertEquals(result,allProductReviews);
+        verify(mockProductReviewRepo, times(1)).findAll();
+    }
 }
