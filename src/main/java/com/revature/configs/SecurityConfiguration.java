@@ -73,6 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         "/signup",
         "/signup/shop",
         "/shop_products",
+        "/featured_products",
         "/shop_products/search/**"
       )
       .permitAll()
