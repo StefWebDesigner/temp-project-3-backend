@@ -106,4 +106,7 @@ public class ShopProductServiceImpl implements ShopProductService {
     }
     return shopProducts;
   }
+
+  // Should return a list ordered by percentage of discount
+  public List<ShopProduct> orderProductByPercentage() { return shopProductRepo.orderProductByPercentage(); }
 }
