@@ -13,7 +13,7 @@ public interface ShopProductRepo extends CrudRepository<ShopProduct, Integer> {
   List<ShopProduct> findByProduct(Product product);
 
   @Query(
-          value = "select price, discount, cast(discount as float) / cast(price as float) * 100 as percentage from shop_products where discount > 0 order by percentage desc",
+          value = "select *, cast(discount as float) / cast(price as float) * 100 as percentage from shop_products where discount > 0 order by percentage desc",
           nativeQuery = true
   )
   List<ShopProduct> orderProductByPercentage();
