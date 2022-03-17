@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.models.UpdateUserPassword;
 import com.revature.models.UserLogin;
 import com.revature.services.AuthService;
 import com.revature.services.UserService;
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,5 +67,13 @@ public class AuthController {
 		com.revature.models.User user = userService.getUserByUsername(username);
 		emailServiceImp.sendSimpleMessage(user.getEmail(), "password reset email test", "http://localhost:3000/resetpassword?data=" + username);
 		return "test";
+	}
+	
+	@PatchMapping("/resetpass/{username}")
+	public ResponseEntity<?> updatePassword(@RequestBody UpdateUserPassword updateUserPassword, @PathVariable("username") String username) {
+		com.revature.models.User existingUser = userService.getUserByUsername(username);
+		existingUser.setPassword(updateUserPassword.getPassword());
+		userService.updateUser(existingUser);
+		return ResponseEntity.ok("Password updated");
 	}
 }
