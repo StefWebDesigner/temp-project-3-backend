@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.models.ProductReview;
 import com.revature.repositories.ProductReviewRepo;
 import com.revature.repositories.UserRepo;
 
@@ -29,4 +30,67 @@ public class ProductReviewServiceTestSuite {
         mockUserService = mock(UserService.class);
         sut = new ProductReviewService(mockProductReviewRepo, mockUserService);
     }
+
+    @Test
+    void test_addProductReview_returnsProductReview_givenValidProductReview() {
+        ProductReview newProductReview = new ProductReview();
+        when(mockProductReviewRepo.save(newProductReview)).thenReturn(newProductReview);
+        
+        ProductReview result = sut.addProductReview(newProductReview);
+        
+        Assertions.assertEquals(result,newProductReview);
+        verify(mockProductReviewRepo, times(1)).save(newProductReview);
+    }
+
+    // @Test
+    // void test_addProductReview_throwsException_givenUnauthorizedUser() {
+    //     ProductReview newProductReview = new ProductReview();
+    //     when(mockProductReviewRepo.save(newProductReview)).thenReturn(newProductReview);
+        
+    //     ProductReview result = sut.addProductReview(newProductReview);
+        
+    //     Assertions.assertEquals(result,newProductReview);
+    //     verify(mockProductReviewRepo, times(1)).save(newProductReview);
+    // }
+
+    @Test
+    void test_addProductReview_throwsException_givenNullProductReview() {
+        ProductReview productReview = null;
+        RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
+			sut.addProductReview(productReview);
+		});
+        Assertions.assertEquals("Invalid product review.", thrown.getMessage());
+        verify(mockProductReviewRepo, times(0)).save(productReview);
+    }
+
+    @Test
+    void test_addProductReview_throwsException_givenInvalidProductReviewTitle() {
+        ProductReview productReview = null; //TODO give invalid title
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+			sut.addProductReview(productReview);
+		});
+        Assertions.assertEquals("expected", thrown.getMessage());
+        verify(mockProductReviewRepo, times(0)).save(productReview);
+    }
+
+    @Test
+    void test_addProductReview_throwsException_givenInvalidProductReviewComment() {
+        ProductReview productReview = null; //TODO give invalid comment
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+			sut.addProductReview(productReview);
+		});
+        Assertions.assertEquals("expected", thrown.getMessage());
+        verify(mockProductReviewRepo, times(0)).save(productReview);
+    }
+
+    @Test
+    void test_addProductReview_throwsException_givenInvalidProductReviewRating() {
+        ProductReview productReview = null; //TODO give invalid rating
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+			sut.addProductReview(productReview);
+		});
+        Assertions.assertEquals("expected", thrown.getMessage());
+        verify(mockProductReviewRepo, times(0)).save(productReview);
+    }
+
 }

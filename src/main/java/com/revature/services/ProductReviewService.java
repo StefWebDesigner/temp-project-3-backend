@@ -10,17 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.Authentication;
 
-
-
 @Service
 @Transactional
 public class ProductReviewService {
     private final ProductReviewRepo productReviewRepo;
     private final UserService userService;
+
     // private final AuthService authService;
     /**
      * Constructor
-     * @param ProductReviewRepo
+     * 
+     * @param userService
+     * @param productReviewRepo
      */
     @Autowired
     public ProductReviewService(ProductReviewRepo productReviewRepo, UserService userService) {
@@ -30,17 +31,21 @@ public class ProductReviewService {
     }
 
     /**
-     * @param 
-     * @return Returns a ProductReview object after it has been added to the database
-     * @throws Exception
+     * @param
+     * @return Returns a ProductReview object after it has been added to the
+     *         database
+     * @throws RuntimeException when provided with invalid data
      */
-    public ProductReview addProductReview(ProductReview newProductReview) throws Exception {
-        // TODO
+    public ProductReview addProductReview(ProductReview newProductReview) {
+        //TODO Check for user authentication
         // int id = userService.getUserByUsername( auth.getName() ).getId();
-        if (newProductReview == null){
-            throw new Exception("Invalid product review data.");
+        if (!isValidProductReview(newProductReview)) {
+            throw new RuntimeException("Invalid product review.");
         }
-        return null;
+        
+        ProductReview savedProductReview = productReviewRepo.save(newProductReview);
+
+        return savedProductReview;
     }
 
     /**
@@ -61,7 +66,7 @@ public class ProductReviewService {
     }
 
     /**
-     * @param 
+     * @param
      * @return Returns a List<ProductReview> by Product Id
      */
     public List<ProductReview> findAllProductReviewsByProductId(int productId) {
@@ -70,7 +75,7 @@ public class ProductReviewService {
     }
 
     /**
-     * @param 
+     * @param
      * @return Returns true if ProductReview updated, false if update unsuccesful
      */
     public boolean updateProductReview(ProductReview productReview) {
@@ -78,8 +83,8 @@ public class ProductReviewService {
         return false;
     }
 
-     /**
-     * @param 
+    /**
+     * @param
      * @return Returns true if ProductReview deleted, false if delete unsuccesful
      */
     public boolean deleteProductReview(ProductReview productReview) {
@@ -88,6 +93,33 @@ public class ProductReviewService {
     }
 
     /**
-     * IsValidProductReview
+     * Add review reqs:
+     *  valid user
+     *  required fields valid:
+     *      comment
+     *      title
+     *      rating
      */
+
+    /**
+     * @param
+     * @return Returns true if ProductReview is valid--contains all required fields and the fields are within a valid range of values
+     */
+    public boolean isValidProductReview(ProductReview productReview) {
+        // TODO
+        if (productReview == null) {
+            return false;
+        }
+        // } else if (productReview.getTitle() == null || productReview.getTitle().equals("")) {
+        //     return false;
+        // } else if (productReview.getComment() == null || productReview.getComment().equals("")) {
+        //     return false;
+        // } else if (productReview.getRating() == null) {
+        //     return false;
+        // } else {
+        //     return true;
+        // }
+
+        return true;
+    }
 }
