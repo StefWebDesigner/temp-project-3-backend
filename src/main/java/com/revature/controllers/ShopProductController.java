@@ -32,6 +32,9 @@ public class ShopProductController {
     return sps.getAllShopProducts();
   }
 
+  @GetMapping("/featured_products")
+  public List<ShopProduct> getOrderedProductsByPercentage() { return sps.getOrderedProductsByPercentage(); }
+
   @GetMapping("/shop_products/search")
   public List<Product> searchShopProducts(
     @RequestParam(name = "name", required = false) String name,
