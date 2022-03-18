@@ -1,0 +1,38 @@
+package com.revature.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.revature.models.ShopProduct;
+import com.revature.models.User;
+import com.revature.models.WishList;
+import com.revature.repositories.WishListDAO;
+import com.revature.web.dto.WishListRequest;
+
+@Service
+public class WishListService {
+	
+	
+	WishListDAO wishListDAO;
+	
+	@Autowired
+	public WishListService(WishListDAO wishListDAO) {
+		this.wishListDAO = wishListDAO;
+	}
+	
+	
+	public void addToWishList(WishList wishListItem) {
+		
+	}
+	
+	public void removeFromWishList(WishList wishListItem) {
+		
+	}
+	
+	public List<WishList> getMyWishList(User user) {
+		return wishListDAO.findByCustomer(user);
+	}
+}
