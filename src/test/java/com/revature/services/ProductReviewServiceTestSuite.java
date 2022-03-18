@@ -222,6 +222,21 @@ public class ProductReviewServiceTestSuite {
     }
 
     @Test
+    void test_updateProductReview_returnsFalse_givenValidProductReview_givenUpdateNotPersisted() {
+        ProductReview productReview1 = new ProductReview();
+        ProductReview productReview2 = new ProductReview();
+        int id = 1; // placeholder for getId implementation -> productReview.getId()
+        when(mockProductReviewRepo.findById(id)).thenReturn(Optional.of(productReview2));
+        when(mockProductReviewRepo.save(productReview1)).thenReturn(productReview2);
+
+        boolean result = sut.updateProductReview(productReview1);
+
+        Assertions.assertFalse(result);
+        verify(mockProductReviewRepo, times(1)).findById(id);
+        verify(mockProductReviewRepo, times(1)).save(productReview1);
+    }
+
+    @Test
     void test_deleteProductReview_returnsTrue_givenValidProductReview_givenProductReviewExists() {
         ProductReview productReview = new ProductReview();
         int id = 1; // placeholder for getId implementation -> productReview.getId()
