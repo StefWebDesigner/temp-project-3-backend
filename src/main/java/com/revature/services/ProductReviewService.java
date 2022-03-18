@@ -20,7 +20,7 @@ public class ProductReviewService {
     /**
      * Constructor
      * 
-     * @param userService
+     * @param authService
      * @param productReviewRepo
      */
     @Autowired
@@ -49,7 +49,7 @@ public class ProductReviewService {
     }
 
     /**
-     * @return Returns a List<ProductReview> of all existing ProductReviews
+     * @return Returns a List<ProductReview> of all existing Product Reviews
      */
     public List<ProductReview> findAllProductReviews() {
         // TODO
@@ -156,20 +156,17 @@ public class ProductReviewService {
         // TODO
         if (productReview == null) {
             return false;
+        } else if (productReview.getTitle() == null ||
+                productReview.getTitle().equals("")) {
+            return false;
+        } else if (productReview.getComment() == null ||
+                productReview.getComment().equals("")) {
+            return false;
+        } else if (productReview.getRating() < 1 ||
+                productReview.getRating() > 5) {
+            return false;
+        } else {
+            return true;
         }
-        // } else if (productReview.getTitle() == null ||
-        // productReview.getTitle().equals("")) {
-        // return false;
-        // } else if (productReview.getComment() == null ||
-        // productReview.getComment().equals("")) {
-        // return false;
-        // } else if (productReview.getRating() == null ||
-        // productReview.getComment().equals("")) {
-        // return false;
-        // } else {
-        // return true;
-        // }
-
-        return true;
     }
 }
