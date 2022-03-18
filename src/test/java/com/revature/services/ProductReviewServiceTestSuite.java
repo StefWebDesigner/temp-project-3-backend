@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.models.Product;
 import com.revature.models.ProductReview;
+import com.revature.models.User;
 import com.revature.repositories.ProductReviewRepo;
 
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +32,9 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_addProductReview_returnsProductReview_givenValidProductReview() {
-        ProductReview newProductReview = new ProductReview();
+        User user = new User();
+        Product product = new Product();
+        ProductReview newProductReview = new ProductReview(1, "valid", "valid", 1, user, product);
         when(mockProductReviewRepo.save(newProductReview)).thenReturn(newProductReview);
 
         ProductReview result = sut.addProductReview(newProductReview);
@@ -62,31 +66,37 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_addProductReview_throwsRuntimeException_givenInvalidProductReviewTitle() {
-        ProductReview productReview = null; // TODO give invalid title
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, null, "valid", 1, user, product);
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             sut.addProductReview(productReview);
         });
-        Assertions.assertEquals("expected", thrown.getMessage());
+        Assertions.assertEquals("Invalid product review.", thrown.getMessage());
         verify(mockProductReviewRepo, times(0)).save(productReview);
     }
 
     @Test
     void test_addProductReview_throwsRuntimeException_givenInvalidProductReviewComment() {
-        ProductReview productReview = null; // TODO give invalid comment
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", null, 1, user, product);
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             sut.addProductReview(productReview);
         });
-        Assertions.assertEquals("expected", thrown.getMessage());
+        Assertions.assertEquals("Invalid product review.", thrown.getMessage());
         verify(mockProductReviewRepo, times(0)).save(productReview);
     }
 
     @Test
     void test_addProductReview_throwsRuntimeException_givenInvalidProductReviewRating() {
-        ProductReview productReview = null; // TODO give invalid rating
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 0, user, product);
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             sut.addProductReview(productReview);
         });
-        Assertions.assertEquals("expected", thrown.getMessage());
+        Assertions.assertEquals("Invalid product review.", thrown.getMessage());
         verify(mockProductReviewRepo, times(0)).save(productReview);
     }
 
@@ -183,48 +193,53 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_updateProductReview_returnsTrue_givenValidProductReview() {
-        ProductReview productReview = new ProductReview();
-        int id = 1; // placeholder for getId implementation -> productReview.getId()
-        when(mockProductReviewRepo.findById(id)).thenReturn(Optional.of(productReview));
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 1, user, product);
+        when(mockProductReviewRepo.findById(productReview.getId())).thenReturn(Optional.of(productReview));
         when(mockProductReviewRepo.save(productReview)).thenReturn(productReview);
 
         boolean result = sut.updateProductReview(productReview);
 
         Assertions.assertTrue(result);
-        verify(mockProductReviewRepo, times(1)).findById(id);
+        verify(mockProductReviewRepo, times(1)).findById(productReview.getId());
         verify(mockProductReviewRepo, times(1)).save(productReview);
     }
 
     @Test
     void test_updateProductReview_throwsRuntimeException_givenInvalidProductReview() {
-        ProductReview productReview = null;
-        int id = 1; // placeholder for getId implementation -> productReview.getId()
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 0, user, product);
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             sut.updateProductReview(productReview);
         });
         Assertions.assertEquals("Invalid product review.", thrown.getMessage());
-        verify(mockProductReviewRepo, times(0)).findById(id);
+        verify(mockProductReviewRepo, times(0)).findById(productReview.getId());
         verify(mockProductReviewRepo, times(0)).save(productReview);
     }
 
     @Test
     void test_updateProductReview_throwsRuntimeException_givenProductReviewDoesNotExist() {
-        ProductReview productReview = new ProductReview();
-        int id = 1; // placeholder for getId implementation -> productReview.getId()
-        when(mockProductReviewRepo.findById(id)).thenReturn(null);
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 1, user, product);
+        when(mockProductReviewRepo.findById(productReview.getId())).thenReturn(null);
         // when(mockProductReviewRepo.save(productReview)).thenReturn(null);
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             sut.updateProductReview(productReview);
         });
         Assertions.assertEquals("Cannot update review--does not exist.", thrown.getMessage());
-        verify(mockProductReviewRepo, times(1)).findById(id);
+        verify(mockProductReviewRepo, times(1)).findById(productReview.getId());
         verify(mockProductReviewRepo, times(0)).save(productReview);
     }
 
     @Test
     void test_updateProductReview_returnsFalse_givenValidProductReview_givenUpdateNotPersisted() {
-        ProductReview productReview1 = new ProductReview();
-        ProductReview productReview2 = new ProductReview();
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview1 = new ProductReview(1, "valid", "valid", 1, user, product);
+        ProductReview productReview2 = new ProductReview(2, "also valid", "also valid", 1, user, product);
         int id = 1; // placeholder for getId implementation -> productReview.getId()
         when(mockProductReviewRepo.findById(id)).thenReturn(Optional.of(productReview2));
         when(mockProductReviewRepo.save(productReview1)).thenReturn(productReview2);
@@ -238,7 +253,9 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_deleteProductReview_returnsTrue_givenValidProductReview_givenProductReviewExists() {
-        ProductReview productReview = new ProductReview();
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 1, user, product);
         int id = 1; // placeholder for getId implementation -> productReview.getId()
         when(mockProductReviewRepo.findById(id)).thenReturn(Optional.of(productReview), null);
 
@@ -263,28 +280,30 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_deleteProductReview_throwsRuntimeException_givenValidProductReview_givenProductReviewDoesNotExist() {
-        ProductReview productReview = new ProductReview();
-        int id = 1; // placeholder for getId implementation -> productReview.getId()
-        when(mockProductReviewRepo.findById(id)).thenReturn(Optional.of(productReview), null);
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 1, user, product);
+        when(mockProductReviewRepo.findById(productReview.getId())).thenReturn(null);
 
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             sut.deleteProductReview(productReview);
         });
-        Assertions.assertEquals("message", thrown.getMessage());
-        verify(mockProductReviewRepo, times(1)).findById(id);
+        Assertions.assertEquals("Cannot delete review--does not exist.", thrown.getMessage());
+        verify(mockProductReviewRepo, times(1)).findById(productReview.getId());
         verify(mockProductReviewRepo, times(0)).delete(productReview);
     }
 
     @Test
     void test_deleteProductReview_returnsFalse_givenValidProductReview_givenDeleteNotPersisted() {
-        ProductReview productReview = new ProductReview();
-        int id = 1; // placeholder for getId implementation -> productReview.getId()
-        when(mockProductReviewRepo.findById(id)).thenReturn(Optional.of(productReview), Optional.of(productReview));
+        User user = new User();
+        Product product = new Product();
+        ProductReview productReview = new ProductReview(1, "valid", "valid", 1, user, product);
+        when(mockProductReviewRepo.findById(productReview.getId())).thenReturn(Optional.of(productReview), Optional.of(productReview));
 
         boolean result = sut.deleteProductReview(productReview);
 
-        Assertions.assertTrue(result);
-        verify(mockProductReviewRepo, times(2)).findById(id);
+        Assertions.assertFalse(result);
+        verify(mockProductReviewRepo, times(2)).findById(productReview.getId());
         verify(mockProductReviewRepo, times(1)).delete(productReview);
     }
 }

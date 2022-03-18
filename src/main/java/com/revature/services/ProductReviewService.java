@@ -129,7 +129,7 @@ public class ProductReviewService {
             throw new RuntimeException("Invalid product review.");
         }
         if (productReviewRepo.findById(productReview.getId()) == null) {
-            throw new RuntimeException("Cannot update review--does not exist.");
+            throw new RuntimeException("Cannot delete review--does not exist.");
         }
         productReviewRepo.delete(productReview);
         if (productReviewRepo.findById(productReview.getId()) == null) {
