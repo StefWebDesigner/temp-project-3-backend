@@ -51,6 +51,14 @@ public class User {
 
   @NotNull
   private long registrationDate;
+  
+  // add fields for about me
+//  @Column(name = "aboutMe")
+//  private String aboutMe;
+//  
+  
+  
+  
 
   // Returns items in both cart and wishlist
   // Filter by CartItem's saved field to separate the lists
