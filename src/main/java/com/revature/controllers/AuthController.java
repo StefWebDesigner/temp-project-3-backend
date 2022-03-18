@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import com.revature.models.UpdateUserPassword;
 import com.revature.models.UserLogin;
 import com.revature.services.AuthService;
 import com.revature.services.UserService;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RestController
 @CrossOrigin
@@ -32,16 +32,19 @@ public class AuthController {
 	private final UserService userService;
 	private final AuthService authService;
 	private final EmailServiceImpl emailServiceImp;
+	private final BCryptPasswordEncoder bCryptEncoder;
 
+	
 	@Autowired
 	public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil,
-			UserService userService, AuthService authService, EmailServiceImpl emailServiceImp) {
+			UserService userService, AuthService authService, EmailServiceImpl emailServiceImp, BCryptPasswordEncoder bCryptEncoder) {
 		super();
 		this.authenticationManager = authenticationManager;
 		this.jwtTokenUtil = jwtTokenUtil;
 		this.userService = userService;
 		this.authService = authService;
 		this.emailServiceImp = emailServiceImp;
+		this.bCryptEncoder = bCryptEncoder;
 	}
 
 	@PostMapping("/login")
@@ -84,7 +87,7 @@ public class AuthController {
 		String password = passwordArr[1].substring(firstIndex+1, secondIndex);
 		
 		com.revature.models.User existingUser = userService.getUserByUsername(username);
-		existingUser.setPassword(password);
+		existingUser.setPassword(bCryptEncoder.encode(password));
 		userService.updateUser(existingUser); 	
 		
 		return ResponseEntity.ok("Password updated");
