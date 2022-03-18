@@ -31,6 +31,7 @@ DartCart is an e-commerce web application designed to buy and sell products deve
 1) in a new folder where you want your project to be saved, right click and select git bash here. In your git bash command terminal, enter: git clone https://github.com/Revature-DartCart-2/DartCart-Server.git
 2)create a new, seperate folder for where you would like your SpringToolSuites workspace to be. 
 3) open SpringToolSuite, select add a local project, using the drop down choose the folder where you cloned the project for the project path and the newly created workspace folder for the workspace path
+![Register](https://github.com/Revature-DartCart-2/DartCart-Server/blob/AndrewS/gendoc/image/readme/stslaunch.png?raw=true)
 4) Run As Spring Boot Application
 ![Register](https://github.com/Revature-DartCart-2/DartCart-Server/blob/AndrewS/gendoc/image/readme/runAs.png?raw=true)
 
