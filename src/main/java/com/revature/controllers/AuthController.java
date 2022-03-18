@@ -5,7 +5,9 @@ import com.revature.services.AuthService;
 import com.revature.services.UserService;
 import com.revature.utilities.JwtTokenUtil;
 import com.revature.utilities.EmailServiceImpl;
+
 import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -66,12 +68,34 @@ public class AuthController {
 	}
 	
 	@GetMapping("/resetpass/{username}")
-	public String resetPassword(@PathVariable("username") String username) {
+	public ResponseEntity<?> resetPassword(@PathVariable("username") String username) {
 		com.revature.models.User user = userService.getUserByUsername(username);
-		emailServiceImp.sendSimpleMessage(user.getEmail(), "password reset email test", "http://localhost:3000/resetpassword?data=" + username);
-		return "test";
+		
+		if(user == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		// Caesar Cipher to obscure username in link
+        StringBuilder cipheredUsername = new StringBuilder();
+        int base = 96;
+        int shift = 1;
+        for(int i=0; i< username.length(); i++) {
+            int charAsInt = (int) username.charAt(i);
+
+            int shiftedLetter = charAsInt+shift;
+            if( shiftedLetter > 122) {
+            	shiftedLetter = (base + shiftedLetter % 122);
+            }
+            else if( shiftedLetter < 97) {
+            	shiftedLetter = 123 - (97-shiftedLetter);
+            }
+            cipheredUsername.append( (char) shiftedLetter );            
+        }
+		
+		emailServiceImp.sendSimpleMessage(user.getEmail(), "password reset email test", "http://localhost:3000/resetpassword?data=" + cipheredUsername.toString());
+		return ResponseEntity.ok("Reset Email Sent");
 	}
-	
+		
 	@PatchMapping("/resetpassword")
 	public ResponseEntity<?> updatePassword(@RequestBody String request) {
 		String[] userInfo = request.split(",");
@@ -87,9 +111,16 @@ public class AuthController {
 		String password = passwordArr[1].substring(firstIndex+1, secondIndex);
 		
 		com.revature.models.User existingUser = userService.getUserByUsername(username);
+		
+		if(existingUser == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
 		existingUser.setPassword(bCryptEncoder.encode(password));
 		userService.updateUser(existingUser); 	
 		
 		return ResponseEntity.ok("Password updated");
 	}
+	
+
 }
