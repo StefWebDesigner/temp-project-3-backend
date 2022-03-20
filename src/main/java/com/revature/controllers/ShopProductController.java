@@ -5,6 +5,7 @@ import com.revature.models.Seller;
 import com.revature.models.Shop;
 import com.revature.models.ShopProduct;
 import com.revature.models.ShopProductResponse;
+import com.revature.services.ProductServiceImpl;
 import com.revature.services.ShopProductServiceImpl;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class ShopProductController {
 	@Autowired
 	private ShopProductServiceImpl sps;
+	
+	@Autowired
+	private ProductServiceImpl ps;
 
 	@GetMapping("/shop_products/{id}")
 	public ResponseEntity<ShopProduct> getShopProductByShopId(@PathVariable("id") String id) {
@@ -36,10 +40,12 @@ public class ShopProductController {
 		return sps.getByProductCategory(name, category);
 	}
 
-	@GetMapping("/sellers/{shopProductId}")
-	public ResponseEntity<List<ShopProductResponse>> getAllSellersForProduct(@PathVariable("shopProductId") String id) {
+	@GetMapping("/sellers/{ProductId}")
+	public ResponseEntity<List<ShopProductResponse>> getAllSellersForProduct(@PathVariable("ProductId") int id) {
 		try {
-			List<ShopProductResponse> shops = sps.getSellersForProduct(Integer.parseInt(id));
+			Product p = ps.getProductById(id).get();
+			int spid = sps.getShopProductsByProduct(p).get(0).getId();
+			List<ShopProductResponse> shops = sps.getSellersForProduct(spid);
 			return new ResponseEntity<>(shops, HttpStatus.OK);
 		}
 		catch (Exception e) {
