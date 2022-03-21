@@ -34,11 +34,16 @@ public class ShopProductController {
 		return sps.getAllShopProducts();
 	}
 
-	@GetMapping("/shop_products/search")
-	public List<Product> searchShopProducts(@RequestParam(name = "name", required = false) String name,
-			@RequestParam(name = "category", required = false) String category) {
-		return sps.getByProductCategory(name, category);
-	}
+  @GetMapping("/featured_products")
+  public List<ShopProduct> getOrderedProductsByPercentage() { return sps.getOrderedProductsByPercentage(); }
+
+  @GetMapping("/shop_products/search")
+  public List<Product> searchShopProducts(
+    @RequestParam(name = "name", required = false) String name,
+    @RequestParam(name = "category", required = false) String category
+  ) {
+    return sps.getByProductCategory(name, category);
+  }
 
 	@GetMapping("/sellers/{ProductId}")
 	public ResponseEntity<List<ShopProductResponse>> getAllSellersForProduct(@PathVariable("ProductId") int id) {
