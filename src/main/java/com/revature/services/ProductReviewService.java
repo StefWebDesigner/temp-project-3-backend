@@ -104,13 +104,13 @@ public class ProductReviewService {
      *                          does not exist
      */
     public boolean updateProductReview(ProductReview productReview) {
-        // TODO
         if (!isValidProductReview(productReview)) {
             throw new RuntimeException("Invalid product review.");
         }
         if (productReviewRepo.findById(productReview.getId()) == null) {
             throw new RuntimeException("Cannot update review--does not exist.");
         }
+        // TODO confirm user owns review
         if (productReviewRepo.save(productReview) == productReview) {
             return true;
         }
@@ -124,10 +124,10 @@ public class ProductReviewService {
      *                          does not exist
      */
     public boolean deleteProductReview(ProductReview productReview) {
-        // TODO
         if (!isValidProductReview(productReview)) {
             throw new RuntimeException("Invalid product review.");
         }
+        // TODO confirm user owns review
         if (productReviewRepo.findById(productReview.getId()) == null) {
             throw new RuntimeException("Cannot delete review--does not exist.");
         }
@@ -137,15 +137,6 @@ public class ProductReviewService {
         }
         return false;
     }
-
-    /**
-     * Add review reqs:
-     * valid user
-     * required fields valid:
-     * comment
-     * title
-     * rating
-     */
 
     /**
      * @param
