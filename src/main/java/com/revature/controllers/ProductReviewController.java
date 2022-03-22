@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,65 +24,76 @@ public class ProductReviewController {
     private final ProductReviewService productReviewService;
 
     @Autowired
-    public ProductReviewController(ProductReviewService productReviewService){
+    public ProductReviewController(ProductReviewService productReviewService) {
         this.productReviewService = productReviewService;
     }
 
     @PostMapping("/create-product-review")
-    public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview){
-        try{
+    public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview) {
+        try {
             ProductReview createdReview = productReviewService.addProductReview(productReview);
 
-            if (createdReview == null){
+            if (createdReview == null) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             } else {
                 return new ResponseEntity<>(createdReview, HttpStatus.OK);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<ProductReview> getProductReview(@RequestBody ProductReview productReview) {
-        try{
-            String param = "";
-            List<ProductReview> reviews = new ArrayList<>();
-            switch (param){
-                case "/user-id":
-                    break;
-                case "/product-id":
-                    break;
-                default:
-                    //all
-                    reviews = productReviewService.findAllProductReviews();
-                    break;
-            }
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
+    @GetMapping("/product-reviews")
+    public ResponseEntity<List> getProductReview(@RequestBody ProductReview productReview) {
+        try {
+            List<ProductReview> reviews = productReviewService.findAllProductReviews();
+
+            return new ResponseEntity<>(reviews, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/product-reviews/user/{id}")
+    public ResponseEntity<List> getProductReviewByUser(@PathVariable("id") int id) {
+        try {
+            List<ProductReview> reviews = productReviewService.findAllProductReviewsByUserId(id);
+
+            return new ResponseEntity<>(reviews, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/product-reviews/product/{id}")
+    public ResponseEntity<List> getProductReviewByProduct(@PathVariable("id") int id) {
+        try {
+            List<ProductReview> reviews = productReviewService.findAllProductReviewsByProductId(id);
+
+            return new ResponseEntity<>(reviews, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping()
     public ResponseEntity<ProductReview> updateProductReview(@RequestBody ProductReview productReview) {
-        try{
+        try {
             String param = "";
 
-            
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
     @DeleteMapping()
     public ResponseEntity<ProductReview> deleteProductReview(@RequestBody ProductReview productReview) {
-        try{
+        try {
             String param = "";
 
-
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
