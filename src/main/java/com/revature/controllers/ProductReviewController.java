@@ -44,7 +44,7 @@ public class ProductReviewController {
     }
 
     @GetMapping("/product-reviews")
-    public ResponseEntity<List> getProductReview(@RequestBody ProductReview productReview) {
+    public ResponseEntity<List> getProductReviews() {
         try {
             List<ProductReview> reviews = productReviewService.findAllProductReviews();
 

@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,10 +36,25 @@ public class ProductReview {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties(
+        {"username", 
+        "password", 
+        "firstName", 
+        "lastName", 
+        "email", 
+        "phone", 
+        "firstName", 
+        "location", 
+        "registrationDate", 
+        "itemList"})
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
+    @JsonIgnoreProperties(
+        {"name", 
+        "description", 
+        "categories"})
     private Product product;
     
 }
