@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class WishListServlet {
 		this.shopProductService = shopProductService;
 	}
 
-	@PostMapping("/myWishList")
+	@GetMapping("/myWishList")
 	public List<WishList> returnMyWishList(Authentication auth) {
 		int id = userService.getUserByUsername(auth.getName()).getId();
 	    User user = userService.getUserById(id).get();
