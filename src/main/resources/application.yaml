@@ -17,6 +17,19 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    #<login user to smtp server>
+    username: noreplydartcart@gmail.com
+    #<login password to smtp server>
+    password: RevatureP3pass45
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 management:
   endpoints:
