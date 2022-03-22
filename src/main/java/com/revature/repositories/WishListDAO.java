@@ -15,5 +15,7 @@ import com.revature.models.WishList;
 public interface WishListDAO extends CrudRepository<WishList, Integer> {
 
 	List<WishList> findByCustomer(User user);
+	
+	Optional<WishList> findByCustomerAndShopProduct(User user, ShopProduct shopProduct);
 
 }

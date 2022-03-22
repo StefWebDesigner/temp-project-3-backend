@@ -25,14 +25,21 @@ public class WishListService {
 	
 	
 	public void addToWishList(WishList wishListItem) {
-		
+		wishListDAO.save(wishListItem);
 	}
 	
 	public void removeFromWishList(WishList wishListItem) {
-		
+		WishList deleteThis = findByCustomerAndShopProduct(wishListItem);
+		if(deleteThis != null) {
+			wishListDAO.delete(deleteThis);
+		}
 	}
 	
 	public List<WishList> getMyWishList(User user) {
 		return wishListDAO.findByCustomer(user);
+	}
+	
+	public WishList findByCustomerAndShopProduct(WishList wishListItem) {
+		return wishListDAO.findByCustomerAndShopProduct(wishListItem.getCustomer(), wishListItem.getShopProduct()).orElse(null);
 	}
 }
