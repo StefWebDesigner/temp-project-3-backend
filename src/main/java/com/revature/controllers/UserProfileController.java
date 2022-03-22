@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,15 +34,6 @@ public class UserProfileController {
 	  this.userService = userService;
   }
   
-
-  
-//  @GetMapping("/getProfile/{id}")
-//  public ResponseEntity<User> getUserById(@PathVariable("id") String id) {
-//    Optional<User> user = userService.getUserById(Integer.parseInt(id));
-//    return user.isPresent()
-//      ? new ResponseEntity<User>(user.get(), HttpStatus.OK)
-//      : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//  }
   
   @GetMapping("/getProfile")
   public ResponseEntity<User> getUserByToken(Authentication auth) {
@@ -55,6 +47,29 @@ public class UserProfileController {
   
   
   
+  // this is to make partial changes to the db for the user
+  @PatchMapping("/updateProfile")
+  public ResponseEntity<User> updateProfile(@RequestBody User user, Authentication auth) {
+	  int id = userService.getUserByUsername(auth.getName()).getId();
+	  Optional<User> oldUser = userService.getUserById(id);
+	  if(user.getFirstName()!= null) {
+		  oldUser.get().setFirstName(user.getFirstName());
+	  }
+	  if(user.getLastName()!= null) {
+		  oldUser.get().setLastName(user.getLastName());
+	  }
+	  if(user.getEmail()!= null) {
+		  oldUser.get().setEmail(user.getEmail());
+	  }
+	  if(user.getPhone()!= null) {
+		  oldUser.get().setPhone(user.getPhone());
+	  }
+	  if(user.getLocation()!= null) {
+		  oldUser.get().setLocation(user.getLocation());
+	  }
+	  userService.updateUser(oldUser.get());
+	  return new ResponseEntity<User>(oldUser.get(), HttpStatus.OK);
+	  
 
-
+}
 }
