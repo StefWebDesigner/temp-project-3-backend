@@ -29,7 +29,7 @@ public class WishListService {
 	}
 	
 	public void removeFromWishList(WishList wishListItem) {
-		WishList deleteThis = findByCustomerAndShopProduct(wishListItem);
+		WishList deleteThis = findByCustomerAndProduct(wishListItem);
 		if(deleteThis != null) {
 			wishListDAO.delete(deleteThis);
 		}
@@ -39,7 +39,7 @@ public class WishListService {
 		return wishListDAO.findByCustomer(user);
 	}
 	
-	public WishList findByCustomerAndShopProduct(WishList wishListItem) {
-		return wishListDAO.findByCustomerAndShopProduct(wishListItem.getCustomer(), wishListItem.getShopProduct()).orElse(null);
+	public WishList findByCustomerAndProduct(WishList wishListItem) {
+		return wishListDAO.findByCustomerAndProduct(wishListItem.getCustomer(), wishListItem.getProduct()).orElse(null);
 	}
 }
