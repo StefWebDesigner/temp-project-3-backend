@@ -30,7 +30,8 @@ public class ProductReviewController {
     private final ProductServiceImpl productService;
 
     @Autowired
-    public ProductReviewController(ProductReviewService productReviewService, UserServiceImpl userService, ProductServiceImpl productService) {
+    public ProductReviewController(ProductReviewService productReviewService, UserServiceImpl userService,
+            ProductServiceImpl productService) {
         this.productReviewService = productReviewService;
         this.userService = userService;
         this.productService = productService;
@@ -39,7 +40,7 @@ public class ProductReviewController {
     @PostMapping("/create-product-review")
     public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview) {
         try {
-            //TODO set userId to this user
+            // TODO set userId to this user
             ProductReview createdReview = productReviewService.addProductReview(productReview);
 
             if (createdReview == null) {
@@ -89,13 +90,17 @@ public class ProductReviewController {
     public ResponseEntity<ProductReview> updateProductReview(@RequestBody ProductReview productReview, Authentication auth) {
         try {
             User user = userService.getUserByUsername(auth.getName());
+            ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
 
-            boolean updated = productReviewService.updateProductReview(productReview);
-
-            if (updated) {
-                return new ResponseEntity<>(HttpStatus.OK);
+            if (user.getId() == prevProductReview.getUser().getId()) {
+                boolean updated = productReviewService.updateProductReview(productReview);
+                if (updated) {
+                    return new ResponseEntity<>(HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.FAILED_DEPENDENCY);
+                }
             } else {
-                return new ResponseEntity<>(HttpStatus.FAILED_DEPENDENCY);
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

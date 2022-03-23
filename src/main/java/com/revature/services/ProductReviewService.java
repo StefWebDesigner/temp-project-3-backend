@@ -89,6 +89,16 @@ public class ProductReviewService {
     }
 
     /**
+     * @param productReviewId
+     * @return Returns a ProductReview object by its Id
+     */
+    public ProductReview findProductReviewById(int productReviewId) {
+        
+        ProductReview result = productReviewRepo.findById(productReviewId).get();
+        return result;
+    }
+
+    /**
      * @param
      * @return Returns true if ProductReview updated, false if update unsuccesful
      * @throws RuntimeException when provided with invalid data or if product review
