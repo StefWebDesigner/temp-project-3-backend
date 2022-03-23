@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +136,7 @@ public class AuthController {
 	@PatchMapping("/resetpassword")
 	public ResponseEntity<?> updatePassword(@RequestBody String request) {
 		
+		//gets emailid and password from request body
 		String[] userInfo = request.split(",");
 		String[] emailIDArr = userInfo[0].split(":");
 		String[] passwordArr = userInfo[1].split(":");
@@ -147,19 +149,32 @@ public class AuthController {
 		secondIndex = passwordArr[1].lastIndexOf("\""); 
 		String password = passwordArr[1].substring(firstIndex+1, secondIndex);
 		
-		ResetPassword resetPassword = resetPasswordService.findResetPasswordById(emailID).get();
-		
+		// get reset password object
+		Optional<ResetPassword> resetPasswordOpt = resetPasswordService.findResetPasswordById(emailID);
+		ResetPassword resetPassword = new ResetPassword();		
+		// check if reset password data was returned from database
+		if( resetPasswordOpt.isPresent() ) {
+			resetPassword = resetPasswordOpt.get();
+		}
+		else {
+			return ResponseEntity.notFound().build();
+		}		
+			
+		// get user object
 		com.revature.models.User existingUser = resetPassword.getUser();
-						
+		
+		// if user does not exist
 		if(existingUser == null) {
 			return ResponseEntity.notFound().build();
 		}
 		
+		// if email is expired
 		long expireTime = Long.parseLong(resetPassword.getTimestamp()) 
 				          + minutesUntilResetPasswordEmailExpires*60000;
 		if(expireTime < System.currentTimeMillis()) {
 			return ResponseEntity.notFound().build();
 		}
+		
 		existingUser.setPassword(bCryptEncoder.encode(password));
 		resetPasswordService.deleteByID(emailID);
 		userService.updateUser(existingUser);

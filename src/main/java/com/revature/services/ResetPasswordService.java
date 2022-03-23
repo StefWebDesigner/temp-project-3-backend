@@ -35,7 +35,7 @@ public class ResetPasswordService {
 		return resetPasswordRepo.findAllByUserId(userId);
 	}
 	
-	public Optional<ResetPassword> findResetPasswordById(String id) {
+	public Optional<ResetPassword> findResetPasswordById(String id) {			
 		return resetPasswordRepo.findById(id);
 	}
 	//Update
