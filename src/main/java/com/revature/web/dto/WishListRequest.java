@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WishListRequest {
 	
-	private int shopProductId;
+	private int productId;
 }
