@@ -97,7 +97,7 @@ public class ProductReviewController {
                 if (updated) {
                     return new ResponseEntity<>(HttpStatus.OK);
                 } else {
-                    return new ResponseEntity<>(HttpStatus.FAILED_DEPENDENCY);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             } else {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
