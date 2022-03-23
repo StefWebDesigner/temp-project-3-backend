@@ -123,12 +123,14 @@ public class AuthController {
 		// email string is: username, email id, timestamp for email, minutes until email expires
 		emailServiceImp.sendSimpleMessage(
 				user.getEmail(), 
-				"password reset email test", 
-				"http://localhost:3000/resetpassword?data="
+				"Password Reset Dart Cart", 
+				"Hello "+user.getFirstName()+",\n"+ "Use the following link to reset your password:\n"
+				+ "http://localhost:3000/resetpassword?data="
 						+ cipheredUsername.toString()
 						+ "&data2="+emailId+ "&data3="
 						+String.valueOf(timestamp) + "&data4="
-						+minuteUntilEmailExpires);
+						+minuteUntilEmailExpires
+				+"\nThe link will expire in 15 minutes.\nIf you did not request a passwrod reset, ignore this email.");
 
 		return ResponseEntity.ok("Reset Email Sent");
 	}
