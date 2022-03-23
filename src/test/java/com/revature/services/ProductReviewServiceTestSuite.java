@@ -21,13 +21,11 @@ import org.junit.jupiter.api.Test;
 public class ProductReviewServiceTestSuite {
     ProductReviewService sut;
     ProductReviewRepo mockProductReviewRepo;
-    AuthService mockAuthService;
 
     @BeforeEach
     void setUp() throws Exception {
         mockProductReviewRepo = mock(ProductReviewRepo.class);
-        mockAuthService = mock(AuthService.class);
-        sut = new ProductReviewService(mockProductReviewRepo, mockAuthService);
+        sut = new ProductReviewService(mockProductReviewRepo);
     }
 
     @Test

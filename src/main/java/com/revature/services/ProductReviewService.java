@@ -9,13 +9,11 @@ import com.revature.repositories.ProductReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.core.Authentication;
 
 @Service
 @Transactional
 public class ProductReviewService {
     private final ProductReviewRepo productReviewRepo;
-    private final AuthService authService;
 
     /**
      * Constructor
@@ -24,9 +22,8 @@ public class ProductReviewService {
      * @param productReviewRepo
      */
     @Autowired
-    public ProductReviewService(ProductReviewRepo productReviewRepo, AuthService authService) {
+    public ProductReviewService(ProductReviewRepo productReviewRepo) {
         this.productReviewRepo = productReviewRepo;
-        this.authService = authService;
     }
 
     /**
@@ -36,9 +33,6 @@ public class ProductReviewService {
      * @throws RuntimeException when provided with invalid data
      */
     public ProductReview addProductReview(ProductReview newProductReview) {
-        // TODO Check for user authentication
-        // int id = userService.getUserByUsername( auth.getName() ).getId();
-        // int id = authService
         if (!isValidProductReview(newProductReview)) {
             throw new RuntimeException("Invalid product review.");
         }
@@ -52,7 +46,6 @@ public class ProductReviewService {
      * @return Returns a List<ProductReview> of all existing Product Reviews
      */
     public List<ProductReview> findAllProductReviews() {
-        // TODO
         List<ProductReview> allProductReviews = new ArrayList<>();
         Iterable<ProductReview> prIterable = productReviewRepo.findAll();
         for (ProductReview pr : prIterable) {
@@ -67,7 +60,6 @@ public class ProductReviewService {
      *         results
      */
     public List<ProductReview> findAllProductReviewsByUserId(int userId) {
-        // TODO
         List<ProductReview> reviewsByUser = new ArrayList<>();
         Iterable<ProductReview> results = productReviewRepo.findAllByUserId(userId);
         if (results != null) {
@@ -85,7 +77,6 @@ public class ProductReviewService {
      *         results
      */
     public List<ProductReview> findAllProductReviewsByProductId(int productId) {
-        // TODO
         List<ProductReview> reviewsByProduct = new ArrayList<>();
         Iterable<ProductReview> results = productReviewRepo.findAllByProductId(productId);
         if (results != null) {
@@ -110,7 +101,6 @@ public class ProductReviewService {
         if (productReviewRepo.findById(productReview.getId()) == null) {
             throw new RuntimeException("Cannot update review--does not exist.");
         }
-        // TODO confirm user owns review
         if (productReviewRepo.save(productReview) == productReview) {
             return true;
         }
@@ -127,7 +117,6 @@ public class ProductReviewService {
         if (!isValidProductReview(productReview)) {
             throw new RuntimeException("Invalid product review.");
         }
-        // TODO confirm user owns review
         if (productReviewRepo.findById(productReview.getId()) == null) {
             throw new RuntimeException("Cannot delete review--does not exist.");
         }
@@ -144,7 +133,7 @@ public class ProductReviewService {
      *         fields are within a valid range of values
      */
     public boolean isValidProductReview(ProductReview productReview) {
-        // TODO
+        // TODO add more validation cases
         if (productReview == null) {
             return false;
         } else if (productReview.getTitle() == null ||
