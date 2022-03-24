@@ -59,9 +59,9 @@ public class ProductReviewService {
      * @return Returns a List of ProductReview objects by User Id, null if no
      *         results
      */
-    public List<ProductReview> findAllProductReviewsByUserId(User user) {
+    public List<ProductReview> findAllProductReviewsByUser(User user) {
         List<ProductReview> reviewsByUser = new ArrayList<>();
-        Iterable<ProductReview> results = productReviewRepo.findAllByUserId(user);
+        Iterable<ProductReview> results = productReviewRepo.findAllByUser(user);
         if (results != null) {
             for (ProductReview pr : results) {
                 reviewsByUser.add(pr);
@@ -76,9 +76,9 @@ public class ProductReviewService {
      * @return Returns a List of ProductReview objects by Product Id, null if no
      *         results
      */
-    public List<ProductReview> findAllProductReviewsByProductId(Product product) {
+    public List<ProductReview> findAllProductReviewsByProduct(Product product) {
         List<ProductReview> reviewsByProduct = new ArrayList<>();
-        Iterable<ProductReview> results = productReviewRepo.findAllByProductId(product);
+        Iterable<ProductReview> results = productReviewRepo.findAllByProduct(product);
         if (results != null) {
             for (ProductReview pr : results) {
                 reviewsByProduct.add(pr);

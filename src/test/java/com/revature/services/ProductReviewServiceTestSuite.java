@@ -113,27 +113,27 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_findAllProductReviewsByUserId_returnsProductReviews_givenValidUserId() {
-        List<ProductReview> allProductReviewsByUserId = new ArrayList<>();
+        User user = new User();
+        List<ProductReview> allProductReviewsByUser = new ArrayList<>();
         // ProductReview productReview1 = new ProductReview()
         // ProductReview productReview2 = new ProductReview()
-        int validUserId = 1;
-        when(mockProductReviewRepo.findAllByUserId(validUserId)).thenReturn(allProductReviewsByUserId);
+        when(mockProductReviewRepo.findAllByUser(user)).thenReturn(allProductReviewsByUser);
 
-        List<ProductReview> result = sut.findAllProductReviewsByUserId(validUserId);
+        List<ProductReview> result = sut.findAllProductReviewsByUser(user);
 
-        Assertions.assertEquals(result, allProductReviewsByUserId);
-        verify(mockProductReviewRepo, times(1)).findAllByUserId(validUserId);
+        Assertions.assertEquals(result, allProductReviewsByUser);
+        verify(mockProductReviewRepo, times(1)).findAllByUser(user);
     }
 
     @Test
     void test_findAllProductReviewsByUserId_returnsNull_givenValidUserId_givenUserHasNoReviews() {
-        int validUserId = 1;
+        User user = new User();
 
-        when(mockProductReviewRepo.findAllByUserId(validUserId)).thenReturn(null);
+        when(mockProductReviewRepo.findAllByUser(user)).thenReturn(null);
 
-        List<ProductReview> result = sut.findAllProductReviewsByUserId(validUserId);
+        List<ProductReview> result = sut.findAllProductReviewsByUser(user);
         Assertions.assertNull(result);
-        verify(mockProductReviewRepo, times(1)).findAllByUserId(validUserId);
+        verify(mockProductReviewRepo, times(1)).findAllByUser(user);
     }
 
     // @Test
@@ -152,27 +152,27 @@ public class ProductReviewServiceTestSuite {
 
     @Test
     void test_findAllProductReviewsByProductId_returnsProductReviews_givenValidProductId() {
-        List<ProductReview> allProductReviewsByProductId = new ArrayList<>();
+        Product product = new Product();
+        List<ProductReview> allProductReviewsByProduct = new ArrayList<>();
         // ProductReview productReview1 = new ProductReview()
         // ProductReview productReview2 = new ProductReview()
-        int validProductId = 1;
-        when(mockProductReviewRepo.findAllByProductId(validProductId)).thenReturn(allProductReviewsByProductId);
+        when(mockProductReviewRepo.findAllByProduct(product)).thenReturn(allProductReviewsByProduct);
 
-        List<ProductReview> result = sut.findAllProductReviewsByProductId(validProductId);
+        List<ProductReview> result = sut.findAllProductReviewsByProduct(product);
 
-        Assertions.assertEquals(result, allProductReviewsByProductId);
-        verify(mockProductReviewRepo, times(1)).findAllByProductId(validProductId);
+        Assertions.assertEquals(result, allProductReviewsByProduct);
+        verify(mockProductReviewRepo, times(1)).findAllByProduct(product);
     }
 
     @Test
     void test_findAllProductReviewsByProductId_returnsNull_givenValidProductId_givenProductHasNoReviews() {
-        int validProductId = 1;
-        when(mockProductReviewRepo.findAllByProductId(validProductId)).thenReturn(null);
+        Product product = new Product();
+        when(mockProductReviewRepo.findAllByProduct(product)).thenReturn(null);
 
-        List<ProductReview> result = sut.findAllProductReviewsByProductId(validProductId);
+        List<ProductReview> result = sut.findAllProductReviewsByProduct(product);
 
         Assertions.assertNull(result);
-        verify(mockProductReviewRepo, times(1)).findAllByProductId(validProductId);
+        verify(mockProductReviewRepo, times(1)).findAllByProduct(product);
     }
 
     // @Test

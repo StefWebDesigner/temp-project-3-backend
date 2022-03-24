@@ -79,7 +79,7 @@ public class ProductReviewController {
     public ResponseEntity<List> getProductReviewByUser(@PathVariable("id") int id) {
         try {
             User user = userService.getUserById(id).get();
-            List<ProductReview> reviews = productReviewService.findAllProductReviewsByUserId(user);
+            List<ProductReview> reviews = productReviewService.findAllProductReviewsByUser(user);
 
             return new ResponseEntity<>(reviews, HttpStatus.OK);
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class ProductReviewController {
     public ResponseEntity<List> getProductReviewByProduct(@PathVariable("id") int id) {
         try {
             Product product = productService.getProductById(id).get();
-            List<ProductReview> reviews = productReviewService.findAllProductReviewsByProductId(product);
+            List<ProductReview> reviews = productReviewService.findAllProductReviewsByProduct(product);
 
             return new ResponseEntity<>(reviews, HttpStatus.OK);
         } catch (Exception e) {
