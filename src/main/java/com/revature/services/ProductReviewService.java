@@ -18,7 +18,6 @@ public class ProductReviewService {
     /**
      * Constructor
      * 
-     * @param authService
      * @param productReviewRepo
      */
     @Autowired
