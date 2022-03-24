@@ -69,7 +69,6 @@ public class UserProfileController {
 	  }
 	  userService.updateUser(oldUser.get());
 	  return new ResponseEntity<User>(oldUser.get(), HttpStatus.OK);
-	  
-
-}
+  }
+  
 }
