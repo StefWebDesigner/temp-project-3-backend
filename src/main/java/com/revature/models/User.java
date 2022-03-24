@@ -52,6 +52,10 @@ public class User {
   @NotNull
   private long registrationDate;
   
+  private String imageURL;
+  
+  private String aboutMe;
+  
 
   // add fields for about me
 //  @Column(name = "aboutMe")
