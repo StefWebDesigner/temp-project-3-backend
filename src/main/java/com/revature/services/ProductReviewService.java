@@ -3,7 +3,9 @@ package com.revature.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.models.Product;
 import com.revature.models.ProductReview;
+import com.revature.models.User;
 import com.revature.repositories.ProductReviewRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +59,9 @@ public class ProductReviewService {
      * @return Returns a List of ProductReview objects by User Id, null if no
      *         results
      */
-    public List<ProductReview> findAllProductReviewsByUserId(int userId) {
+    public List<ProductReview> findAllProductReviewsByUserId(User user) {
         List<ProductReview> reviewsByUser = new ArrayList<>();
-        Iterable<ProductReview> results = productReviewRepo.findAllByUserId(userId);
+        Iterable<ProductReview> results = productReviewRepo.findAllByUserId(user);
         if (results != null) {
             for (ProductReview pr : results) {
                 reviewsByUser.add(pr);
@@ -74,9 +76,9 @@ public class ProductReviewService {
      * @return Returns a List of ProductReview objects by Product Id, null if no
      *         results
      */
-    public List<ProductReview> findAllProductReviewsByProductId(int productId) {
+    public List<ProductReview> findAllProductReviewsByProductId(Product product) {
         List<ProductReview> reviewsByProduct = new ArrayList<>();
-        Iterable<ProductReview> results = productReviewRepo.findAllByProductId(productId);
+        Iterable<ProductReview> results = productReviewRepo.findAllByProductId(product);
         if (results != null) {
             for (ProductReview pr : results) {
                 reviewsByProduct.add(pr);

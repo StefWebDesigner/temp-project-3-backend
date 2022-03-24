@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.models.Product;
 import com.revature.models.ProductReview;
 import com.revature.models.User;
 import com.revature.services.ProductReviewService;
@@ -38,9 +39,18 @@ public class ProductReviewController {
     }
 
     @PostMapping("/create-product-review")
-    public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview) {
-        try {
-            // TODO set userId to this user
+    public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview, Authentication auth) {
+        try {  
+            // User user = userService.getUserByUsername(auth.getName());
+            // ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
+            // // TODO set userId to this user   
+            // productReview.setUser(user);
+            // productReview.setProduct(productService.getProductById(productReview.getProduct().getId()).get());
+            // // check for same user, reviews same product, return bad request
+            // if(prevProductReview != null && (user.getId() == prevProductReview.getUser().getId())){
+            //     return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            // }
+
             ProductReview createdReview = productReviewService.addProductReview(productReview);
 
             if (createdReview == null) {
@@ -49,6 +59,7 @@ public class ProductReviewController {
                 return new ResponseEntity<>(createdReview, HttpStatus.OK);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -67,7 +78,8 @@ public class ProductReviewController {
     @GetMapping("/product-reviews/user/{id}")
     public ResponseEntity<List> getProductReviewByUser(@PathVariable("id") int id) {
         try {
-            List<ProductReview> reviews = productReviewService.findAllProductReviewsByUserId(id);
+            User user = userService.getUserById(id).get();
+            List<ProductReview> reviews = productReviewService.findAllProductReviewsByUserId(user);
 
             return new ResponseEntity<>(reviews, HttpStatus.OK);
         } catch (Exception e) {
@@ -78,10 +90,12 @@ public class ProductReviewController {
     @GetMapping("/product-reviews/product/{id}")
     public ResponseEntity<List> getProductReviewByProduct(@PathVariable("id") int id) {
         try {
-            List<ProductReview> reviews = productReviewService.findAllProductReviewsByProductId(id);
+            Product product = productService.getProductById(id).get();
+            List<ProductReview> reviews = productReviewService.findAllProductReviewsByProductId(product);
 
             return new ResponseEntity<>(reviews, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -107,12 +121,22 @@ public class ProductReviewController {
         }
     }
 
-    @DeleteMapping()
-    public ResponseEntity<ProductReview> deleteProductReview(@RequestBody ProductReview productReview) {
+    @DeleteMapping("/delete-product-review")
+    public ResponseEntity<ProductReview> deleteProductReview(@RequestBody ProductReview productReview, Authentication auth) {
         try {
-            String param = "";
+            User user = userService.getUserByUsername(auth.getName());
+            ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
 
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            if (user.getId() == prevProductReview.getUser().getId()) {
+                boolean deleted = productReviewService.deleteProductReview(productReview);
+                if (deleted) {
+                    return new ResponseEntity<>(HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            } else {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
