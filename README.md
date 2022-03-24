@@ -84,4 +84,5 @@ Please reference the Maven file to see what services need to be installed.
 * Scott Damon
 * Tracy Bodine
 * Joshua Robles
+
 Dart Cart 2 was made for the Revature Java/React 1/24 batch
