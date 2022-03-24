@@ -28,12 +28,12 @@ public class WishList {
 	  private User customer;
 	 //shop product
 	  @OneToOne
-	  @JoinColumn(name = "shop_product_id")
-	  private ShopProduct shopProduct;
+	  @JoinColumn(name = "product_id")
+	  private Product product;
 	
-	public WishList(User customer, ShopProduct shopProduct) {
+	public WishList(User customer, Product product) {
 		this.customer = customer;
-		this.shopProduct = shopProduct;
+		this.product = product;
 	}
 
 }

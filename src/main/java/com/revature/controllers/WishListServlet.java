@@ -31,13 +31,13 @@ public class WishListServlet {
 	
 	WishListService wishListService;
 	UserServiceImpl userService;
-	ShopProductServiceImpl shopProductService;
+	ProductServiceImpl productService;
 	
 	@Autowired
-	public WishListServlet(WishListService wishListService, UserServiceImpl userService, ShopProductServiceImpl shopProductService) {
+	public WishListServlet(WishListService wishListService, UserServiceImpl userService, ProductServiceImpl productService) {
 		this.wishListService = wishListService;
 		this.userService = userService;
-		this.shopProductService = shopProductService;
+		this.productService = productService;
 	}
 
 	@GetMapping("/myWishList")
@@ -52,9 +52,9 @@ public class WishListServlet {
 		try{
 			int id = userService.getUserByUsername(auth.getName()).getId();
 			User user = userService.getUserById(id).get();
-			ShopProduct shopProduct = shopProductService.getShopProductById(wishListRequest.getShopProductId()).get();
-			WishList addToWishList = new WishList(user, shopProduct);
-			WishList checkWishList = wishListService.findByCustomerAndShopProduct(addToWishList);
+			Product product = productService.getProductById(wishListRequest.getProductId()).get();
+			WishList addToWishList = new WishList(user, product);
+			WishList checkWishList = wishListService.findByCustomerAndProduct(addToWishList);
 			if(checkWishList != null) {
 				return new ResponseEntity<>(HttpStatus.CONFLICT);
 			}
@@ -70,9 +70,9 @@ public class WishListServlet {
 		try{
 			int id = userService.getUserByUsername(auth.getName()).getId();
 			User user = userService.getUserById(id).get();
-			ShopProduct shopProduct = shopProductService.getShopProductById(wishListRequest.getShopProductId()).get();
-			WishList addToWishList = new WishList(user, shopProduct);
-			wishListService.removeFromWishList(addToWishList);
+			Product product = productService.getProductById(wishListRequest.getProductId()).get();
+			WishList removeFromWishList = new WishList(user, product);
+			wishListService.removeFromWishList(removeFromWishList);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch(NoSuchElementException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
