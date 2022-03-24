@@ -35,7 +35,6 @@ public class ProductReviewService {
         if (!isValidProductReview(newProductReview)) {
             throw new RuntimeException("Invalid product review.");
         }
-        // check for same user, reviews same product, throw exception
         ProductReview savedProductReview = productReviewRepo.save(newProductReview);
 
         return savedProductReview;
