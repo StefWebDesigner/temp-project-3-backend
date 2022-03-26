@@ -38,27 +38,27 @@ public class ProductReviewController {
         this.productService = productService;
     }
 
-    @PostMapping("/create-product-review")
-    public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview, Authentication auth) {
-        try {  
-            // User user = userService.getUserByUsername(auth.getName());
-            // ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
-            // // TODO set userId to this user   
-            // productReview.setUser(user);
-            // productReview.setProduct(productService.getProductById(productReview.getProduct().getId()).get());
-            // // check for same user, reviews same product, return bad request
-            // if(prevProductReview != null && (user.getId() == prevProductReview.getUser().getId())){
-            //     return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-            // }
-
+    @PostMapping("/create-product-review/product/{id}")
+    public ResponseEntity<ProductReview> newProductReview(@RequestBody ProductReview productReview, Authentication auth,
+            @PathVariable("id") int id) {
+        try {
+            User user = userService.getUserByUsername(auth.getName());
+            productReview.setUser(user);
+            productReview.setProduct(productService.getProductById(id).get());
+            // check for duplicate review (same product, same user)
+            ProductReview prevProductReview = productReviewService
+                    .findProductReviewByUserAndProduct(productReview.getUser(), productReview.getProduct());
+            if (prevProductReview != null) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
             ProductReview createdReview = productReviewService.addProductReview(productReview);
-
             if (createdReview == null) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             } else {
                 return new ResponseEntity<>(createdReview, HttpStatus.OK);
             }
         } catch (Exception e) {
+            // TODO
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -101,7 +101,8 @@ public class ProductReviewController {
     }
 
     @PutMapping("/update-product-review")
-    public ResponseEntity<ProductReview> updateProductReview(@RequestBody ProductReview productReview, Authentication auth) {
+    public ResponseEntity<ProductReview> updateProductReview(@RequestBody ProductReview productReview,
+            Authentication auth) {
         try {
             User user = userService.getUserByUsername(auth.getName());
             ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
@@ -122,7 +123,8 @@ public class ProductReviewController {
     }
 
     @DeleteMapping("/delete-product-review")
-    public ResponseEntity<ProductReview> deleteProductReview(@RequestBody ProductReview productReview, Authentication auth) {
+    public ResponseEntity<ProductReview> deleteProductReview(@RequestBody ProductReview productReview,
+            Authentication auth) {
         try {
             User user = userService.getUserByUsername(auth.getName());
             ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());

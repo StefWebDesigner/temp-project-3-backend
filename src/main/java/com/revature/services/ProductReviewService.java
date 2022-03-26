@@ -93,7 +93,7 @@ public class ProductReviewService {
      * @return Returns a ProductReview object by its Id
      */
     public ProductReview findProductReviewById(int productReviewId) {
-        
+
         ProductReview result = productReviewRepo.findById(productReviewId).get();
         return result;
     }
@@ -158,5 +158,14 @@ public class ProductReviewService {
         } else {
             return true;
         }
+    }
+
+    /**
+     * @param
+     * @return Returns ProductReview matching user and product, else null
+     */
+    public ProductReview findProductReviewByUserAndProduct(User user, Product product) {
+        ProductReview productReview = productReviewRepo.findByUserAndProduct(user, product);
+        return productReview;
     }
 }
