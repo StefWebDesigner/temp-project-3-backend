@@ -39,8 +39,8 @@ public class ProductReview {
     @JsonIgnoreProperties(
         {"username", 
         "password", 
-        "firstName", 
-        "lastName", 
+        // "firstName", 
+        // "lastName", 
         "email", 
         "phone", 
         "firstName", 
