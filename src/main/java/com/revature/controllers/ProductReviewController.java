@@ -100,11 +100,13 @@ public class ProductReviewController {
         }
     }
 
-    @PutMapping("/update-product-review")
+    @PutMapping("/update-product-review/product/{id}")
     public ResponseEntity<ProductReview> updateProductReview(@RequestBody ProductReview productReview,
-            Authentication auth) {
+            Authentication auth, @PathVariable("id") int id) {
         try {
             User user = userService.getUserByUsername(auth.getName());
+            productReview.setUser(user);
+            productReview.setProduct(productService.getProductById(id).get()); 
             ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
 
             if (user.getId() == prevProductReview.getUser().getId()) {
@@ -118,15 +120,18 @@ public class ProductReviewController {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @DeleteMapping("/delete-product-review")
+    @DeleteMapping("/delete-product-review/product/{id}")
     public ResponseEntity<ProductReview> deleteProductReview(@RequestBody ProductReview productReview,
-            Authentication auth) {
+            Authentication auth, @PathVariable("id") int id) {
         try {
             User user = userService.getUserByUsername(auth.getName());
+            productReview.setUser(user);
+            productReview.setProduct(productService.getProductById(id).get());
             ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
 
             if (user.getId() == prevProductReview.getUser().getId()) {
@@ -140,6 +145,7 @@ public class ProductReviewController {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
