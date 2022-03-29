@@ -46,6 +46,7 @@ public class ProductControllersTests {
     1,
     "testProduct",
     "testDescription",
+    "",
     new ArrayList<Category>(Arrays.asList(new Category(1, "testCategory")))
   );
 
