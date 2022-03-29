@@ -17,7 +17,7 @@ public interface ProductReviewRepo extends CrudRepository<ProductReview, Integer
     @Query("FROM ProductReview p WHERE p.product = ?1")
     Iterable<ProductReview> findAllByProduct(Product product);
 
-    @Query("FROM ProductReview p WHERE p.product = ?1 AND p.user = ?2")
+    @Query("FROM ProductReview p WHERE p.user = ?1 AND p.product = ?2")
     ProductReview findByUserAndProduct(User user, Product product);
 
 }
