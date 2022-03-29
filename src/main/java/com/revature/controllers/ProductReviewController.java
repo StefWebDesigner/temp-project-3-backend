@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.revature.models.Product;
 import com.revature.models.ProductReview;
@@ -44,7 +45,12 @@ public class ProductReviewController {
         try {
             User user = userService.getUserByUsername(auth.getName());
             productReview.setUser(user);
-            productReview.setProduct(productService.getProductById(id).get());
+            Optional<Product> product = productService.getProductById(id);
+            if(product.isPresent()){
+                productReview.setProduct(product.get());
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
             // check for duplicate review (same product, same user)
             ProductReview prevProductReview = productReviewService
                     .findProductReviewByUserAndProduct(productReview.getUser(), productReview.getProduct());
@@ -106,7 +112,12 @@ public class ProductReviewController {
         try {
             User user = userService.getUserByUsername(auth.getName());
             productReview.setUser(user);
-            productReview.setProduct(productService.getProductById(id).get()); 
+            Optional<Product> product = productService.getProductById(id);
+            if(product.isPresent()){
+                productReview.setProduct(product.get());
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
             ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
 
             if (user.getId() == prevProductReview.getUser().getId()) {
@@ -131,7 +142,12 @@ public class ProductReviewController {
         try {
             User user = userService.getUserByUsername(auth.getName());
             productReview.setUser(user);
-            productReview.setProduct(productService.getProductById(id).get());
+            Optional<Product> product = productService.getProductById(id);
+            if(product.isPresent()){
+                productReview.setProduct(product.get());
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
             ProductReview prevProductReview = productReviewService.findProductReviewById(productReview.getId());
 
             if (user.getId() == prevProductReview.getUser().getId()) {
