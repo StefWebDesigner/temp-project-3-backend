@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandler;
 
 @SpringBootApplication(scanBasePackages = "com.revature")
 @EntityScan("com.revature.models")
@@ -13,6 +15,9 @@ public class DartCartApplication {
   public static ApplicationContext app;
 
   public static void main(String[] args) {
+
     app = SpringApplication.run(DartCartApplication.class, args);
+
+
   }
 }
